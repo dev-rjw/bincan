@@ -38,6 +38,7 @@ function SignUp() {
                 }
             }
         });
+        console.log(error);
     };
 
     // 프로필
