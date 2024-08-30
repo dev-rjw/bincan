@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
-import Main from "../pages/Main";
+import MainPage from "../pages/MainPage";
 import MyPage from "../pages/MyPage";
 import Detail from "../pages/Detail";
 import NavHeader from "../components/NavHeader";
@@ -20,7 +20,7 @@ const Router = () => {
         <BrowserRouter>
             <NavHeader />
             <Routes>
-                <Route path="/main" element={<Main />}></Route>
+                <Route path="/main" element={<MainPage />}></Route>
                 <Route element={<AuthRoute />}>
                     <Route path="/login" element={<Login />}></Route>
                     <Route path="/signup" element={<SignUp />}></Route>
