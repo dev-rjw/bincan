@@ -1,7 +1,12 @@
 import React from "react";
+import InputWindow from "../components/inputWindow";
 
 function Main() {
-    return <div></div>;
+    return (
+        <>
+            <InputWindow />
+        </>
+    );
 }
 
 export default Main;
