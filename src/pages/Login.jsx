@@ -1,11 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 import { useNavigate } from "react-router-dom";
-
-///supabass 연결
-const SUPABASS_URL = "https://ltmlsvowetkigjbwwqwy.supabase.co";
-const SUPABASS_KEY = import.meta.env.VITE_SUPABASE_KEY;
-const supabase = createClient(SUPABASS_URL, SUPABASS_KEY);
+import { supabase } from "../supabase";
 
 function Login() {
     const navigate = useNavigate();
@@ -27,7 +23,7 @@ function Login() {
             password: password
         });
 
-        console.log(signIn);
+        checkSignIn();
 
         // getUserData();
     };
@@ -39,7 +35,9 @@ function Login() {
 
         setSignIn(isSignIn);
 
-        isSignIn ? navigate("/main") : alert("아이디 또는 비밀번호를 확인해주세요");
+        console.log(session.data.session);
+
+        // isSignIn ? navigate("/main") : alert("아이디 또는 비밀번호를 확인해주세요");
     }
 
     const getUserData = async () => {

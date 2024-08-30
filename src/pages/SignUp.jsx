@@ -1,11 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 import { useNavigate } from "react-router-dom";
-
-//supabass 연결
-const SUPABASS_URL = "https://ltmlsvowetkigjbwwqwy.supabase.co";
-const SUPABASS_KEY = import.meta.env.VITE_SUPABASE_KEY;
-const supabase = createClient(SUPABASS_URL, SUPABASS_KEY);
+import { supabase } from "../supabase";
 
 function SignUp() {
     const navigate = useNavigate();
