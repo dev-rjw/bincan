@@ -12,7 +12,6 @@ function Login() {
 
     useEffect(() => {
         getUserData();
-        // checkSignIn();
     }, []);
 
     const logIn = async (e) => {
@@ -22,26 +21,19 @@ function Login() {
             email: email,
             password: password
         });
+        console.log(error);
 
-        checkSignIn();
-
-        // getUserData();
+        if (error) {
+            alert("아이디 또는 비번 틀림");
+        } else {
+            navigate("/main");
+        }
     };
-
-    // 로그인 유효성 검사
-    async function checkSignIn() {
-        const session = await supabase.auth.getSession();
-        const isSignIn = !!session.data.session;
-
-        setSignIn(isSignIn);
-
-        console.log(session.data.session);
-
-        // isSignIn ? navigate("/main") : alert("아이디 또는 비밀번호를 확인해주세요");
-    }
 
     const getUserData = async () => {
         const { data } = await supabase.auth.getUser();
+
+        return data;
     };
 
     return (
