@@ -34,7 +34,7 @@ const StDetailContainer = styled.div`
 const StBtnContainer = styled.div`
     width: 1280px;
     height: 20px;
-    background-color: red;
+    background-color: purple;
     margin-top: 80px;
 `;
 const StBtnWrapper = styled.div`
