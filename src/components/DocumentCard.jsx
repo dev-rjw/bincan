@@ -13,7 +13,7 @@ const DocumentCard = ({ post }) => {
             <Card>
                 <img src={post.img_url} width="100%"></img>
                 <p>{post.title}</p>
-                <p>{post.content}</p>
+                <p>{post.context}</p>
             </Card>
         </>
     );
