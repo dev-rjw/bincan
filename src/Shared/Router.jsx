@@ -27,7 +27,7 @@ const Router = () => {
                 </Route>
                 <Route element={<PrivateRoute />}>
                     <Route path="/mypage/:id" element={<MyPage />}></Route>
-                    <Route path="/detail/:id/:postid " element={<Detail />}></Route>
+                    <Route path="/detail" element={<Detail />}></Route>
                 </Route>
             </Routes>
         </BrowserRouter>

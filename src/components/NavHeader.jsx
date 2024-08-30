@@ -1,7 +1,82 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
 const NavHeader = () => {
-    return <div>NavHeader</div>;
+    const navigate = useNavigate();
+    return (
+        <>
+            <StNavContainer>
+                <StNavContent>
+                    <StNavLeft>
+                        <StEmptyNav></StEmptyNav>
+                    </StNavLeft>
+                    <StNavCenter>
+                        <StNavLogo
+                            src="hi"
+                            alt="bincan"
+                            onClick={() => {
+                                navigate("/");
+                            }}
+                        />
+                    </StNavCenter>
+                    <StNavRight>
+                        <StNavMenu>마이페이지</StNavMenu>
+                        <StNavMenu
+                            onClick={() => {
+                                navigate("/login");
+                            }}
+                        >
+                            로그인
+                        </StNavMenu>
+                    </StNavRight>
+                </StNavContent>
+            </StNavContainer>
+        </>
+    );
 };
 
 export default NavHeader;
+
+const StNavContainer = styled.nav`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    /* background-color: red; */
+    height: 80px;
+`;
+
+const StNavContent = styled.nav`
+    width: 1280px;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border: 1px solid red;
+`;
+
+const StNavLeft = styled.div``;
+
+const StEmptyNav = styled.div`
+    width: 200px;
+`;
+
+const StNavCenter = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+`;
+
+const StNavLogo = styled.img``;
+
+const StNavRight = styled.div`
+    display: flex;
+    width: 200px;
+    justify-content: flex-end;
+    align-items: center;
+`;
+const StNavMenu = styled.div`
+    margin-left: 15px;
+`;
