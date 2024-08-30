@@ -8,14 +8,12 @@ const CardDiv = styled.div`
     grid-template-columns: 1fr 1fr 1fr 1fr;
 `;
 
-const DocumentList = () => {
-    const [posts, setPosts] = useState([]);
-
+const DocumentList = ({ posts, setPosts }) => {
     useEffect(() => {
         getDocument(); // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const getDocument = async (e) => {
+    const getDocument = async () => {
         let { data, error } = await supabase.from("posts").select("*");
 
         if (error) console.log(error);

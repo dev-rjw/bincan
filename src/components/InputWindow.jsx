@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { supabase } from "../supabase";
 
 const Window = styled.div`
     width: 100%;
@@ -32,14 +33,31 @@ const Button = styled.button`
     cursor: pointer;
 `;
 
-const InputWindow = () => {
+const InputWindow = ({ posts, setPosts }) => {
+    const [title, setTitle] = useState("");
+    const [money, setMoney] = useState("");
+    const [context, setContext] = useState("");
+
+    const insertDocument = async (e) => {
+        e.preventDefault();
+
+        const { data, error } = await supabase
+            .from("posts")
+            .insert([{ title: title, nickname: "닉네임", img_url: "", money: money, context: context }])
+            .select();
+
+        if (error) console.log(error);
+
+        setPosts([...posts, ...data]);
+    };
+
     return (
         <Window>
-            <Input type="text" />
-            <Input type="text" />
-            <TextArea />
+            <Input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+            <Input type="text" value={money} onChange={(e) => setMoney(e.target.value)} />
+            <TextArea value={context} onChange={(e) => setContext(e.target.value)} />
             <img src="" />
-            <Button>등록</Button>
+            <Button onClick={insertDocument}>등록</Button>
         </Window>
     );
 };
