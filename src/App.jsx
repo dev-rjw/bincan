@@ -1,10 +1,16 @@
-import "./reset.css";
+import { createContext, useState } from "react";
+// import "./reset.css";
+import "./normalize.css";
 import Router from "./Shared/Router";
+export const PostsContext = createContext();
 
 function App() {
+    const [posts, setPosts] = useState([]);
     return (
         <>
-            <Router />
+            <PostsContext.Provider value={{ posts, setPosts }}>
+                <Router />
+            </PostsContext.Provider>
         </>
     );
 }
