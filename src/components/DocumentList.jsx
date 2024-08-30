@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DocumentCard from "./DocumentCard";
 import styled from "styled-components";
 
@@ -11,17 +11,19 @@ const DocumentList = () => {
     const [posts, setPosts] = useState([
         {
             id: 1,
-            img_url: "../assets/bincan.png",
+            img_url: "src/assets/bincan.png",
             title: "1234",
             content: "1234"
         },
         {
             id: 2,
-            img_url: "../assets/bincan.png",
+            img_url: "src/assets/bincan.png",
             title: "2222",
             content: "2222"
         }
     ]);
+
+    useEffect(() => {}, []);
 
     return (
         <>

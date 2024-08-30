@@ -5,6 +5,7 @@ const Card = styled.div`
     background-color: #d9d9d9;
     width: 200px;
     margin-top: 30px;
+    cursor: pointer;
 `;
 const DocumentCard = ({ post }) => {
     return (
