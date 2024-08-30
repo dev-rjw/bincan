@@ -1,7 +1,12 @@
-import "/reset.css";
+import "./reset.css";
+import Router from "./Shared/Router";
 
 function App() {
-    return <></>;
+    return (
+        <>
+            <Router />
+        </>
+    );
 }
 
 export default App;
