@@ -5,11 +5,10 @@ import { useNavigate } from "react-router-dom";
 //supabass 연결
 const SUPABASS_URL = "https://ltmlsvowetkigjbwwqwy.supabase.co";
 const SUPABASS_KEY = import.meta.env.VITE_SUPABASE_KEY;
-
 const supabase = createClient(SUPABASS_URL, SUPABASS_KEY);
 
 function SignUp() {
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -38,7 +37,7 @@ function SignUp() {
                 }
             }
         });
-        console.log(error);
+        navigate("/login");
     };
 
     // 프로필
@@ -55,7 +54,7 @@ function SignUp() {
         setProfileUrl(data.publicUrl);
     }
 
-    // 프로필 사진 변경
+    // // 프로필 사진 변경
     async function handleFileInputChange(files) {
         const [file] = files;
 
