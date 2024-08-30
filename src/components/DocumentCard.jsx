@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 
 const Card = styled.div`
-    background-color: #aaaaaa;
+    background-color: #d9d9d9;
     width: 200px;
-    margin: 10px;
+    margin-top: 30px;
 `;
 const DocumentCard = ({ post }) => {
     return (

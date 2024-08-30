@@ -1,5 +1,11 @@
 import React, { useState } from "react";
 import DocumentCard from "./DocumentCard";
+import styled from "styled-components";
+
+const CardDiv = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+`;
 
 const DocumentList = () => {
     const [posts, setPosts] = useState([
@@ -19,9 +25,11 @@ const DocumentList = () => {
 
     return (
         <>
-            {posts.map((post) => {
-                return <DocumentCard key={post.id} post={post} />;
-            })}
+            <CardDiv>
+                {posts.map((post) => {
+                    return <DocumentCard key={post.id} post={post} />;
+                })}
+            </CardDiv>
         </>
     );
 };
