@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Card = styled.div`
@@ -8,9 +9,15 @@ const Card = styled.div`
     cursor: pointer;
 `;
 const DocumentCard = ({ post }) => {
+    const navigate = useNavigate();
     return (
         <>
-            <Card>
+            <Card
+                onClick={() => {
+                    navigate(`/detail?id=${post.id}`);
+                    console.log(post.id);
+                }}
+            >
                 <img src={post.img_url} width="100%"></img>
                 <p>{post.title}</p>
                 <p>{post.context}</p>
