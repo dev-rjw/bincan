@@ -23,6 +23,10 @@ function SignUp() {
     const SignUp = async (e) => {
         e.preventDefault();
 
+        // 유효성 검사
+
+        // 부합하지 않으면 (경고) => 함수도 종료 return
+
         const { data, error } = await supabase.auth.signUp({
             email: email,
             password: password,
