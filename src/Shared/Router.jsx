@@ -3,6 +3,10 @@ import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import MainPage from "../pages/MainPage";
+<<<<<<< HEAD
+=======
+// import MyPage from "../pages/MyPage";
+>>>>>>> 2fbdef971bccea1a8de113f60c3980b13cb41d35
 import Detail from "../pages/Detail";
 import NavHeader from "../components/NavHeader";
 import MyPage from "./../pages/MyPage";
@@ -20,13 +24,13 @@ const Router = () => {
         <BrowserRouter>
             <NavHeader />
             <Routes>
-                <Route path="/main" element={<MainPage />}></Route>
+                <Route path="/" element={<MainPage />}></Route>
                 <Route element={<AuthRoute />}>
                     <Route path="/login" element={<Login />}></Route>
                     <Route path="/signup" element={<SignUp />}></Route>
                 </Route>
                 <Route element={<PrivateRoute />}>
-                    <Route path="/mypage/:id" element={<MyPage />}></Route>
+                    {/* <Route path="/mypage/:id" element={<MyPage />}></Route> */}
                     <Route path="/detail" element={<Detail />}></Route>
                 </Route>
             </Routes>
