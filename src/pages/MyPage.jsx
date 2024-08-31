@@ -22,7 +22,6 @@ function MyPage() {
         </>
     );
 }
-=======
 // import {
 //     Modal,
 //     ModalOverlay,
@@ -56,6 +55,4 @@ function MyPage() {
 //         </>
 //     );
 // }
->>>>>>> 9b61f1e99cf19cacd7b52cc067bb9c848f30da7d
-
 // export default MyPage;
