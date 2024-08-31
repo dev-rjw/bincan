@@ -20,7 +20,7 @@ const DocumentList = () => {
         let { data, error } = await supabase.from("posts").select("*");
         if (error) console.log(error);
 
-        setPosts([...posts, ...data]);
+        setPosts([...data]);
     };
 
     return (

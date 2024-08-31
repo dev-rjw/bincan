@@ -1,7 +1,21 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
+import { PostsContext } from "../App";
+import { useSearchParams } from "react-router-dom";
+import CommentList from "../components/CommentList";
+import CommentInput from "../components/CommentInput";
 
 function Detail() {
+    const { posts, setPosts } = useContext(PostsContext);
+
+    const [comments, setComments] = useState([]);
+    const [searchParams] = useSearchParams();
+    const postsId = searchParams.get("id");
+    const selectedId = Number(postsId);
+
+    const selectedPost = posts.find((post) => post.id === selectedId);
+    const { created_at, title, nickname, img_url, money, context } = selectedPost;
+
     return (
         <>
             <StDetailContainer>
@@ -15,12 +29,27 @@ function Detail() {
 
             <StContentContainer>
                 <StContentArea>
-                    <StRightArea></StRightArea>
+                    <StRightArea>
+                        <img src={img_url} alt={title} />
+                    </StRightArea>
                     <StLeftArea>
-                        <div>안녕하세요</div>
+                        <div>{nickname}</div>
+                        <div>{created_at}</div>
+                        <div>{title}</div>
+                        <div>{context}</div>
+                        <div>{money}</div>
                     </StLeftArea>
                 </StContentArea>
             </StContentContainer>
+            <StVoteBtnContainer>
+                <StVoteBtnWrapper>
+                    <StGoodBtn>인정</StGoodBtn>
+                    <StBadBtn>장난?</StBadBtn>
+                </StVoteBtnWrapper>
+            </StVoteBtnContainer>
+
+            <CommentList comments={comments} setComments={setComments} />
+            <CommentInput comments={comments} setComments={setComments} />
         </>
     );
 }
@@ -34,7 +63,7 @@ const StDetailContainer = styled.div`
 const StBtnContainer = styled.div`
     width: 1280px;
     height: 20px;
-    background-color: purple;
+    /* background-color: purple; */
     margin-top: 80px;
 `;
 const StBtnWrapper = styled.div`
@@ -64,4 +93,24 @@ const StRightArea = styled.div`
 const StLeftArea = styled.div`
     background-color: green;
     flex: 1;
+`;
+
+const StVoteBtnContainer = styled.div`
+    display: flex;
+    justify-content: center;
+`;
+const StVoteBtnWrapper = styled.div`
+    display: flex;
+    gap: 50px;
+    margin: 30px 0 60px 0;
+`;
+const StGoodBtn = styled.button`
+    width: 300px;
+    height: 80px;
+    background-color: red;
+`;
+const StBadBtn = styled.button`
+    width: 300px;
+    height: 80px;
+    background-color: red;
 `;
