@@ -3,10 +3,6 @@ import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import MainPage from "../pages/MainPage";
-<<<<<<< HEAD
-=======
-// import MyPage from "../pages/MyPage";
->>>>>>> 2fbdef971bccea1a8de113f60c3980b13cb41d35
 import Detail from "../pages/Detail";
 import NavHeader from "../components/NavHeader";
 import MyPage from "./../pages/MyPage";
