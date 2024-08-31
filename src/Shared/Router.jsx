@@ -3,9 +3,9 @@ import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import MainPage from "../pages/MainPage";
-// import MyPage from "../pages/MyPage";
 import Detail from "../pages/Detail";
 import NavHeader from "../components/NavHeader";
+import MyPage from "./../pages/MyPage";
 
 const AuthRoute = () => {
     return <Outlet />;
