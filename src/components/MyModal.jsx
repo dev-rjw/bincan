@@ -10,10 +10,23 @@ import {
     Button
 } from "@chakra-ui/react";
 import styled from "styled-components";
+import { supabase } from "../supabase";
+import { useEffect } from "react";
 
 const ModalColor = styled.div`
     background-color: greenyellow;
 `;
+
+const getUserData = async () => {
+    const { data } = await supabase.auth.getUser();
+    return data;
+};
+
+useEffect(() => {
+    getUserData();
+}, []);
+
+console.log(getUserData);
 
 function MyModal() {
     const { isOpen, onOpen, onClose } = useDisclosure();

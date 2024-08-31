@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import styled from "styled-components";
 import MyModal from "./../components/MyModal";
 
@@ -21,5 +22,40 @@ function MyPage() {
         </>
     );
 }
+=======
+// import {
+//     Modal,
+//     ModalOverlay,
+//     ModalContent,
+//     ModalHeader,
+//     ModalFooter,
+//     ModalBody,
+//     ModalCloseButton,
+//     useDisclosure,
+//     Button
+// } from "@chakra-ui/react";
 
-export default MyPage;
+// function MyPage() {
+//     const { isOpen, onOpen, onClose } = useDisclosure();
+
+//     return (
+//         <>
+//             <Button onClick={onOpen}>Trigger modal</Button>
+
+//             <Modal onClose={onClose} isOpen={isOpen} isCentered>
+//                 <ModalOverlay />
+//                 <ModalContent>
+//                     <ModalHeader>정보수정</ModalHeader>
+//                     <ModalCloseButton />
+//                     <ModalBody>인풋</ModalBody>
+//                     <ModalFooter>
+//                         <Button onClick={onClose}>Close</Button>
+//                     </ModalFooter>
+//                 </ModalContent>
+//             </Modal>
+//         </>
+//     );
+// }
+>>>>>>> 9b61f1e99cf19cacd7b52cc067bb9c848f30da7d
+
+// export default MyPage;
