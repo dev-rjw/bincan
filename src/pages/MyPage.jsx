@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import styled from "styled-components";
 import MyModal from "./../components/MyModal";
 
@@ -55,4 +54,4 @@ function MyPage() {
 //         </>
 //     );
 // }
-// export default MyPage;
+export default MyPage;
