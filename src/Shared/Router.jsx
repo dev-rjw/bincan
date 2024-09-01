@@ -26,7 +26,7 @@ const Router = () => {
                     <Route path="/signup" element={<SignUp />}></Route>
                 </Route>
                 <Route element={<PrivateRoute />}>
-                    <Route path="/mypage/:id" element={<MyPage />}></Route>
+                    <Route path="/mypage" element={<MyPage />}></Route>
                     <Route path="/detail" element={<Detail />}></Route>
                 </Route>
             </Routes>
