@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import styled from "styled-components";
 import { supabase } from "../supabase";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const ModalColor = styled.div`
     background-color: greenyellow;
@@ -19,16 +19,17 @@ const ModalColor = styled.div`
 
 function MyModal() {
     const { isOpen, onOpen, onClose } = useDisclosure();
-
+    const [userData, setUserData] = useState();
     const getUserData = async () => {
         const { data } = await supabase.auth.getUser();
+        setUserData(data);
         return data;
     };
+    console.log(userData);
 
     useEffect(() => {
         getUserData();
     }, []);
-
     return (
         <>
             <Button onClick={onOpen}>개인정보 수정</Button>
