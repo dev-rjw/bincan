@@ -7,9 +7,11 @@ export const PostsContext = createContext();
 
 function App() {
     const [posts, setPosts] = useState([]);
+    const [user, setUser] = useState();
 
     useEffect(() => {
-        getDocument(); // eslint-disable-next-line react-hooks/exhaustive-deps
+        getDocument();
+        getUser(); // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const getDocument = async () => {
@@ -19,9 +21,14 @@ function App() {
         setPosts([...data]);
     };
 
+    const getUser = async () => {
+        const { data } = await supabase.auth.getUser();
+        setUser(data);
+    };
+
     return (
         <>
-            <PostsContext.Provider value={{ posts, setPosts }}>
+            <PostsContext.Provider value={{ posts, setPosts, user, setUser }}>
                 <Router />
             </PostsContext.Provider>
         </>
