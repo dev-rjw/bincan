@@ -5,7 +5,7 @@ import SignUp from "../pages/SignUp";
 import MainPage from "../pages/MainPage";
 import Detail from "../pages/Detail";
 import NavHeader from "../components/NavHeader";
-import MyPage from "./../pages/MyPage";
+import MyPage from "../pages/MyPage";
 
 const AuthRoute = () => {
     return <Outlet />;
@@ -26,7 +26,7 @@ const Router = () => {
                     <Route path="/signup" element={<SignUp />}></Route>
                 </Route>
                 <Route element={<PrivateRoute />}>
-                    {/* <Route path="/mypage/:id" element={<MyPage />}></Route> */}
+                    <Route path="/mypage/:id" element={<MyPage />}></Route>
                     <Route path="/detail" element={<Detail />}></Route>
                 </Route>
             </Routes>
