@@ -41,7 +41,10 @@ function Login() {
             <form onSubmit={logIn}>
                 <input value={email} onChange={(e) => setEmail(e.target.value)} />
                 <input value={password} onChange={(e) => setPassword(e.target.value)} />
-                <button type="submit">확인</button>
+                <button type="submit">로그인</button>
+                <button type="button" onClick={() => navigate("/signup")}>
+                    회원가입
+                </button>
             </form>
         </div>
     );
