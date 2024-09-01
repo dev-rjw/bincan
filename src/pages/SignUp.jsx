@@ -10,8 +10,6 @@ function SignUp() {
     const [password, setPassword] = useState("");
     const [nickName, setNickName] = useState("");
     const [profileUrl, setProfileUrl] = useState("");
-    // 프로필 사진 관리용 state
-    const [userImg, setUserImg] = useState("");
     const fileInputRef = useRef(null);
 
     const getUserData = async () => {
@@ -68,25 +66,27 @@ function SignUp() {
     async function handleFileInputChange(files) {
         const [file] = files;
         console.log(file);
-        setUserImg(file.name);
 
         // 파일이 없으면 그냥 리턴
         if (!file) {
             return;
         }
 
-        const { data } = await supabase.storage.from("UserProfile").upload(`${file.name}`, file); //오류 웨ㅔ..?
+        // 파일명 유효성검사 => 한글x 띄어쓰기x, 특수문자x
+
+        const { data } = await supabase.storage.from("UserProfile").upload(file.name, file); //오류 웨ㅔ..?
         //upsert: true 덮어쓰기
 
         // 유져 정보 업데이트
         // 프로필 수정
         const { data: profileUrl, error } = await supabase.auth.updateUser({
-            data: { profileUrl: supabase.storage.from("UserProfile").getPublicUrl("파일명").data.publicUrl }
+            data: { profileUrl: supabase.storage.from("UserProfile").getPublicUrl(file.name).data.publicUrl }
         });
 
         // data.path = 프로필 이미지 넘버링
         // setProfileUrl(`https://yhqidmepyhxhostsyirn.supabase.co/storage/v1/object/sign/UserProfile/${data.path}`);
-        setProfileUrl(supabase.storage.from("UserProfile").getPublicUrl(`${file.name}`).data.publicUrl);
+        setProfileUrl(supabase.storage.from("UserProfile").getPublicUrl(file.name).data.publicUrl);
+        console.log(supabase.storage.from("UserProfile").getPublicUrl(file.name));
 
         // 고마워요 준호님
     }
