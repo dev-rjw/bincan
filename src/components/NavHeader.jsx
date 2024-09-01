@@ -12,7 +12,10 @@ const NavHeader = () => {
             <StNavContainer>
                 <StNavContent>
                     <StNavLeft>
-                        <StEmptyNav></StEmptyNav>
+                        <StEmptyNav>
+                            {user.user.email}님, <br />
+                            지갑은 안녕하시렵니까?
+                        </StEmptyNav>
                     </StNavLeft>
                     <StNavCenter>
                         <StNavLogo
