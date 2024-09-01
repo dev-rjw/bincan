@@ -20,7 +20,6 @@ const CommentInput = ({ comments, setComments }) => {
 
         setComments([...comments, ...data]);
         setComment("");
-        // console.log(data);
     };
 
     return (
