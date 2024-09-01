@@ -4,26 +4,20 @@ import styled from "styled-components";
 import { supabase } from "../supabase";
 import { PostsContext } from "../App";
 
-const DocumentList = () => {
-    const { posts, setPosts } = useContext(PostsContext);
-
-    useEffect(() => {
-        getDocument(); // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
-    const getDocument = async () => {
-        let { data, error } = await supabase.from("posts").select("*");
-        if (error) console.log(error);
-
-        setPosts([...data]);
-    };
+const DocumentList = ({ id }) => {
+    const { posts, user } = useContext(PostsContext);
 
     return (
         <>
             <StyledCardDiv>
-                {posts.map((post) => {
-                    return <DocumentCard key={post.id} post={post} />;
-                })}
+                {posts
+                    .sort((a, b) => {
+                        if (a.created_at < b.created_at) return 1;
+                        if (a.created_at > b.created_at) return -1;
+                        return 0;
+                    })
+                    .map((post) => <DocumentCard key={post.id} post={post} />)
+                    .filter((post) => (id === undefined ? post : post.id === id))}
             </StyledCardDiv>
         </>
     );
