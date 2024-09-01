@@ -17,6 +17,7 @@ const CommentList = () => {
         if (error) console.log(error);
 
         setComments(data);
+        // console.log(data);
     };
     return (
         <>
