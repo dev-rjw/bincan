@@ -21,6 +21,10 @@ const InputWindow = () => {
         if (error) console.log(error);
 
         setPosts([...posts, ...data]);
+
+        setTitle("");
+        setMoney("");
+        setContext("");
     };
 
     return (
