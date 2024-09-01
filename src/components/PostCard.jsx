@@ -9,7 +9,6 @@ const PostCard = ({ post }) => {
             <StyledCard
                 onClick={() => {
                     navigate(`/detail?id=${post.id}`);
-                    console.log(post.id);
                 }}
             >
                 <img src={post.img_url} width="100%"></img>

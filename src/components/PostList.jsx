@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import PostCard from "./PostCard";
 import styled from "styled-components";
-import { supabase } from "../supabase";
 import { PostsContext } from "../App";
 
 const PostList = ({ id }) => {
