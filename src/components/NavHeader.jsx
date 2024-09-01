@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { PostsContext } from "../App";
 
 const NavHeader = () => {
     const navigate = useNavigate();
+    const { user } = useContext(PostsContext);
+    console.log(user);
     return (
         <>
             <StNavContainer>
@@ -21,7 +24,13 @@ const NavHeader = () => {
                         />
                     </StNavCenter>
                     <StNavRight>
-                        <StNavMenu>마이페이지</StNavMenu>
+                        <StNavMenu
+                            onClick={() => {
+                                navigate(`/mypage?id=${user.user.id}`);
+                            }}
+                        >
+                            마이페이지
+                        </StNavMenu>
                         <StNavMenu
                             onClick={() => {
                                 navigate("/login");
