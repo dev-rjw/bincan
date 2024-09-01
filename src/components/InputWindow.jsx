@@ -24,19 +24,19 @@ const InputWindow = () => {
     };
 
     return (
-        <Window>
-            <Input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
-            <Input type="text" value={money} onChange={(e) => setMoney(e.target.value)} />
-            <TextArea value={context} onChange={(e) => setContext(e.target.value)} />
+        <StyledWindow>
+            <StyledInput type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+            <StyledInput type="text" value={money} onChange={(e) => setMoney(e.target.value)} />
+            <StyledTextArea value={context} onChange={(e) => setContext(e.target.value)} />
             <img src="" />
-            <Button onClick={insertDocument}>등록</Button>
-        </Window>
+            <StyledButton onClick={insertDocument}>등록</StyledButton>
+        </StyledWindow>
     );
 };
 
 export default InputWindow;
 
-const Window = styled.div`
+const StyledWindow = styled.div`
     width: 100%;
     background-color: #676767;
     display: flex;
@@ -46,19 +46,19 @@ const Window = styled.div`
     border-radius: 10px;
 `;
 
-const Input = styled.input`
+const StyledInput = styled.input`
     width: 40%;
     height: 30px;
     background-color: #f1d594;
 `;
 
-const TextArea = styled.textarea`
+const StyledTextArea = styled.textarea`
     width: 40%;
     height: 60px;
     background-color: #f1d594;
 `;
 
-const Button = styled.button`
+const StyledButton = styled.button`
     width: 15%;
     height: 35px;
     background-color: #edb432;

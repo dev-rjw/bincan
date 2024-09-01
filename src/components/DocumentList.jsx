@@ -4,11 +4,6 @@ import styled from "styled-components";
 import { supabase } from "../supabase";
 import { PostsContext } from "../App";
 
-const CardDiv = styled.div`
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-`;
-
 const DocumentList = () => {
     const { posts, setPosts } = useContext(PostsContext);
 
@@ -25,13 +20,18 @@ const DocumentList = () => {
 
     return (
         <>
-            <CardDiv>
+            <StyledCardDiv>
                 {posts.map((post) => {
                     return <DocumentCard key={post.id} post={post} />;
                 })}
-            </CardDiv>
+            </StyledCardDiv>
         </>
     );
 };
 
 export default DocumentList;
+
+const StyledCardDiv = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+`;
