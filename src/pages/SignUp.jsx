@@ -14,6 +14,7 @@ function SignUp() {
 
     useEffect(() => {
         getUserData();
+        checkProfile();
     }, []);
 
     const getUserData = async () => {
@@ -44,7 +45,7 @@ function SignUp() {
             options: {
                 data: {
                     nickName: nickName,
-                    profileUrl: setProfileUrl
+                    profileUrl: profileUrl
                 }
             }
         });
@@ -56,9 +57,9 @@ function SignUp() {
         const { data: userData } = await supabase.auth.getUser();
 
         const userProfileUrl = userData.user.user_metadata.profileUrl;
-        //옵셔널체이닝
 
-        const { data } = supabase.storage.from("avatars").getPublicUrl(userProfileUrl ?? "default-profile.jpg");
+        //옵셔널체이닝
+        const { data } = supabase.storage.from("UserProfile").getPublicUrl(userProfileUrl ?? "Group 66.svg");
 
         setProfileUrl(data.publicUrl);
     }
@@ -72,10 +73,15 @@ function SignUp() {
             return;
         }
 
-        const { data } = await supabase.storage.from("avatars").upload(`avatar_${Date.now()}.png`, file);
+        const { data } = await supabase.storage.from("UserProfile").upload(`UserProfile${Date.now()}.png`, file);
 
         // data.path = 프로필 이미지 넘버링
-        setProfileUrl(`https://yhqidmepyhxhostsyirn.supabase.co/storage/v1/object/public/avatars/${data.path}`);
+        setProfileUrl(`https://yhqidmepyhxhostsyirn.supabase.co/storage/v1/object/public/UserProfile/${data.path}`);
+
+        // 프로필 수정
+        const { data: profileData, error } = await supabase.auth.updateUser({
+            data: { profileUrl: data.path }
+        });
     }
 
     return (
