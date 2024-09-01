@@ -5,7 +5,7 @@ const Comment = ({ comment }) => {
     return (
         <>
             <StCommentWrapper>
-                <StCommentContext>{comment.context} </StCommentContext>
+                <StCommentContext>{comment.comment} </StCommentContext>
                 <StCommentTime>{comment.created_at}</StCommentTime>
             </StCommentWrapper>
         </>

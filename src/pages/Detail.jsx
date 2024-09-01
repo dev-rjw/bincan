@@ -1,21 +1,31 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { PostsContext } from "../App";
 import { useSearchParams } from "react-router-dom";
 import CommentList from "../components/CommentList";
 import CommentInput from "../components/CommentInput";
+import { supabase } from "../supabase";
 
 function Detail() {
-    const { posts, setPosts } = useContext(PostsContext);
-
-    const [comments, setComments] = useState([]);
     const [searchParams] = useSearchParams();
     const postsId = searchParams.get("id");
-    const selectedId = Number(postsId);
 
-    const selectedPost = posts.find((post) => post.id === selectedId);
+    const [selectedPost, setSelectedPost] = useState({});
+    const [comments, setComments] = useState([]);
+
+    useEffect(() => {
+        const getPost = async () => {
+            let { data, error } = await supabase.from("posts").select("*").eq("id", postsId);
+            if (error) {
+                console.log(error);
+            }
+            console.log(data);
+            setSelectedPost(data[0]);
+        };
+        getPost();
+    }, []);
+
     const { created_at, title, nickname, img_url, money, context } = selectedPost;
-
     return (
         <>
             <StDetailContainer>
