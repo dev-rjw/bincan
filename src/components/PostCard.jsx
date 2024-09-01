@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-const DocumentCard = ({ post }) => {
+const PostCard = ({ post }) => {
     const navigate = useNavigate();
     return (
         <>
@@ -20,7 +20,7 @@ const DocumentCard = ({ post }) => {
     );
 };
 
-export default DocumentCard;
+export default PostCard;
 
 const StyledCard = styled.div`
     background-color: #d9d9d9;

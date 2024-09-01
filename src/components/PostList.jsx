@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import DocumentCard from "./DocumentCard";
+import PostCard from "./PostCard";
 import styled from "styled-components";
 import { supabase } from "../supabase";
 import { PostsContext } from "../App";
 
-const DocumentList = ({ id }) => {
+const PostList = ({ id }) => {
     const { posts, user } = useContext(PostsContext);
 
     return (
@@ -16,14 +16,14 @@ const DocumentList = ({ id }) => {
                         if (a.created_at > b.created_at) return -1;
                         return 0;
                     })
-                    .map((post) => <DocumentCard key={post.id} post={post} />)
+                    .map((post) => <PostCard key={post.id} post={post} />)
                     .filter((post) => (id === undefined ? post : post.id === id))}
             </StyledCardDiv>
         </>
     );
 };
 
-export default DocumentList;
+export default PostList;
 
 const StyledCardDiv = styled.div`
     display: grid;

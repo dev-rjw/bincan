@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { supabase } from "../supabase";
 import { PostsContext } from "../App";
 
-const InputWindow = () => {
+const PostInput = () => {
     const [title, setTitle] = useState("");
     const [money, setMoney] = useState("");
     const [context, setContext] = useState("");
@@ -38,7 +38,7 @@ const InputWindow = () => {
     );
 };
 
-export default InputWindow;
+export default PostInput;
 
 const StyledWindow = styled.div`
     width: 100%;
