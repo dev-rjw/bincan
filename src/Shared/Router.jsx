@@ -6,6 +6,7 @@ import MainPage from "../pages/MainPage";
 import Detail from "../pages/Detail";
 import NavHeader from "../components/NavHeader";
 import MyPage from "../pages/MyPage";
+import DetailEdit from "../pages/DetailEdit";
 
 const AuthRoute = () => {
     return <Outlet />;
@@ -28,6 +29,7 @@ const Router = () => {
                 <Route element={<PrivateRoute />}>
                     <Route path="/mypage" element={<MyPage />}></Route>
                     <Route path="/detail" element={<Detail />}></Route>
+                    <Route path="/detail-edit" element={<DetailEdit />}></Route>
                 </Route>
             </Routes>
         </BrowserRouter>

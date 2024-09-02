@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { PostsContext } from "../App";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import CommentList from "../components/CommentList";
 import CommentInput from "../components/CommentInput";
 import { supabase } from "../supabase";
@@ -12,7 +12,8 @@ function Detail() {
 
     const [selectedPost, setSelectedPost] = useState({});
     const [comments, setComments] = useState([]);
-
+    const { user } = useContext(PostsContext);
+    const navigate = useNavigate();
     useEffect(() => {
         const getPost = async () => {
             let { data, error } = await supabase.from("posts").select("*").eq("id", postsId);
@@ -26,12 +27,20 @@ function Detail() {
     }, []);
 
     const { created_at, title, nickname, img_url, money, context } = selectedPost;
+
     return (
         <>
             <StDetailContainer>
                 <StBtnContainer>
                     <StBtnWrapper>
-                        <StEditBtn>수정하기</StEditBtn>
+                        <StEditBtn
+                            onClick={() => {
+                                navigate(`/detail-edit?id=${postsId}`);
+                            }}
+                        >
+                            수정하기
+                        </StEditBtn>
+
                         <StDeleteBtn>삭제하기</StDeleteBtn>
                     </StBtnWrapper>
                 </StBtnContainer>

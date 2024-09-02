@@ -6,15 +6,22 @@ import { PostsContext } from "../App";
 const NavHeader = () => {
     const navigate = useNavigate();
     const { user } = useContext(PostsContext);
-    console.log(user);
+    // console.log(user);
+
     return (
         <>
             <StNavContainer>
                 <StNavContent>
                     <StNavLeft>
                         <StEmptyNav>
-                            {user.user.email}님, <br />
-                            지갑은 안녕하시렵니까?
+                            {user?.user?.email ? (
+                                <>
+                                    {user?.user.email}님, <br />
+                                    지갑은 안녕하시렵니까?
+                                </>
+                            ) : (
+                                "로그인이 필요합니다."
+                            )}
                         </StEmptyNav>
                     </StNavLeft>
                     <StNavCenter>
