@@ -3,6 +3,7 @@ import PostInput from "../components/PostInput";
 import PostList from "../components/PostList";
 import { supabase } from "../supabase";
 import LogOut from "../components/LogOut";
+import MyInfo from "../pages/MyInfo";
 
 function MainPage() {
     const [userData, setUserData] = useState({});
