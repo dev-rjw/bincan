@@ -45,6 +45,7 @@ function SignUp() {
                 data: {
                     nickName: nickName,
                     profileUrl: setProfileUrl
+                    // 문제
                 }
             }
         });
