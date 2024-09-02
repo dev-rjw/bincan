@@ -3,7 +3,7 @@ import MyModal from "./../components/MyModal";
 import { useContext } from "react";
 import { PostsContext } from "../App";
 import { useSearchParams } from "react-router-dom";
-import DocumentCard from "../components/DocumentCard";
+import PostCard from "../components/PostCard";
 
 const Dashboard = styled.div`
     background-color: greenyellow;
@@ -32,7 +32,7 @@ function MyPage({ intro }) {
                 {filterdPosts.map((post) => {
                     return (
                         <li key={post.id}>
-                            <DocumentCard post={post} />;
+                            <PostCard post={post} />;
                         </li>
                     );
                 })}
