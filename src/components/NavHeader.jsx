@@ -6,7 +6,7 @@ import { PostsContext } from "../App";
 const NavHeader = () => {
     const navigate = useNavigate();
     const { user } = useContext(PostsContext);
-    console.log(user);
+
     return (
         <>
             <StNavContainer>
