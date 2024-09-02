@@ -37,12 +37,22 @@ const MyInfo = () => {
         reader.onloadend = () => setImgUrl(reader.result);
     };
 
+    // async function checkProfile() {
+    //     //프로필 유효성 검사
+    //     const { data: userData } = await supabase.auth.getUser();
+    //     const userProfileUrl = userData.user.user_metadata.profileUrl;
+    //     //null 병합 연산자를 사용하여 프로필이미지 상태 탐지 및 반환 // 기본 이미지 "Group 66.png"
+    //     const { data } = supabase.storage.from("UserProfile").getPublicUrl("Group_66.png");
+    //     setProfileUrl(data.publicUrl);
+    //     console.log(data.publicUrl);
+    // }
+
     return (
         <div>
             <div>
                 <h1>개인정보 수정</h1>
                 <p>프로필 사진</p>
-                <img src={imgUrl} alt="빈캔" width="50%" />
+                <img src={imgUrl} alt="" width="50%" />
                 <input type="file" onChange={onchangeImageUpload} />
 
                 <p>이메일</p>
