@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import MyModal from "./../components/MyModal";
+import MyInfo from "./MyInfo";
 import { useContext } from "react";
 import { PostsContext } from "../App";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import PostCard from "../components/PostCard";
 
 const Dashboard = styled.div`
@@ -10,23 +10,25 @@ const Dashboard = styled.div`
 `;
 
 function MyPage() {
+    const navigate = useNavigate();
     const { posts, user } = useContext(PostsContext);
     const [searchParams] = useSearchParams();
     const userId = searchParams.get("id");
 
     const filterdPosts = posts.filter((post) => post.user_id === userId);
     console.log(user);
+
     return (
         <>
             <Dashboard>
-                <img src="{post.img_url}" alt="" />
+                <img src={user?.user.user_metadata.profileUrl} alt="" width="50%" />
                 <h2>닉네임</h2>
                 <p>{user?.user.user_metadata.nickName}</p>
                 <h2>이메일</h2>
                 <p>{user?.user.email}</p>
                 <h2>자기소개</h2>
                 <p>{user?.user.user_metadata.intro ? user?.user.user_metadata.intro : "자기소개를 등록해주세요"}</p>
-                <MyModal />
+                <button onClick={() => navigate("/MyInfo")}>개인정보수정</button>
             </Dashboard>
             <ul>
                 {filterdPosts.map((post) => {

@@ -21,7 +21,10 @@ const MyInfo = () => {
                 intro: intro
             }
         });
-        console.log(data);
+        if (data) {
+            alert("수정되었습니다.");
+            navigate("/mypage");
+        }
     };
 
     const onchangeImageUpload = (e) => {
@@ -40,8 +43,7 @@ const MyInfo = () => {
                 <p>프로필 사진</p>
                 <img src={imgUrl} alt="빈캔" />
                 <input type="file" onChange={onchangeImageUpload} />
-                <button>사진업로드</button>
-                <button>사진 제거</button>
+
                 <p>이메일</p>
                 {/* 조건부 랜더링 */}
                 {user && <input type="text" value={user?.user.email} disabled />}
