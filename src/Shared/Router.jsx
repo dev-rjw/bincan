@@ -6,6 +6,7 @@ import MainPage from "../pages/MainPage";
 import Detail from "../pages/Detail";
 import NavHeader from "../components/NavHeader";
 import MyPage from "../pages/MyPage";
+import MyInfo from "../pages/MyInfo";
 
 const AuthRoute = () => {
     return <Outlet />;
@@ -27,6 +28,7 @@ const Router = () => {
                 </Route>
                 <Route element={<PrivateRoute />}>
                     <Route path="/mypage" element={<MyPage />}></Route>
+                    <Route path="/myinfo" element={<MyInfo />}></Route>
                     <Route path="/detail" element={<Detail />}></Route>
                 </Route>
             </Routes>
