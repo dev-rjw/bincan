@@ -4,17 +4,16 @@ import { useContext } from "react";
 import { PostsContext } from "../App";
 import { useSearchParams } from "react-router-dom";
 import PostCard from "../components/PostCard";
+import PostList from "../components/PostList";
 
 const Dashboard = styled.div`
     background-color: greenyellow;
 `;
 
 function MyPage({ intro }) {
-    const { posts, user } = useContext(PostsContext);
+    const { user } = useContext(PostsContext);
     const [searchParams] = useSearchParams();
     const userId = searchParams.get("id");
-
-    const filterdPosts = posts.filter((post) => post.user_id === userId);
 
     return (
         <>
@@ -28,15 +27,7 @@ function MyPage({ intro }) {
                 <p>{intro ? user?.user.user_metadata.intro : "자기소개를 등록해주세요"}</p>
                 <MyModal />
             </Dashboard>
-            <ul>
-                {filterdPosts.map((post) => {
-                    return (
-                        <li key={post.id}>
-                            <PostCard post={post} />;
-                        </li>
-                    );
-                })}
-            </ul>
+            <PostList id={userId} />
         </>
     );
 }
