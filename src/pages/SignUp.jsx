@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../supabase";
+import styled from "styled-components";
 
 function SignUp() {
     const navigate = useNavigate();
@@ -12,9 +13,8 @@ function SignUp() {
     const [profileUrl, setProfileUrl] = useState("");
     const fileInputRef = useRef(null);
 
-    useEffect(() => {
-        getUserData();
-    }, []);
+    //정규표현식
+    var engValidation = /^[A-Za-z.]+$/g; // 영어랑.만 포함하는 정규표현식
 
     const getUserData = async () => {
         const { data } = await supabase.auth.getUser();
@@ -44,7 +44,7 @@ function SignUp() {
             options: {
                 data: {
                     nickName: nickName,
-                    profileUrl: setProfileUrl
+                    profileUrl: profileUrl
                 }
             }
         });
@@ -55,11 +55,8 @@ function SignUp() {
     async function checkProfile() {
         const { data: userData } = await supabase.auth.getUser();
 
-        const userProfileUrl = userData.user.user_metadata.profileUrl;
-        //옵셔널체이닝
-
-        const { data } = supabase.storage.from("avatars").getPublicUrl(userProfileUrl ?? "default-profile.jpg");
-
+        // 기본 이미지 "Group 66.png" 셋팅
+        const { data } = supabase.storage.from("UserProfile").getPublicUrl("Group_66.png");
         setProfileUrl(data.publicUrl);
     }
 
@@ -67,33 +64,100 @@ function SignUp() {
     async function handleFileInputChange(files) {
         const [file] = files;
 
-        // 파일이 없으면 그냥 리턴
+        // 파일이 없으면 리턴
         if (!file) {
             return;
         }
 
-        const { data } = await supabase.storage.from("avatars").upload(`avatar_${Date.now()}.png`, file);
+        // 파일명 유효성검사 => only eng & .
+        if (!engValidation.test(file.name)) {
+            alert("파일명이 잘못되었습니다. 영어 또는 숫자만 가능합니다.");
+            return;
+        }
 
-        // data.path = 프로필 이미지 넘버링
-        setProfileUrl(`https://yhqidmepyhxhostsyirn.supabase.co/storage/v1/object/public/avatars/${data.path}`);
+        // 로컬스토리지에 파일명으로 저장 // 프로필사진은 1개만 사용하므로 덮어쓰기(upsert:true)
+        const { data } = await supabase.storage.from("UserProfile").upload(file.name, file, { upsert: true });
+
+        //유저 정보 업데이트
+        const { data: profileUrl, error } = await supabase.auth.updateUser({
+            data: { profileUrl: supabase.storage.from("UserProfile").getPublicUrl(file.name).data.publicUrl }
+        });
+
+        setProfileUrl(supabase.storage.from("UserProfile").getPublicUrl(file.name).data.publicUrl);
+
+        // 고마워요 준호님
     }
+
+    useEffect(() => {
+        getUserData();
+        checkProfile();
+    }, []);
 
     return (
         <div>
-            <form onSubmit={SignUp}>
-                <input value={email} onChange={(e) => setEmail(e.target.value)} />
-                <input value={password} onChange={(e) => setPassword(e.target.value)} />
-                <input value={nickName} onChange={(e) => setNickName(e.target.value)} />
-                <input
-                    onChange={(e) => handleFileInputChange(e.target.files)}
-                    type="file"
-                    ref={fileInputRef}
-                    className="hidden"
-                />
-                <button type="submit">확인</button>
-            </form>
+            <Form onSubmit={SignUp}>
+                <User>
+                    <input value={email} onChange={(e) => setEmail(e.target.value)} />
+                    <input value={password} onChange={(e) => setPassword(e.target.value)} />
+                    <input value={nickName} onChange={(e) => setNickName(e.target.value)} />
+                </User>
+                <ProfileImg>
+                    <InputImg onChange={(e) => handleFileInputChange(e.target.files)} type="file" ref={fileInputRef} />
+                    <Img src={profileUrl} alt="profile" onClick={() => fileInputRef.current.click()} />
+                </ProfileImg>
+                <Button type="submit">확인</Button>
+            </Form>
         </div>
     );
 }
 
 export default SignUp;
+
+const Form = styled.form`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+`;
+
+const User = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`;
+
+const ProfileImg = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`;
+
+const InputImg = styled.input`
+    position: absolute;
+    right: 10px;
+    top: 450px;
+
+    background-color: #edb432;
+    border-radius: 10px;
+    color: white;
+`;
+
+const Img = styled.img`
+    position: absolute;
+    right: 100px;
+    top: 100px;
+    width: 250px;
+    height: 250px;
+    border: solid 7px #edb432;
+    border-radius: 10px;
+
+    background-color: #ffffff;
+`;
+
+const Button = styled.button`
+    background-color: #edb432;
+    color: white;
+`;

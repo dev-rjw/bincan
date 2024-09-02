@@ -35,7 +35,7 @@ const NavHeader = () => {
                     <StNavRight>
                         <StNavMenu
                             onClick={() => {
-                                navigate(`/mypage?id=${user.user.id}`);
+                                navigate(`/mypage?id=${user?.user.id}`);
                             }}
                         >
                             마이페이지
