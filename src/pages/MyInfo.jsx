@@ -1,8 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { supabase } from "../supabase";
 import { PostsContext } from "../App";
+import { useNavigate } from "react-router-dom";
 
 const MyInfo = () => {
+    const navigate = useNavigate();
     const [imgUrl, setImgUrl] = useState();
     const [nickName, setNickName] = useState();
     const [intro, setIntro] = useState();
@@ -11,11 +13,15 @@ const MyInfo = () => {
 
     const updateUserData = async () => {
         const { data, error } = await supabase.auth.updateUser({
-            img_url: imgUrl,
-            email: user.user.email,
-            nickname: nickName,
-            intro: intro
+            // email: user.user.email,
+
+            data: {
+                profileUrl: imgUrl,
+                nickName: nickName,
+                intro: intro
+            }
         });
+        console.log(data);
     };
 
     const onchangeImageUpload = (e) => {
@@ -37,7 +43,9 @@ const MyInfo = () => {
                 <button>사진업로드</button>
                 <button>사진 제거</button>
                 <p>이메일</p>
-                <input type="text" value={user?.user.email} disabled />
+                {/* 조건부 랜더링 */}
+                {user && <input type="text" value={user?.user.email} disabled />}
+
                 <p>닉네임</p>
                 <input
                     type="text"
@@ -58,7 +66,7 @@ const MyInfo = () => {
 
             <div>
                 <button onClick={updateUserData}>수정하기</button>
-                <button>취소</button>
+                <button onClick={() => navigate("/Mypage")}>취소</button>
             </div>
         </div>
     );

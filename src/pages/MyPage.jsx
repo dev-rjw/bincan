@@ -9,13 +9,13 @@ const Dashboard = styled.div`
     background-color: greenyellow;
 `;
 
-function MyPage({ intro }) {
+function MyPage() {
     const { posts, user } = useContext(PostsContext);
     const [searchParams] = useSearchParams();
     const userId = searchParams.get("id");
 
     const filterdPosts = posts.filter((post) => post.user_id === userId);
-
+    console.log(user);
     return (
         <>
             <Dashboard>
@@ -25,7 +25,7 @@ function MyPage({ intro }) {
                 <h2>이메일</h2>
                 <p>{user?.user.email}</p>
                 <h2>자기소개</h2>
-                <p>{intro ? user?.user.user_metadata.intro : "자기소개를 등록해주세요"}</p>
+                <p>{user?.user.user_metadata.intro ? user?.user.user_metadata.intro : "자기소개를 등록해주세요"}</p>
                 <MyModal />
             </Dashboard>
             <ul>
