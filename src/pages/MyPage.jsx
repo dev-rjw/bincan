@@ -27,7 +27,7 @@ function MyPage() {
 
     useEffect(() => {
         getUser();
-    });
+    }, []);
 
     // get user >  set user
     return (
