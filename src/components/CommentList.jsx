@@ -8,17 +8,15 @@ const CommentList = () => {
     const [searchParams] = useSearchParams();
     const postsId = searchParams.get("id");
 
-    useEffect(() => {
-        getComment();
-    }, [comments]);
-
+    // 어떤식으로 바로 보여줄지... useEffect
     const getComment = async () => {
         let { data, error } = await supabase.from("comments").select("*").eq("post_id", postsId);
         if (error) console.log(error);
 
         setComments(data);
-        // console.log(data);
+        // setComments((prev) => [...prev, ...data]);
     };
+    getComment();
     return (
         <>
             {comments.map((comment) => {

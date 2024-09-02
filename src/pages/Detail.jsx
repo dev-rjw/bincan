@@ -10,38 +10,68 @@ function Detail() {
     const [searchParams] = useSearchParams();
     const postsId = searchParams.get("id");
 
+    // const { user } = useContext(PostsContext);
+    const navigate = useNavigate();
+
     const [selectedPost, setSelectedPost] = useState({});
     const [comments, setComments] = useState([]);
-    const { user } = useContext(PostsContext);
-    const navigate = useNavigate();
+    const [user, setUser] = useState();
+
     useEffect(() => {
-        const getPost = async () => {
-            let { data, error } = await supabase.from("posts").select("*").eq("id", postsId);
-            if (error) {
-                console.log(error);
-            }
-            console.log(data);
-            setSelectedPost(data[0]);
-        };
         getPost();
+        getUser();
     }, []);
 
+    // posts 내용 불러오기
+    const getPost = async () => {
+        let { data, error } = await supabase.from("posts").select("*");
+        if (error) console.log(error);
+
+        const filteredPost = data.filter((data) => {
+            return data.id === Number(postsId);
+        });
+        setSelectedPost(filteredPost[0]);
+    };
+    const getUser = async () => {
+        const { data } = await supabase.auth.getUser();
+        setUser(data);
+    };
+    console.log(user);
+    console.log(selectedPost);
     const { created_at, title, nickname, img_url, money, context } = selectedPost;
+
+    // 삭제 로직
+    const handleDelete = async (e) => {
+        e.preventDefault();
+
+        const result = confirm("게시글을 삭제하시겠습니까?");
+        if (result) {
+            const { error } = await supabase.from("posts").delete().eq("id", postsId);
+            navigate("/");
+        } else {
+            return;
+        }
+    };
 
     return (
         <>
             <StDetailContainer>
                 <StBtnContainer>
                     <StBtnWrapper>
-                        <StEditBtn
-                            onClick={() => {
-                                navigate(`/detail-edit?id=${postsId}`);
-                            }}
-                        >
-                            수정하기
-                        </StEditBtn>
-
-                        <StDeleteBtn>삭제하기</StDeleteBtn>
+                        {user?.user?.id === selectedPost.user_id ? (
+                            <>
+                                <StEditBtn
+                                    onClick={() => {
+                                        navigate(`/detail-edit?id=${postsId}`);
+                                    }}
+                                >
+                                    수정하기
+                                </StEditBtn>
+                                <StDeleteBtn onClick={handleDelete}>삭제하기</StDeleteBtn>
+                            </>
+                        ) : (
+                            <>{""}</>
+                        )}
                     </StBtnWrapper>
                 </StBtnContainer>
             </StDetailContainer>

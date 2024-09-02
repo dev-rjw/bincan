@@ -15,21 +15,18 @@ const DetailEdit = () => {
     const postsId = searchParams.get("id");
 
     useEffect(() => {
-        const getPost = async () => {
-            let { data, error } = await supabase.from("posts").select("*").eq("id", postsId);
-            if (error) {
-                console.log(error);
-            }
-            if (data.length > 0) {
-                const post = data[0];
-                setTitle(post.title || "");
-                setMoney(post.money || "");
-                setContext(post.context || "");
-            }
-            // console.log(data);
-        };
-        getPost();
-    }, [postsId]);
+        const filteredPost = posts?.filter((data) => {
+            return data.id === Number(postsId);
+        });
+
+        if (filteredPost.length > 0) {
+            const post = filteredPost[0];
+            setTitle(post.title || "");
+            setMoney(post.money || "");
+            setContext(post.context || "");
+        }
+        console.log(filteredPost);
+    }, []);
 
     const editDocument = async (e) => {
         e.preventDefault();
@@ -43,7 +40,7 @@ const DetailEdit = () => {
         const userId = user.user.id;
         if (!userId) {
             console.error("유저 아이디가 없습니다");
-            return;
+            return; // 로긴창
         }
 
         // 게시물 업데이트
