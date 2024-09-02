@@ -8,7 +8,7 @@ function Login() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [signIn, setSignIn] = useState(false);
+    // const [signIn, setSignIn] = useState(false);
 
     useEffect(() => {
         getUserData();
@@ -21,8 +21,8 @@ function Login() {
             email: email,
             password: password
         });
-        console.log(error);
-        console.log(data);
+        // console.log(error);
+        // console.log(data);
 
         if (error) {
             alert("아이디 또는 비밀번호를 확인해주세요.");

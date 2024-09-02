@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../supabase";
+import styled from "styled-components";
 
 function SignUp() {
     const navigate = useNavigate();
@@ -11,6 +12,10 @@ function SignUp() {
     const [nickName, setNickName] = useState("");
     const [profileUrl, setProfileUrl] = useState("");
     const fileInputRef = useRef(null);
+
+    //정규표현식
+    var engValidation = /^[A-Za-z.]+$/g; // 영어
+    var emailValidation = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+$/; // 이메일형식
 
     const getUserData = async () => {
         const { data } = await supabase.auth.getUser();
@@ -49,23 +54,21 @@ function SignUp() {
 
     // 프로필
     async function checkProfile() {
-        // 기본 프로필
-        // const { data } = supabase.storage.from("UserProfile").getPublicUrl("Group 66.png");
         //프로필 유효성 검사
         const { data: userData } = await supabase.auth.getUser();
         const userProfileUrl = userData.user.user_metadata.profileUrl;
 
-        //null 병합 연산자를 사용하여 프로필 상태 탐지 및 반환
-        const profileImg = supabase.storage.from("UserProfile").getPublicUrl(userProfileUrl ?? "Group 66.png")
-            .data.publicUrl;
+        //null 병합 연산자를 사용하여 프로필이미지 상태 탐지 및 반환 // 기본 이미지 "Group 66.png"
+        const { data } = supabase.storage.from("UserProfile").getPublicUrl("Group_66.png");
+        setProfileUrl(data.publicUrl);
 
-        setProfileUrl(profileImg);
+        console.log(data.publicUrl);
     }
 
     // 프로필 사진 변경
     async function handleFileInputChange(files) {
         const [file] = files;
-        console.log(file);
+        // console.log(file);
 
         // 파일이 없으면 리턴
         if (!file) {
@@ -73,9 +76,13 @@ function SignUp() {
         }
 
         // 파일명 유효성검사 => 한글x 띄어쓰기x, 특수문자x
+        if (!engValidation.test(file.name)) {
+            alert("파일명이 잘못되었습니다. 영어 또는 숫자만 가능합니다.");
+            return;
+        }
 
-        const { data } = await supabase.storage.from("UserProfile").upload(file.name, file); //같은 이미지 업로드시 오류발생 어떻게 해결하냐이거
-        //upsert: true 덮어쓰기 할?말? 말
+        // 로컬스토리지에 파일명으로 저장 // 프로필사진은 1개만 사용하므로 덮어쓰기(upsert:true)
+        const { data } = await supabase.storage.from("UserProfile").upload(file.name, file, { upsert: true });
 
         //유저 정보 업데이트
         const { data: profileUrl, error } = await supabase.auth.updateUser({
@@ -83,7 +90,7 @@ function SignUp() {
         });
 
         setProfileUrl(supabase.storage.from("UserProfile").getPublicUrl(file.name).data.publicUrl);
-        console.log(supabase.storage.from("UserProfile").getPublicUrl(file.name));
+        // console.log(supabase.storage.from("UserProfile").getPublicUrl(file.name));
 
         // 고마워요 준호님
     }
@@ -95,29 +102,69 @@ function SignUp() {
 
     return (
         <div>
-            <form onSubmit={SignUp}>
-                <input value={email} onChange={(e) => setEmail(e.target.value)} />
-                <input value={password} onChange={(e) => setPassword(e.target.value)} />
-                <input value={nickName} onChange={(e) => setNickName(e.target.value)} />
-                <input
-                    onChange={(e) => handleFileInputChange(e.target.files)}
-                    type="file"
-                    ref={fileInputRef}
-                    className="hidden"
-                />
-                <img
-                    className="rounded-full cursor-pointer"
-                    width={300}
-                    height={300}
-                    border={10}
-                    src={profileUrl}
-                    alt="profile"
-                    onClick={() => fileInputRef.current.click()}
-                />
-                <button type="submit">확인</button>
-            </form>
+            <Form onSubmit={SignUp}>
+                <User>
+                    <input value={email} onChange={(e) => setEmail(e.target.value)} />
+                    <input value={password} onChange={(e) => setPassword(e.target.value)} />
+                    <input value={nickName} onChange={(e) => setNickName(e.target.value)} />
+                </User>
+                <ProfileImg>
+                    <InputImg onChange={(e) => handleFileInputChange(e.target.files)} type="file" ref={fileInputRef} />
+                    <Img src={profileUrl} alt="profile" onClick={() => fileInputRef.current.click()} />
+                </ProfileImg>
+                <Button type="submit">확인</Button>
+            </Form>
         </div>
     );
 }
 
 export default SignUp;
+
+const Form = styled.form`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+`;
+
+const User = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`;
+
+const ProfileImg = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`;
+
+const InputImg = styled.input`
+    position: absolute;
+    right: 10px;
+    top: 450px;
+
+    background-color: #edb432;
+    border-radius: 10px;
+    color: white;
+`;
+
+const Img = styled.img`
+    position: absolute;
+    right: 100px;
+    top: 100px;
+    width: 250px;
+    height: 250px;
+    border: solid 7px #edb432;
+    border-radius: 10px;
+
+    background-color: #ffffff;
+`;
+
+const Button = styled.button`
+    background-color: #edb432;
+    color: white;
+`;
