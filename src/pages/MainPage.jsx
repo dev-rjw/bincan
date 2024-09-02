@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import InputWindow from "../components/InputWindow";
-import DocumentList from "../components/DocumentList";
+import PostInput from "../components/PostInput";
+import PostList from "../components/PostList";
 import { supabase } from "../supabase";
 import LogOut from "../components/LogOut";
+import MyInfo from "../pages/MyInfo";
 
 function MainPage() {
     const [userData, setUserData] = useState({});
@@ -20,8 +21,8 @@ function MainPage() {
     return (
         <>
             <LogOut />
-            {userData.user !== null ? <InputWindow /> : ""}
-            <DocumentList />
+            {userData.user !== null ? <PostInput /> : ""}
+            <PostList />
         </>
     );
 }

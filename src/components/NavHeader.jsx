@@ -6,7 +6,7 @@ import { PostsContext } from "../App";
 const NavHeader = () => {
     const navigate = useNavigate();
     const { user } = useContext(PostsContext);
-    console.log(user);
+
     return (
         <>
             <StNavContainer>
@@ -26,7 +26,7 @@ const NavHeader = () => {
                     <StNavRight>
                         <StNavMenu
                             onClick={() => {
-                                navigate(`/mypage?id=${user.user.id}`);
+                                navigate(`/mypage?id=${user?.user.id}`);
                             }}
                         >
                             마이페이지

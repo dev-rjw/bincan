@@ -45,7 +45,7 @@ function SignUp() {
             options: {
                 data: {
                     nickName: nickName,
-                    profileUrl: null
+                    profileUrl: profileUrl
                 }
             }
         });
