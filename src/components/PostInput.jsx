@@ -36,6 +36,7 @@ const PostInput = () => {
         setTitle("");
         setMoney("");
         setContext("");
+        setImgUrl("");
     };
 
     return (
