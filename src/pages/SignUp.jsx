@@ -14,8 +14,7 @@ function SignUp() {
     const fileInputRef = useRef(null);
 
     //정규표현식
-    var engValidation = /^[A-Za-z.]+$/g; // 영어
-    var emailValidation = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+$/; // 이메일형식
+    var engValidation = /^[A-Za-z.]+$/g; // 영어랑.만 포함하는 정규표현식
 
     const getUserData = async () => {
         const { data } = await supabase.auth.getUser();
@@ -55,9 +54,8 @@ function SignUp() {
     // 프로필
     async function checkProfile() {
         const { data: userData } = await supabase.auth.getUser();
-        // const userProfileUrl = userData.user.user_metadata.profileUrl;
 
-        //null 병합 연산자를 사용하여 프로필이미지 상태 탐지 및 반환 // 기본 이미지 "Group 66.png"
+        // 기본 이미지 "Group 66.png" 셋팅
         const { data } = supabase.storage.from("UserProfile").getPublicUrl("Group_66.png");
         setProfileUrl(data.publicUrl);
     }
@@ -65,14 +63,13 @@ function SignUp() {
     // 프로필 사진 변경
     async function handleFileInputChange(files) {
         const [file] = files;
-        // console.log(file);
 
         // 파일이 없으면 리턴
         if (!file) {
             return;
         }
 
-        // 파일명 유효성검사 => 한글x 띄어쓰기x, 특수문자x
+        // 파일명 유효성검사 => only eng & .
         if (!engValidation.test(file.name)) {
             alert("파일명이 잘못되었습니다. 영어 또는 숫자만 가능합니다.");
             return;
@@ -87,7 +84,6 @@ function SignUp() {
         });
 
         setProfileUrl(supabase.storage.from("UserProfile").getPublicUrl(file.name).data.publicUrl);
-        // console.log(supabase.storage.from("UserProfile").getPublicUrl(file.name));
 
         // 고마워요 준호님
     }
