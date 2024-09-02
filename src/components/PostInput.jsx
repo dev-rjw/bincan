@@ -8,14 +8,25 @@ const PostInput = () => {
     const [money, setMoney] = useState("");
     const [context, setContext] = useState("");
 
+    const [imgUrl, setImgUrl] = useState("");
+
     const { posts, setPosts } = useContext(PostsContext);
+
+    const onchangeImageUpload = (e) => {
+        const { files } = e.target;
+        const uploadFile = files[0];
+
+        const reader = new FileReader();
+        reader.readAsDataURL(uploadFile);
+        reader.onloadend = () => setImgUrl(reader.result);
+    };
 
     const insertDocument = async (e) => {
         e.preventDefault();
 
         const { data, error } = await supabase
             .from("posts")
-            .insert([{ title: title, nickname: "닉네임", img_url: "", money: money, context: context }])
+            .insert([{ title: title, nickname: "닉네임", img_url: imgUrl, money: money, context: context }])
             .select();
 
         if (error) console.log(error);
@@ -25,6 +36,7 @@ const PostInput = () => {
         setTitle("");
         setMoney("");
         setContext("");
+        setImgUrl("");
     };
 
     return (
@@ -32,7 +44,8 @@ const PostInput = () => {
             <StyledInput type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
             <StyledInput type="text" value={money} onChange={(e) => setMoney(e.target.value)} />
             <StyledTextArea value={context} onChange={(e) => setContext(e.target.value)} />
-            <img src="" />
+            <img src={imgUrl} width="30%" />
+            <input type="file" accept="image/*" onChange={onchangeImageUpload}></input>
             <StyledButton onClick={insertDocument}>등록</StyledButton>
         </StyledWindow>
     );
