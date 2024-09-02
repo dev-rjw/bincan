@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import MyInfo from "./MyInfo";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { PostsContext } from "../App";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import PostCard from "../components/PostCard";
+import { supabase } from "../supabase";
 
 const Dashboard = styled.div`
     background-color: greenyellow;
@@ -11,13 +12,24 @@ const Dashboard = styled.div`
 
 function MyPage() {
     const navigate = useNavigate();
-    const { posts, user } = useContext(PostsContext);
+
+    const { posts, user, setUser } = useContext(PostsContext);
     const [searchParams] = useSearchParams();
     const userId = searchParams.get("id");
 
     const filterdPosts = posts.filter((post) => post.user_id === userId);
     console.log(user);
 
+    const getUser = async () => {
+        const { data } = await supabase.auth.getUser();
+        setUser(data);
+    };
+
+    useEffect(() => {
+        getUser();
+    });
+
+    // get user >  set user
     return (
         <>
             <Dashboard>
@@ -44,3 +56,5 @@ function MyPage() {
 }
 
 export default MyPage;
+
+//데이터 저장시 스토리지 사용 (네트워크 이미지사용)

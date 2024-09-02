@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { supabase } from "../supabase";
 import { PostsContext } from "../App";
 import { useNavigate } from "react-router-dom";
+import MyPage from "./MyPage";
 
 const MyInfo = () => {
     const navigate = useNavigate();
@@ -41,7 +42,7 @@ const MyInfo = () => {
             <div>
                 <h1>개인정보 수정</h1>
                 <p>프로필 사진</p>
-                <img src={imgUrl} alt="빈캔" />
+                <img src={imgUrl} alt="빈캔" width="50%" />
                 <input type="file" onChange={onchangeImageUpload} />
 
                 <p>이메일</p>
@@ -68,7 +69,13 @@ const MyInfo = () => {
 
             <div>
                 <button onClick={updateUserData}>수정하기</button>
-                <button onClick={() => navigate("/Mypage")}>취소</button>
+                <button
+                    onClick={() => {
+                        navigate(`/mypage?id=${user.user.id}`);
+                    }}
+                >
+                    취소
+                </button>
             </div>
         </div>
     );
