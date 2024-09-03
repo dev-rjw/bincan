@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import PostCard from "./PostCard";
 import styled from "styled-components";
 import { PostsContext } from "../App";
-import { supabase } from "../supabase";
 
 const PostList = ({ id }) => {
     const { posts } = useContext(PostsContext);

@@ -9,6 +9,7 @@ import { Div } from "../components/StyledComponents/StyledDiv";
 
 function MyPage() {
     const navigate = useNavigate();
+    const [setPost] = useState([]);
     const { user, setUser } = useContext(PostsContext);
     const [searchParams] = useSearchParams();
     const userId = searchParams.get("id");
@@ -18,8 +19,16 @@ function MyPage() {
         setUser(data);
     };
 
+    const getComment = async () => {
+        let { data, error } = await supabase.from("post").select("*").eq("post_id", userId);
+        if (error) console.log(error);
+
+        setPost(data[0]);
+    };
+
     useEffect(() => {
         getUser();
+        getComment();
     }, []);
 
     return (

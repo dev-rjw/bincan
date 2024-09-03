@@ -82,6 +82,7 @@ const NavHeader = () => {
 
 export default NavHeader;
 
+<<<<<<< HEAD
 const StyleNavContainer = styled.nav`
     width: 100%;
     height: 100px;
@@ -89,6 +90,19 @@ const StyleNavContainer = styled.nav`
     display: flex;
     justify-content: center;
     background-color: #edb432;
+=======
+const StNavContainer = styled.nav`
+    display: flex;
+    justify-content: center;
+    // 헤더 상단 고정
+    position: sticky;
+    top: 0px;
+
+    width: 100%;
+    height: 80px;
+
+    background-color: blue;
+>>>>>>> 6bf82c3cc6e091c719685fdaef7e09416ac02604
 `;
 
 const StyledNavContent = styled.nav`
