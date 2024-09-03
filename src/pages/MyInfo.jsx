@@ -65,12 +65,12 @@ const MyInfo = () => {
     }
 
     return (
-        <A>
+        <StyledMyInfoWrap>
             <StyledInfo>
                 <div>
                     <h1>개인정보 수정</h1>
                     <h2>프로필 사진</h2>
-                    <img src={imgUrl} alt="빈캔" width="60%" />
+                    <img src={imgUrl} alt="빈캔" width="373px" />
 
                     <StyledimgInput
                         id="styleLabel"
@@ -81,7 +81,7 @@ const MyInfo = () => {
                     />
                     <Styledlabel htmlFor="styleLabel">파일선택</Styledlabel>
                 </div>
-                <B>
+                <StyledInputWrap>
                     <h2>이메일</h2>
                     {user && <Input type="text" value={user?.user?.email} disabled />}
 
@@ -111,18 +111,18 @@ const MyInfo = () => {
                             취소
                         </StyledBtn>
                     </div>
-                </B>
+                </StyledInputWrap>
             </StyledInfo>
-        </A>
+        </StyledMyInfoWrap>
     );
 };
 
 export default MyInfo;
 
-const B = styled.div`
+const StyledInputWrap = styled.div`
     margin-top: 55px;
 `;
-const A = styled.div`
+const StyledMyInfoWrap = styled.div`
     background-color: #d9d9d9;
     margin-top: 50px;
     padding-bottom: 50px;
