@@ -43,7 +43,7 @@ function Login() {
             <Form onSubmit={logIn}>
                 <StyledLogo
                     alt="X"
-                    src="https://ltmlsvowetkigjbwwqwy.supabase.co/storage/v1/object/public/UserProfile/bbin.svg
+                    src="https://ltmlsvowetkigjbwwqwy.supabase.co/storage/v1/object/public/UserProfile/Group%2067bbin.png
                     "
                 ></StyledLogo>
                 <InputLogin>
@@ -52,12 +52,12 @@ function Login() {
                     <Font>비밀번호</Font>
                     <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                 </InputLogin>
-                <Div>
+                <StyledButtonWrap>
                     <StyledBtn type="submit">로그인</StyledBtn>
                     <StyledBtn type="button" onClick={() => navigate("/signup")}>
                         회원가입
                     </StyledBtn>
-                </Div>
+                </StyledButtonWrap>
             </Form>
         </div>
     );
@@ -79,7 +79,7 @@ const InputLogin = styled.div`
     align-items: left;
 `;
 
-const Div = styled.div`
+const StyledButtonWrap = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: center;
