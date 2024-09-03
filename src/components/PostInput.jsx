@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { supabase } from "../supabase";
 import { PostsContext } from "../App";
@@ -13,9 +13,13 @@ const PostInput = () => {
     const [posts, setPosts] = useState([]);
     const [user, setUser] = useState();
 
+    const engValidation = /^[A-Za-z0-9.]+$/g; // 영어랑 숫자만 포함하는 정규표현식
+    const fileInputRef = useRef(null);
+
     useEffect(() => {
         getDocument();
         getUser();
+        checkPost();
     }, []);
 
     const getDocument = async () => {
@@ -30,14 +34,34 @@ const PostInput = () => {
         setUser(data);
     };
 
-    const onchangeImageUpload = (e) => {
-        const { files } = e.target;
-        const uploadFile = files[0];
+    // post 세팅
+    async function checkPost() {
+        // 기본 이미지 "Group 66.png" 셋팅
+        const { data } = supabase.storage.from("posts").getPublicUrl("Group_66.png");
+        setImgUrl(data.publicUrl);
+    }
 
-        const reader = new FileReader();
-        reader.readAsDataURL(uploadFile);
-        reader.onloadend = () => setImgUrl(reader.result);
-    };
+    // post 사진 변경
+    async function handleFileInputChange(files) {
+        const [file] = files;
+
+        // 파일이 없으면 리턴
+        if (!file) {
+            return;
+        }
+
+        // 파일명 유효성검사 => only eng & num
+        if (!engValidation.test(file.name)) {
+            alert("파일명이 잘못되었습니다. 영어 또는 숫자만 가능합니다.");
+            return;
+        }
+
+        // 로컬스토리지에 파일명으로 저장
+        // post 사진은 1개만 사용하므로 덮어쓰기(upsert:true)
+        const { data } = await supabase.storage.from("posts").upload(file.name, file, { upsert: true });
+
+        setImgUrl(supabase.storage.from("posts").getPublicUrl(file.name).data.publicUrl);
+    }
 
     const insertDocument = async (e) => {
         e.preventDefault();
@@ -71,7 +95,12 @@ const PostInput = () => {
             <StyledInput type="text" value={money} onChange={(e) => setMoney(e.target.value)} />
             <StyledTextArea value={context} onChange={(e) => setContext(e.target.value)} />
             <img src={imgUrl} width="30%" />
-            <input type="file" accept="image/*" onChange={onchangeImageUpload}></input>
+            <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => handleFileInputChange(e.target.files)}
+                ref={fileInputRef}
+            ></input>
             <StyledButton onClick={insertDocument}>등록</StyledButton>
         </StyledWindow>
     );
