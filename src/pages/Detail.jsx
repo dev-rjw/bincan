@@ -46,7 +46,6 @@ function Detail() {
         if (result) {
             const { error } = await supabase.from("posts").delete().eq("id", postsId);
             navigate("/");
-            // window.location.reload();
         } else {
             return;
         }
@@ -60,6 +59,8 @@ function Detail() {
     };
 
     const { created_at, title, nickname, img_url, money, context } = selectedPost;
+    console.log(selectedPost);
+    const formattedDate = created_at ? created_at.slice(0, 10) : "날짜가 입력되지 않았습니다";
 
     return (
         <>
@@ -91,7 +92,7 @@ function Detail() {
                     </StRightArea>
                     <StLeftArea>
                         <div>{nickname}</div>
-                        <div>{created_at}</div>
+                        <div>{formattedDate}</div>
                         <div>{title}</div>
                         <div>{context}</div>
                         <div>{money}</div>

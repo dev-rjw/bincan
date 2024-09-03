@@ -34,7 +34,7 @@ const Comment = ({ comment, onDelete, onEdit }) => {
 
         const { data, error } = await supabase
             .from("comments")
-            .update({ comment: updatedComment.comment })
+            .update({ comment: updatedComment.comment, nickname: user?.user.user_metadata.nickName })
             .eq("id", updatedComment.id) // 댓글의 id로 업데이트
             .eq("user_id", updatedComment.user_id) // 현재 사용자의 댓글만 업데이트
             .select();
@@ -47,6 +47,7 @@ const Comment = ({ comment, onDelete, onEdit }) => {
         onEdit(updatedComment);
         // 수정 성공 후 사용자에게 알림
         alert("댓글이 수정되었습니다.");
+        console.log(data);
     };
 
     const handleDelete = async (e) => {
@@ -65,7 +66,7 @@ const Comment = ({ comment, onDelete, onEdit }) => {
     return (
         <>
             <StCommentWrapper>
-                <StCommentContext>{comment.user_id} </StCommentContext>
+                <StCommentContext>{comment.nickname} </StCommentContext>
                 <StCommentContext>{comment.comment} </StCommentContext>
                 <StCommentTime>{comment.created_at.slice(0, 10)}</StCommentTime>
                 {user?.user?.id === comment.user_id ? (
