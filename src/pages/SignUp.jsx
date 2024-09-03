@@ -3,6 +3,8 @@ import { createClient } from "@supabase/supabase-js";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../supabase";
 import styled from "styled-components";
+import { Input } from "../components/StyledComponents/StyledInput";
+import { StyledBtn } from "../components/StyledComponents/StyledButton";
 
 function SignUp() {
     const navigate = useNavigate();
@@ -97,16 +99,16 @@ function SignUp() {
         <div>
             <Form onSubmit={SignUp}>
                 <User>
-                    <input value={email} onChange={(e) => setEmail(e.target.value)} />
-                    <input value={password} onChange={(e) => setPassword(e.target.value)} />
-                    <input value={nickName} onChange={(e) => setNickName(e.target.value)} />
+                    이메일 : <Input value={email} onChange={(e) => setEmail(e.target.value)} />
+                    패스워드 : <Input value={password} onChange={(e) => setPassword(e.target.value)} />
+                    닉네임 : <Input value={nickName} onChange={(e) => setNickName(e.target.value)} />
                 </User>
                 <ProfileImg>
-                    <InputImg onChange={(e) => handleFileInputChange(e.target.files)} type="file" ref={fileInputRef} />
                     <Img src={profileUrl} alt="profile" onClick={() => fileInputRef.current.click()} />
+                    <input onChange={(e) => handleFileInputChange(e.target.files)} type="file" ref={fileInputRef} />
                 </ProfileImg>
-                <Button type="submit">확인</Button>
             </Form>
+            <StyledBtn type="submit">확인</StyledBtn>
         </div>
     );
 }
@@ -126,27 +128,21 @@ const User = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    margin-top: 100px;
 `;
 
 const ProfileImg = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-`;
-
-const InputImg = styled.input`
-    position: absolute;
-    right: 10px;
-    top: 450px;
-
-    background-color: #edb432;
-    border-radius: 10px;
-    color: white;
+    margin-top: 150px;
+    margin-left: 100px;
 `;
 
 const Img = styled.img`
-    position: absolute;
+    /* position: absolute; */
+
+    margin-bottom: 10px;
     right: 100px;
     top: 100px;
     width: 250px;
@@ -155,9 +151,4 @@ const Img = styled.img`
     border-radius: 10px;
 
     background-color: #ffffff;
-`;
-
-const Button = styled.button`
-    background-color: #edb432;
-    color: white;
 `;

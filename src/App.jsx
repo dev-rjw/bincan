@@ -3,6 +3,7 @@ import { createContext, useEffect, useState } from "react";
 import "./normalize.css";
 import Router from "./Shared/Router";
 import { supabase } from "./supabase";
+import styled from "styled-components";
 export const PostsContext = createContext();
 
 function App() {
