@@ -3,24 +3,23 @@ import PostInput from "../components/PostInput";
 import PostList from "../components/PostList";
 import { supabase } from "../supabase";
 import LogOut from "../components/LogOut";
-import MyInfo from "../pages/MyInfo";
 
 function MainPage() {
-    const [userData, setUserData] = useState({});
+    const [user, setUser] = useState({});
 
     useEffect(() => {
-        getUserData();
+        getUser();
     }, []);
 
-    const getUserData = async () => {
+    const getUser = async () => {
         const { data } = await supabase.auth.getUser();
-        setUserData(data);
+        setUser(data);
         return data;
     };
 
     return (
         <>
-            {userData.user !== null ? <PostInput /> : ""}
+            {user.user !== null ? <PostInput /> : ""}
             <PostList />
         </>
     );
