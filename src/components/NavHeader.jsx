@@ -21,64 +21,62 @@ const NavHeader = () => {
     };
 
     return (
-        <>
-            <StNavContainer>
-                <StNavContent>
-                    <StNavLeft>
-                        <StEmptyNav>
-                            {user?.user?.email ? (
-                                <>
-                                    {user?.user.email}님, <br />
-                                    지갑은 안녕하시렵니까?
-                                </>
-                            ) : (
-                                "로그인이 필요합니다."
-                            )}
-                        </StEmptyNav>
-                    </StNavLeft>
-                    <StNavCenter>
-                        <StNavLogo
-                            src="hi"
-                            alt="bincan"
-                            onClick={() => {
-                                navigate("/");
-                            }}
-                        />
-                    </StNavCenter>
-                    <StNavRight>
+        <StNavContainer>
+            <StyledNavContent>
+                <StNavLeft>
+                    <StEmptyNav>
                         {user?.user?.email ? (
                             <>
-                                <StNavMenu
-                                    onClick={() => {
-                                        navigate(`/mypage?id=${user?.user.id}`);
-                                    }}
-                                >
-                                    마이페이지
-                                </StNavMenu>
-                                <Logout />
+                                {user?.user.email}님, <br />
+                                지갑은 안녕하시렵니까?
                             </>
                         ) : (
-                            <>
-                                <StNavMenu
-                                    onClick={() => {
-                                        navigate(`/signup`);
-                                    }}
-                                >
-                                    회원가입
-                                </StNavMenu>
-                                <StNavMenu
-                                    onClick={() => {
-                                        navigate("/login");
-                                    }}
-                                >
-                                    로그인
-                                </StNavMenu>
-                            </>
+                            "로그인이 필요합니다."
                         )}
-                    </StNavRight>
-                </StNavContent>
-            </StNavContainer>
-        </>
+                    </StEmptyNav>
+                </StNavLeft>
+                <StNavCenter>
+                    <StNavLogo
+                        src="hi"
+                        alt="bincan"
+                        onClick={() => {
+                            navigate("/");
+                        }}
+                    />
+                </StNavCenter>
+                <StNavRight>
+                    {user?.user?.email ? (
+                        <>
+                            <StNavMenu
+                                onClick={() => {
+                                    navigate(`/mypage?id=${user?.user.id}`);
+                                }}
+                            >
+                                마이페이지
+                            </StNavMenu>
+                            <Logout />
+                        </>
+                    ) : (
+                        <>
+                            <StNavMenu
+                                onClick={() => {
+                                    navigate(`/signup`);
+                                }}
+                            >
+                                회원가입
+                            </StNavMenu>
+                            <StNavMenu
+                                onClick={() => {
+                                    navigate("/login");
+                                }}
+                            >
+                                로그인
+                            </StNavMenu>
+                        </>
+                    )}
+                </StNavRight>
+            </StyledNavContent>
+        </StNavContainer>
     );
 };
 
@@ -92,14 +90,17 @@ const StNavContainer = styled.nav`
     height: 80px;
 `;
 
-const StNavContent = styled.nav`
-    width: 1280px;
-    height: 100%;
+const StyledNavContent = styled.nav`
     display: flex;
     justify-content: space-between;
     align-items: center;
 
+    width: 1280px;
+    height: 80px;
+
     border: 1px solid red;
+
+    background-color: red;
 `;
 
 const StNavLeft = styled.div``;

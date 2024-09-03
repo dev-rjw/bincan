@@ -1,14 +1,13 @@
 import styled from "styled-components";
 
 export const Input = styled.input`
-    display: flex;
+    /* display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-
+    align-items: center; */
     margin: 10px;
     margin-top: 7%;
-    width: 67%;
+    width: 500px;
     height: 50px;
 
     font-size: 23px;

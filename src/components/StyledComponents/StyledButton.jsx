@@ -19,10 +19,10 @@ export const StyledBtn = styled.button`
 
     padding: 10px;
     background-color: #edb432;
-    cursor: pointer;
+    cursor: pointe;
 
     &:hover {
-        background-color: #dda249;
-        /* color: #3d3d3d; */
+        background-color: #f6e6c2;
+        color: #edb432;
     }
 `;
