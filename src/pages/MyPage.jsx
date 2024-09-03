@@ -57,7 +57,9 @@ function MyPage() {
                 </Div>
                 <div>
                     <P>{user?.user?.user_metadata.nickName}님의 게시물</P>
-                    <PostList id={userId} />
+                    <MainDiv>
+                        <PostList id={userId} />
+                    </MainDiv>
                 </div>
             </Div2>
         </>
@@ -65,6 +67,13 @@ function MyPage() {
 }
 
 export default MyPage;
+
+const MainDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`;
 
 const P = styled.p`
     margin-top: 80px;
@@ -76,9 +85,9 @@ const H2 = styled.h2`
 `;
 
 const Div2 = styled.div`
-    display: flex;
+    /* display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: center; */
 `;
 
 export const Img = styled.img`
