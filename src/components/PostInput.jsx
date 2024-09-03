@@ -10,7 +10,7 @@ const PostInput = () => {
 
     const [imgUrl, setImgUrl] = useState("");
 
-    const { posts, setPosts } = useContext(PostsContext);
+    const { posts, setPosts, user } = useContext(PostsContext);
 
     const onchangeImageUpload = (e) => {
         const { files } = e.target;
@@ -26,7 +26,15 @@ const PostInput = () => {
 
         const { data, error } = await supabase
             .from("posts")
-            .insert([{ title: title, nickname: "닉네임", img_url: imgUrl, money: money, context: context }])
+            .insert([
+                {
+                    title: title,
+                    nickname: user?.user.user_metadata.nickName,
+                    img_url: imgUrl,
+                    money: money,
+                    context: context
+                }
+            ])
             .select();
 
         if (error) console.log(error);
