@@ -10,25 +10,17 @@ const PostInput = () => {
 
     const [imgUrl, setImgUrl] = useState("");
 
-    const [posts, setPosts] = useState([]);
-    const [user, setUser] = useState();
+    const { posts, setPosts, user, setUser } = useContext(PostsContext);
 
     const engValidation = /^[A-Za-z0-9.]+$/g; // 영어랑 숫자만 포함하는 정규표현식
     const fileInputRef = useRef(null);
 
     useEffect(() => {
-        getDocument();
-        getUser();
         checkPost();
+        getUser();
     }, []);
 
-    const getDocument = async () => {
-        let { data, error } = await supabase.from("posts").select("*");
-        if (error) console.log(error);
-
-        setPosts([...data]);
-    };
-
+    // user
     const getUser = async () => {
         const { data } = await supabase.auth.getUser();
         setUser(data);

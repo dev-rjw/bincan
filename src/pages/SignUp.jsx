@@ -84,8 +84,6 @@ function SignUp() {
         });
 
         setProfileUrl(supabase.storage.from("UserProfile").getPublicUrl(file.name).data.publicUrl);
-
-        // 고마워요 준호님
     }
 
     useEffect(() => {

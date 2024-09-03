@@ -4,9 +4,10 @@ import { PostsContext } from "../App";
 
 const LogOut = () => {
     const { user, setUser } = useContext(PostsContext);
+
     async function signOut() {
-        await supabase.auth.signOut();
         setUser(null);
+        await supabase.auth.signOut();
     }
 
     return (
