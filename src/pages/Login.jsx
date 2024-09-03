@@ -43,7 +43,7 @@ function Login() {
             <Form onSubmit={logIn}>
                 <StyledLogo
                     alt="X"
-                    src="https://ltmlsvowetkigjbwwqwy.supabase.co/storage/v1/object/public/UserProfile/bincanlogo.png
+                    src="https://ltmlsvowetkigjbwwqwy.supabase.co/storage/v1/object/public/UserProfile/Group%2067bbin.png
                     "
                 ></StyledLogo>
                 <InputLogin>

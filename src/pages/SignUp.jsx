@@ -95,8 +95,8 @@ function SignUp() {
     return (
         <Form onSubmit={SignUp}>
             <StyledLogo
-                alt="X"
-                src="https://ltmlsvowetkigjbwwqwy.supabase.co/storage/v1/object/public/UserProfile/bincanlogo.png
+                alt="bincan"
+                src="https://ltmlsvowetkigjbwwqwy.supabase.co/storage/v1/object/public/UserProfile/Group%2067bbin.png
                     "
             ></StyledLogo>
             <Div>
