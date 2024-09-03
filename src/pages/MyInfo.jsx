@@ -66,9 +66,7 @@ const MyInfo = () => {
         <div>
             <div>
                 <h1>개인정보 수정</h1>
-
                 <p>프로필 사진</p>
-
                 <img src={imgUrl} alt="빈캔" width="20%" />
                 <StyledimgInput
                     type="file"
@@ -76,10 +74,8 @@ const MyInfo = () => {
                     onChange={(e) => handleFileInputChange(e.target.files)}
                     ref={fileInputRef}
                 />
-
                 <p>이메일</p>
-                {/* 조건부 랜더링 */}
-                {user && <input type="text" value={user?.user?.email} disabled />}
+                {user && <Input type="text" value={user?.user?.email} disabled />}
 
                 <p>닉네임</p>
                 <Input
@@ -89,7 +85,6 @@ const MyInfo = () => {
                         setNickName(e.target.value);
                     }}
                 />
-
                 <p>자기소개</p>
                 <Input
                     type="text"
