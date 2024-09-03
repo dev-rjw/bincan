@@ -20,4 +20,9 @@ export const StyledBtn = styled.button`
     padding: 10px;
     background-color: #edb432;
     cursor: pointe;
+
+    &:hover {
+        background-color: #f6e6c2;
+        color: #edb432;
+    }
 `;

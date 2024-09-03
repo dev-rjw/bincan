@@ -94,7 +94,7 @@ const StyledNavContent = styled.nav`
     justify-content: space-between;
     align-items: center;
 
-    width: 1000px;
+    width: 1280px;
     height: 80px;
 
     border: 1px solid red;

@@ -100,26 +100,26 @@ function SignUp() {
     }, []);
 
     return (
-        <div>
-            <Form onSubmit={SignUp}>
+        <form onSubmit={SignUp}>
+            <Div>
                 <User>
                     이메일 : <Input value={email} onChange={(e) => setEmail(e.target.value)} />
-                    패스워드 : <Input value={password} onChange={(e) => setPassword(e.target.value)} />
+                    패스워드 : <Input value={password} type="password" onChange={(e) => setPassword(e.target.value)} />
                     닉네임 : <Input value={nickName} onChange={(e) => setNickName(e.target.value)} />
                 </User>
                 <ProfileImg>
                     <Img src={profileUrl} alt="profile" onClick={() => fileInputRef.current.click()} />
                     <input onChange={(e) => handleFileInputChange(e.target.files)} type="file" ref={fileInputRef} />
                 </ProfileImg>
-            </Form>
+            </Div>
             <StyledBtn type="submit">확인</StyledBtn>
-        </div>
+        </form>
     );
 }
 
 export default SignUp;
 
-const Form = styled.form`
+const Div = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: center;
