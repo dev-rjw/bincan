@@ -29,13 +29,13 @@ function MyPage() {
     return (
         <>
             <Dashboard>
-                <img src={user?.user.user_metadata.profileUrl} alt="" width="50%" />
+                <img src={user?.user?.user_metadata.profileUrl} alt="" width="50%" />
                 <h2>닉네임</h2>
-                <p>{user?.user.user_metadata.nickName}</p>
+                <p>{user?.user?.user_metadata.nickName}</p>
                 <h2>이메일</h2>
-                <p>{user?.user.email}</p>
+                <p>{user?.user?.email}</p>
                 <h2>자기소개</h2>
-                <p>{user?.user.user_metadata.intro ? user?.user.user_metadata.intro : "자기소개를 등록해주세요"}</p>
+                <p>{user?.user?.user_metadata.intro ? user?.user?.user_metadata.intro : "자기소개를 등록해주세요"}</p>
                 <button onClick={() => navigate("/MyInfo")}>개인정보수정</button>
             </Dashboard>
             <PostList id={userId} />

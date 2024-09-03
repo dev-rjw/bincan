@@ -84,7 +84,7 @@ const MyInfo = () => {
 
                 <p>이메일</p>
                 {/* 조건부 랜더링 */}
-                {user && <input type="text" value={user?.user.email} disabled />}
+                {user && <input type="text" value={user?.user?.email} disabled />}
 
                 <p>닉네임</p>
                 <input
