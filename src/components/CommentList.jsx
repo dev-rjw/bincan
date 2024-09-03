@@ -3,24 +3,24 @@ import Comment from "./Comment";
 import { supabase } from "../supabase";
 import { useSearchParams } from "react-router-dom";
 
-const CommentList = () => {
-    const [comments, setComments] = useState([]);
-    const [searchParams] = useSearchParams();
-    const postsId = searchParams.get("id");
-
-    // 어떤식으로 바로 보여줄지... useEffect
-    const getComment = async () => {
-        let { data, error } = await supabase.from("comments").select("*").eq("post_id", postsId);
-        if (error) console.log(error);
-
-        setComments(data);
-        // setComments((prev) => [...prev, ...data]);
+const CommentList = ({ comments, setComments }) => {
+    const handleEdit = (updatedComment) => {
+        // 수정된 댓글로 상태 업데이트
+        const updatedComments = comments.map((comment) =>
+            comment.id === updatedComment.id ? updatedComment : comment
+        );
+        setComments(updatedComments);
     };
-    getComment();
+
+    const handleDelete = (deletedCommentId) => {
+        // 삭제된 댓글을 제외한 새로운 댓글 배열 생성
+        const updatedComments = comments.filter((comment) => comment.id !== deletedCommentId);
+        setComments(updatedComments);
+    };
     return (
         <>
             {comments.map((comment) => {
-                return <Comment key={comment.id} comment={comment} />;
+                return <Comment key={comment.id} comment={comment} onEdit={handleEdit} onDelete={handleDelete} />;
             })}
         </>
     );

@@ -7,11 +7,9 @@ import CommentInput from "../components/CommentInput";
 import { supabase } from "../supabase";
 
 function Detail() {
+    const navigate = useNavigate();
     const [searchParams] = useSearchParams();
     const postsId = searchParams.get("id");
-
-    // const { user } = useContext(PostsContext);
-    const navigate = useNavigate();
 
     const [selectedPost, setSelectedPost] = useState({});
     const [comments, setComments] = useState([]);
@@ -20,6 +18,7 @@ function Detail() {
     useEffect(() => {
         getPost();
         getUser();
+        getComment();
     }, []);
 
     // posts 내용 불러오기
@@ -32,14 +31,16 @@ function Detail() {
         });
         setSelectedPost(filteredPost[0]);
     };
+
+    // user
     const getUser = async () => {
         const { data } = await supabase.auth.getUser();
         setUser(data);
     };
-    console.log(user);
-    console.log(selectedPost);
-    const { created_at, title, nickname, img_url, money, context } = selectedPost;
+    // console.log(user);
+    // console.log(selectedPost);
 
+    //
     // 삭제 로직
     const handleDelete = async (e) => {
         e.preventDefault();
@@ -48,10 +49,20 @@ function Detail() {
         if (result) {
             const { error } = await supabase.from("posts").delete().eq("id", postsId);
             navigate("/");
+            window.location.reload();
         } else {
             return;
         }
     };
+
+    const getComment = async () => {
+        let { data, error } = await supabase.from("comments").select("*").eq("post_id", postsId);
+        if (error) console.log(error);
+
+        setComments(data);
+    };
+
+    const { created_at, title, nickname, img_url, money, context } = selectedPost;
 
     return (
         <>

@@ -8,11 +8,22 @@ const DetailEdit = () => {
     const [title, setTitle] = useState("");
     const [money, setMoney] = useState("");
     const [context, setContext] = useState("");
+    const [imgUrl, setImgUrl] = useState("");
 
     const { posts, setPosts, user } = useContext(PostsContext);
+
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
     const postsId = searchParams.get("id");
+
+    const onchangeImageUpload = (e) => {
+        const { files } = e.target;
+        const uploadFile = files[0];
+
+        const reader = new FileReader();
+        reader.readAsDataURL(uploadFile);
+        reader.onloadend = () => setImgUrl(reader.result);
+    };
 
     useEffect(() => {
         const filteredPost = posts?.filter((data) => {
@@ -24,6 +35,7 @@ const DetailEdit = () => {
             setTitle(post.title || "");
             setMoney(post.money || "");
             setContext(post.context || "");
+            setImgUrl(post.imgUrl || "");
         }
         console.log(filteredPost);
     }, []);
@@ -46,7 +58,7 @@ const DetailEdit = () => {
         // 게시물 업데이트
         const { data, error } = await supabase
             .from("posts")
-            .update({ title, img_url: "", money, context })
+            .update({ title, img_url: imgUrl, money, context })
             .eq("id", postsId)
             .eq("user_id", userId)
             .select();
@@ -57,7 +69,7 @@ const DetailEdit = () => {
         }
 
         // 업데이트된 데이터가 있는지 확인
-        const updatedPost = data[0];
+        const updatedPost = data;
         console.log("포스트 업데이트 =>", updatedPost);
 
         setPosts(updatedPost);
@@ -71,7 +83,8 @@ const DetailEdit = () => {
             <Input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
             <Input type="text" value={money} onChange={(e) => setMoney(e.target.value)} />
             <TextArea value={context} onChange={(e) => setContext(e.target.value)} />
-            <img src="" />
+            <img src={imgUrl} width="30%" />
+            <input type="file" accept="image/*" onChange={onchangeImageUpload}></input>
             <Button onClick={editDocument}>수정하기</Button>
         </Window>
     );
