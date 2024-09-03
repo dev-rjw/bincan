@@ -58,15 +58,34 @@ const PostInput = () => {
     const insertDocument = async (e) => {
         e.preventDefault();
 
+        // input validation
+        if (title.trim() === "") {
+            alert("제목을 입력해주세요.");
+            return;
+        }
+        if (imgUrl.trim() === "") {
+            alert("이미지를 추가해주세요.");
+            return;
+        }
+        if (money.trim() === "") {
+            alert("금액을 입력해주세요.");
+            return;
+        }
+        if (context.trim() === "") {
+            alert("내용을 입력해주세요.");
+            return;
+        }
+
+        // input insert
         const { data, error } = await supabase
             .from("posts")
             .insert([
                 {
-                    title: title,
+                    title: title.trim(),
                     nickname: user?.user.user_metadata.nickName,
-                    img_url: imgUrl,
-                    money: money,
-                    context: context
+                    img_url: imgUrl.trim(),
+                    money: money.trim(),
+                    context: context.trim()
                 }
             ])
             .select();
@@ -83,9 +102,9 @@ const PostInput = () => {
 
     return (
         <StyledWindow>
-            <StyledInput type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
-            <StyledInput type="text" value={money} onChange={(e) => setMoney(e.target.value)} />
-            <StyledTextArea value={context} onChange={(e) => setContext(e.target.value)} />
+            <StyledInput type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="제목" />
+            <StyledInput type="text" value={money} onChange={(e) => setMoney(e.target.value)} placeholder="금액" />
+            <StyledTextArea value={context} onChange={(e) => setContext(e.target.value)} placeholder="내용" />
             <img src={imgUrl} width="30%" />
             <input
                 type="file"
