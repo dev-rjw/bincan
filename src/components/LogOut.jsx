@@ -6,7 +6,7 @@ const Logout = () => {
     const { user, setUser } = useContext(PostsContext);
 
     async function signOut() {
-        setUser(null);
+        setUser({ user: null });
         await supabase.auth.signOut();
     }
 

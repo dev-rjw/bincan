@@ -26,7 +26,7 @@ function MainPage() {
 
     return (
         <>
-            {user !== null ? <PostInput /> : ""}
+            {user?.user !== null ? <PostInput /> : ""}
             <PostList />
         </>
     );
