@@ -147,10 +147,13 @@ const Img = styled.img`
     /* position: absolute; */
 
     margin-bottom: 10px;
+
     right: 100px;
     top: 100px;
+
     width: 250px;
     height: 250px;
+
     border: solid 7px #edb432;
     border-radius: 10px;
 
