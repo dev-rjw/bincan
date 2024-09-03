@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { supabase } from "../supabase";
 import { PostsContext } from "../App";
@@ -10,7 +10,25 @@ const PostInput = () => {
 
     const [imgUrl, setImgUrl] = useState("");
 
-    const { posts, setPosts, user } = useContext(PostsContext);
+    const [posts, setPosts] = useState([]);
+    const [user, setUser] = useState();
+
+    useEffect(() => {
+        getDocument();
+        getUser();
+    }, []);
+
+    const getDocument = async () => {
+        let { data, error } = await supabase.from("posts").select("*");
+        if (error) console.log(error);
+
+        setPosts([...data]);
+    };
+
+    const getUser = async () => {
+        const { data } = await supabase.auth.getUser();
+        setUser(data);
+    };
 
     const onchangeImageUpload = (e) => {
         const { files } = e.target;
