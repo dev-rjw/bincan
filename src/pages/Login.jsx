@@ -2,6 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../supabase";
+import styled from "styled-components";
+import { StyledBtn } from "../components/StyledComponents/StyledButton";
+import { Input } from "../components/StyledComponents/StyledInput";
 
 function Login() {
     const navigate = useNavigate();
@@ -37,12 +40,12 @@ function Login() {
     return (
         <div>
             <form onSubmit={logIn}>
-                <input value={email} onChange={(e) => setEmail(e.target.value)} />
-                <input value={password} onChange={(e) => setPassword(e.target.value)} />
-                <button type="submit">로그인</button>
-                <button type="button" onClick={() => navigate("/signup")}>
+                <Input value={email} onChange={(e) => setEmail(e.target.value)} />
+                <Input value={password} onChange={(e) => setPassword(e.target.value)} />
+                <StyledBtn type="submit">로그인</StyledBtn>
+                <StyledBtn type="button" onClick={() => navigate("/signup")}>
                     회원가입
-                </button>
+                </StyledBtn>
             </form>
         </div>
     );
