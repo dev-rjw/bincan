@@ -24,7 +24,7 @@ function MyPage() {
 
     useEffect(() => {
         getUser();
-    });
+    }, []);
 
     return (
         <>

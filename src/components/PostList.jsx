@@ -5,7 +5,7 @@ import { PostsContext } from "../App";
 
 const PostList = ({ id }) => {
     const { posts, user } = useContext(PostsContext);
-
+    // console.log(posts);
     return (
         <>
             <StyledCardDiv>
