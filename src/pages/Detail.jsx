@@ -13,6 +13,8 @@ function Detail() {
 
     const [post, setPost] = useState({});
     const [comments, setComments] = useState([]);
+    const [thumbUp, setThumbUp] = useState(0);
+    const [thumbDown, setThumbDown] = useState(0);
 
     const { user, setUser } = useContext(PostsContext);
 
@@ -20,18 +22,29 @@ function Detail() {
         getPost();
         getUser();
         getComment();
+        getThumbUp();
+        getThumbDown();
     }, []);
 
     const getPost = async () => {
         let { data, error } = await supabase.from("posts").select("*").eq("id", postsId);
         if (error) console.log(error);
-
         setPost(data[0]);
     };
 
     const getUser = async () => {
         const { data } = await supabase.auth.getUser();
         setUser(data);
+    };
+
+    const getThumbUp = async () => {
+        const { data, error } = await supabase.from("posts").select("thumb_up");
+        setThumbUp(data[0].thumb_up);
+    };
+
+    const getThumbDown = async () => {
+        const { data, error } = await supabase.from("posts").select("thumb_down");
+        setThumbDown(data[0].thumb_down);
     };
 
     const handleDelete = async (e) => {
@@ -54,8 +67,35 @@ function Detail() {
         setComments(data);
     };
 
-    const { created_at, title, nickname, img_url, money, context } = post;
+    const updateThumbUp = async () => {
+        setThumbUp(thumbUp + 1);
+        const { data, error } = await supabase
+            .from("posts")
+            .update({ thumb_up: thumbUp + 1 })
+            .eq("id", postsId)
+            .select();
 
+        if (error) {
+            console.log("버튼 오류", error);
+            return;
+        }
+    };
+
+    const updateThumbDown = async () => {
+        setThumbDown(thumbDown + 1);
+        const { data, error } = await supabase
+            .from("posts")
+            .update({ thumb_down: thumbDown + 1 })
+            .eq("id", postsId)
+            .select();
+
+        if (error) {
+            console.log("버튼 오류", error);
+            return;
+        }
+    };
+
+    const { created_at, title, nickname, img_url, money, context } = post;
     const formatDate = created_at ? created_at.slice(0, 10) : "";
 
     return (
@@ -94,14 +134,14 @@ function Detail() {
                         <StyledTitle>{title}</StyledTitle>
                         <StyledContext>{context}</StyledContext>
                         <hr style={{ border: "0.5px solid #666" }} />
-                        <StyledMoney>{money}원</StyledMoney>
+                        <StyledMoney>{Number(money)?.toLocaleString()}원</StyledMoney>
                     </StRightArea>
                 </StContentArea>
             </StContentContainer>
             <StVoteBtnContainer>
                 <StVoteBtnWrapper>
-                    <StGoodBtn>😋</StGoodBtn>
-                    <StBadBtn>🤬</StBadBtn>
+                    <StGoodBtn onClick={updateThumbUp}>😋 {thumbUp}</StGoodBtn>
+                    <StBadBtn onClick={updateThumbDown}>🤬 {thumbDown}</StBadBtn>
                 </StVoteBtnWrapper>
             </StVoteBtnContainer>
 
