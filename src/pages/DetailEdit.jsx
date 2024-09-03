@@ -37,7 +37,6 @@ const DetailEdit = () => {
             setContext(post.context || "");
             setImgUrl(post.imgUrl || "");
         }
-        console.log(filteredPost);
     }, []);
 
     const editPost = async (e) => {

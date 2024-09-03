@@ -37,10 +37,7 @@ function Detail() {
         const { data } = await supabase.auth.getUser();
         setUser(data);
     };
-    // console.log(user);
-    // console.log(selectedPost);
 
-    //
     // 삭제 로직
     const handleDelete = async (e) => {
         e.preventDefault();
