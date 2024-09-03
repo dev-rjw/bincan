@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { supabase } from "../supabase";
 import { PostsContext } from "../App";
 
-const LogOut = () => {
+const Logout = () => {
     const { user, setUser } = useContext(PostsContext);
 
     async function signOut() {
@@ -25,4 +25,4 @@ function SignInBtn({ text, onClick }) {
     );
 }
 
-export default LogOut;
+export default Logout;

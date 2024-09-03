@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import PostInput from "../components/PostInput";
 import PostList from "../components/PostList";
 import { supabase } from "../supabase";
-import LogOut from "../components/LogOut";
 import { PostsContext } from "../App";
 
 function MainPage() {
