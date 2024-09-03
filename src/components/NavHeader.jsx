@@ -92,7 +92,7 @@ const StNavContainer = styled.nav`
     width: 100%;
     height: 80px;
 
-    background-color: blue;
+    background-color: #d9d9d9;
 `;
 
 const StyledNavContent = styled.nav`
@@ -105,7 +105,7 @@ const StyledNavContent = styled.nav`
 
     border: 1px solid red;
 
-    background-color: red;
+    background-color: #d9d9d9;
 `;
 
 const StNavLeft = styled.div``;
