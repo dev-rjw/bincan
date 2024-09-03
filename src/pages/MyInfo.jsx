@@ -3,6 +3,7 @@ import { supabase } from "../supabase";
 import { PostsContext } from "../App";
 import { useNavigate } from "react-router-dom";
 import MyPage from "./MyPage";
+import styled from "styled-components";
 
 const MyInfo = () => {
     const navigate = useNavigate();
@@ -14,8 +15,6 @@ const MyInfo = () => {
 
     const updateUserData = async () => {
         const { data, error } = await supabase.auth.updateUser({
-            // email: user.user.email,
-
             data: {
                 profileUrl: imgUrl,
                 nickName: nickName,
@@ -37,30 +36,19 @@ const MyInfo = () => {
         reader.onloadend = () => setImgUrl(reader.result);
     };
 
-    // async function checkProfile() {
-    //     //프로필 유효성 검사
-    //     const { data: userData } = await supabase.auth.getUser();
-    //     const userProfileUrl = userData.user.user_metadata.profileUrl;
-    //     //null 병합 연산자를 사용하여 프로필이미지 상태 탐지 및 반환 // 기본 이미지 "Group 66.png"
-    //     const { data } = supabase.storage.from("UserProfile").getPublicUrl("Group_66.png");
-    //     setProfileUrl(data.publicUrl);
-    //     console.log(data.publicUrl);
-    // }
-
     return (
         <div>
             <div>
                 <h1>개인정보 수정</h1>
                 <p>프로필 사진</p>
                 <img src={imgUrl} alt="" width="50%" />
-                <input type="file" onChange={onchangeImageUpload} />
+                <StyledimgInput type="file" onChange={onchangeImageUpload} />
 
                 <p>이메일</p>
-                {/* 조건부 랜더링 */}
-                {user && <input type="text" value={user?.user.email} disabled />}
+                {user && <StyledInput type="text" value={user?.user.email} disabled />}
 
                 <p>닉네임</p>
-                <input
+                <StyledInput
                     type="text"
                     value={nickName}
                     onChange={(e) => {
@@ -68,7 +56,7 @@ const MyInfo = () => {
                     }}
                 />
                 <p>자기소개</p>
-                <input
+                <StyledInput
                     type="text"
                     value={intro}
                     onChange={(e) => {
@@ -78,17 +66,58 @@ const MyInfo = () => {
             </div>
 
             <div>
-                <button onClick={updateUserData}>수정하기</button>
-                <button
+                <StyledyellowBtn onClick={updateUserData}>수정하기</StyledyellowBtn>
+                <StyledyellowBtn
                     onClick={() => {
                         navigate(`/mypage?id=${user.user.id}`);
                     }}
                 >
                     취소
-                </button>
+                </StyledyellowBtn>
             </div>
         </div>
     );
 };
 
 export default MyInfo;
+
+const StyledyellowBtn = styled.button`
+    width: 15%;
+    height: 35px;
+    background-color: #edb432;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #f6e6c2;
+    }
+`;
+
+const StyledInput = styled.input`
+    width: 500px;
+    height: 32px;
+    font-size: 15px;
+    border: 0;
+    border-radius: 15px;
+    outline: none;
+    padding-left: 10px;
+    background-color: #f6e6c2;
+
+    &:focus {
+        background-color: #edb432;
+    }
+`;
+
+const StyledimgInput = styled.input`
+    width: 15%;
+    height: 35px;
+    background-color: #edb432;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:focus {
+        background-color: #edb432;
+    }
+`;

@@ -5,12 +5,6 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import PostList from "../components/PostList";
 import { supabase } from "../supabase";
 
-const Dashboard = styled.div`
-    background-color: greenyellow;
-`;
-
-const styledprofile = styled.img``;
-
 function MyPage() {
     const navigate = useNavigate();
     const { posts, user, setUser } = useContext(PostsContext);
@@ -39,7 +33,7 @@ function MyPage() {
                 <p>{user?.user.email}</p>
                 <h2>자기소개</h2>
                 <p>{user?.user.user_metadata.intro ? user?.user.user_metadata.intro : "자기소개를 등록해주세요"}</p>
-                <button onClick={() => navigate("/MyInfo")}>개인정보수정</button>
+                <StyledButton onClick={() => navigate("/MyInfo")}>개인정보수정</StyledButton>
             </Dashboard>
             <PostList id={userId} />
         </>
@@ -47,3 +41,14 @@ function MyPage() {
 }
 
 export default MyPage;
+
+const Dashboard = styled.div``;
+
+const StyledButton = styled.button`
+    width: 15%;
+    height: 35px;
+    background-color: #edb432;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+`;
