@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { PostsContext } from "../App";
+import LogOut from "./LogOut";
 
 const NavHeader = () => {
     const navigate = useNavigate();
@@ -33,20 +34,35 @@ const NavHeader = () => {
                         />
                     </StNavCenter>
                     <StNavRight>
-                        <StNavMenu
-                            onClick={() => {
-                                navigate(`/mypage?id=${user?.user.id}`);
-                            }}
-                        >
-                            마이페이지
-                        </StNavMenu>
-                        <StNavMenu
-                            onClick={() => {
-                                navigate("/login");
-                            }}
-                        >
-                            로그인
-                        </StNavMenu>
+                        {user?.user.email ? (
+                            <>
+                                <StNavMenu
+                                    onClick={() => {
+                                        navigate(`/mypage?id=${user?.user.id}`);
+                                    }}
+                                >
+                                    마이페이지
+                                </StNavMenu>
+                                <LogOut />
+                            </>
+                        ) : (
+                            <>
+                                <StNavMenu
+                                    onClick={() => {
+                                        navigate(`/signup`);
+                                    }}
+                                >
+                                    회원가입
+                                </StNavMenu>
+                                <StNavMenu
+                                    onClick={() => {
+                                        navigate("/login");
+                                    }}
+                                >
+                                    로그인
+                                </StNavMenu>
+                            </>
+                        )}
                     </StNavRight>
                 </StNavContent>
             </StNavContainer>
