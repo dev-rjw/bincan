@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { supabase } from "../supabase";
 import styled from "styled-components";
 import { useSearchParams } from "react-router-dom";
+import { PostsContext } from "../App";
 
 const CommentInput = ({ comments, setComments }) => {
+    const { user } = useContext(PostsContext);
     const [comment, setComment] = useState("");
     const [searchParams] = useSearchParams();
     const postsId = searchParams.get("id");
@@ -13,7 +15,7 @@ const CommentInput = ({ comments, setComments }) => {
 
         const { data, error } = await supabase
             .from("comments")
-            .insert([{ comment: comment, post_id: postsId }])
+            .insert([{ comment: comment, post_id: postsId, nickname: user?.user.user_metadata.nickName }])
             .select();
 
         if (error) console.log(error);
