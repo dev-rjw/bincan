@@ -51,10 +51,9 @@ const DetailEdit = () => {
         const userId = user.user.id;
         if (!userId) {
             console.error("유저 아이디가 없습니다");
-            return; // 로긴창
+            return;
         }
 
-        // 게시물 업데이트
         const { data, error } = await supabase
             .from("posts")
             .update({ title, img_url: imgUrl, money, context })
@@ -67,13 +66,11 @@ const DetailEdit = () => {
             return;
         }
 
-        // 업데이트된 데이터가 있는지 확인
         const updatedPost = data;
         console.log("포스트 업데이트 =>", updatedPost);
 
         setPosts(updatedPost);
 
-        // 페이지 리디렉션
         navigate(`/detail?id=${postsId}`);
     };
 
