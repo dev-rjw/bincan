@@ -11,7 +11,7 @@ function App() {
 
     useEffect(() => {
         getDocument();
-        getUser(); // eslint-disable-next-line react-hooks/exhaustive-deps
+        getUser();
     }, []);
 
     const getDocument = async () => {
