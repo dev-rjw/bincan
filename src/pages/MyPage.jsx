@@ -26,7 +26,7 @@ function MyPage() {
         <>
             <Div>
                 <div>
-                    <Img src={user?.user.user_metadata.profileUrl} alt="" width="20%" />
+                    <Img src={user?.user.user_metadata.profileUrl} alt="" />
                 </div>
                 <div>
                     <h2>닉네임</h2>
@@ -47,4 +47,10 @@ function MyPage() {
 
 export default MyPage;
 
-export const Img = styled.img``;
+export const Img = styled.img`
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    margin-right: 180px;
+    border: solid 3px #edb432;
+`;
