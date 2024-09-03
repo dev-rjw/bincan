@@ -36,8 +36,8 @@ function Login() {
     return (
         <div>
             <form onSubmit={logIn}>
-                <input value={email} onChange={(e) => setEmail(e.target.value)} />
-                <input value={password} onChange={(e) => setPassword(e.target.value)} />
+                <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
+                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                 <button type="submit">로그인</button>
                 <button type="button" onClick={() => navigate("/signup")}>
                     회원가입
