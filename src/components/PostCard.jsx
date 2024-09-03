@@ -13,7 +13,7 @@ const PostCard = ({ post }) => {
             >
                 <StyledImg src={post.img_url} width="100%"></StyledImg>
                 <StyledP>{post.title}</StyledP>
-                <StyledP>{post.context}</StyledP>
+                <StyledP>{post.context.length > 20 ? post.context.substr(0, 20) + " ..." : post.context}</StyledP>
             </StyledCard>
         </>
     );
