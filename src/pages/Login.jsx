@@ -27,7 +27,7 @@ function Login() {
         if (error) {
             alert("아이디 또는 비밀번호를 확인해주세요.");
         } else {
-            alert("로그인 되었습니다.");
+            alert("로그인을 성공하였습니다. 메인페이지로 이동합니다.");
             navigate("/");
         }
     };
@@ -40,8 +40,8 @@ function Login() {
     return (
         <div>
             <form onSubmit={logIn}>
-                <Input value={email} onChange={(e) => setEmail(e.target.value)} />
-                <Input value={password} onChange={(e) => setPassword(e.target.value)} />
+                <Input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
+                <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                 <StyledBtn type="submit">로그인</StyledBtn>
                 <StyledBtn type="button" onClick={() => navigate("/signup")}>
                     회원가입

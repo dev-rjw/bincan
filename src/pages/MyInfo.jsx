@@ -10,12 +10,18 @@ const MyInfo = () => {
     const [nickName, setNickName] = useState("");
     const [intro, setIntro] = useState("");
 
-    const { user } = useContext(PostsContext);
+    const { user, setUser } = useContext(PostsContext);
+
+    const getUser = async () => {
+        const { data } = await supabase.auth.getUser();
+        setUser(data);
+    };
 
     const engValidation = /^[A-Za-z0-9.]+$/g; // 영어랑 숫자만 포함하는 정규표현식
     const fileInputRef = useRef(null);
 
     useEffect(() => {
+        getUser();
         checkProfile();
     }, []);
 
@@ -29,7 +35,7 @@ const MyInfo = () => {
         });
         if (data) {
             alert("수정되었습니다.");
-            navigate("/mypage");
+            navigate(`/mypage?id=${data.user.id}`);
         }
     };
 
@@ -61,16 +67,6 @@ const MyInfo = () => {
 
         setImgUrl(supabase.storage.from("UserProfile").getPublicUrl(file.name).data.publicUrl);
     }
-
-    // async function checkProfile() {
-    //     //프로필 유효성 검사
-    //     const { data: userData } = await supabase.auth.getUser();
-    //     const userProfileUrl = userData.user.user_metadata.profileUrl;
-    //     //null 병합 연산자를 사용하여 프로필이미지 상태 탐지 및 반환 // 기본 이미지 "Group 66.png"
-    //     const { data } = supabase.storage.from("UserProfile").getPublicUrl("Group_66.png");
-    //     setProfileUrl(data.publicUrl);
-    //     console.log(data.publicUrl);
-    // }
 
     return (
         <div>
