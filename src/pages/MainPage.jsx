@@ -3,6 +3,7 @@ import PostInput from "../components/PostInput";
 import PostList from "../components/PostList";
 import { supabase } from "../supabase";
 import { PostsContext } from "../App";
+import styled from "styled-components";
 
 function MainPage() {
     const { posts, setPosts, user, setUser } = useContext(PostsContext);
@@ -25,11 +26,18 @@ function MainPage() {
     }, []);
 
     return (
-        <>
+        <MainDiv>
             {user?.user !== null ? <PostInput /> : ""}
             <PostList />
-        </>
+        </MainDiv>
     );
 }
 
 export default MainPage;
+
+const MainDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`;

@@ -83,11 +83,8 @@ export default NavHeader;
 
 const StyledNavContainer = styled.nav`
     width: 100%;
-    height: 100px;
-
     position: sticky;
     top: 0px;
-
     display: flex;
     justify-content: center;
     background-color: #edb432;
@@ -95,7 +92,7 @@ const StyledNavContainer = styled.nav`
 
 const StyledNavContent = styled.nav`
     width: 1280px;
-    height: 100%;
+    height: 100px;
 
     display: flex;
     justify-content: space-between;

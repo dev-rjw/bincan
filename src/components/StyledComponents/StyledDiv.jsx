@@ -8,4 +8,5 @@ export const Div = styled.div`
     margin-top: 105px;
     border: solid 3px #edb432;
     padding: 10px;
+    background-color: #d9d9d9;
 `;
