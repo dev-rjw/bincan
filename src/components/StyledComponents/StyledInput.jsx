@@ -1,3 +1,4 @@
+import { Flex } from "@chakra-ui/react";
 import styled from "styled-components";
 
 export const Input = styled.input`
@@ -5,10 +6,13 @@ export const Input = styled.input`
     flex-direction: column;
     justify-content: center;
     align-items: center; */
+    display: ${(props) => props.display || Flex};
+
     margin: 10px;
-    margin-top: 7%;
+    margin-top: 10px;
+    margin-bottom: 18px;
     width: 500px;
-    height: 50px;
+    min-height: 50px;
 
     font-size: 23px;
     color: #1f1f1f;
@@ -24,3 +28,7 @@ export const Input = styled.input`
         background-color: #f1d594;
     }
 `;
+
+export function StyledInput({ children, display }) {
+    return <Input display={display}>{children}</Input>;
+}

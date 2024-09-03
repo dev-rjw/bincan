@@ -3,8 +3,9 @@ import { createClient } from "@supabase/supabase-js";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../supabase";
 import styled from "styled-components";
-import { Input } from "../components/StyledComponents/StyledInput";
+import { Input, StyledInput } from "../components/StyledComponents/StyledInput";
 import { StyledBtn } from "../components/StyledComponents/StyledButton";
+import { StyledLogo } from "../components/StyledComponents/StyledLogo";
 
 function SignUp() {
     const navigate = useNavigate();
@@ -92,31 +93,69 @@ function SignUp() {
     }, []);
 
     return (
-        <form onSubmit={SignUp}>
+        <Form onSubmit={SignUp}>
+            <StyledLogo
+                alt="X"
+                src="https://ltmlsvowetkigjbwwqwy.supabase.co/storage/v1/object/public/UserProfile/bbin.svg
+                    "
+            ></StyledLogo>
             <Div>
                 <User>
-                    이메일 : <Input value={email} onChange={(e) => setEmail(e.target.value)} />
-                    패스워드 : <Input value={password} type="password" onChange={(e) => setPassword(e.target.value)} />
-                    닉네임 : <Input value={nickName} onChange={(e) => setNickName(e.target.value)} />
+                    <Font>이메일</Font>
+                    <Input value={email} onChange={(e) => setEmail(e.target.value)} />
+                    <Font>비밀번호</Font>
+                    <Input value={password} type="password" onChange={(e) => setPassword(e.target.value)} />
+                    <Font>닉네임</Font>
+                    <Input value={nickName} onChange={(e) => setNickName(e.target.value)} />
                 </User>
                 <ProfileImg>
                     <Img src={profileUrl} alt="profile" onClick={() => fileInputRef.current.click()} />
-                    <input onChange={(e) => handleFileInputChange(e.target.files)} type="file" ref={fileInputRef} />
+                    <Input
+                        display="none"
+                        id="styledLabel"
+                        onChange={(e) => handleFileInputChange(e.target.files)}
+                        type="file"
+                        ref={fileInputRef}
+                    />
+                    <FileBut htmlFor="styledLabel">🔗 FILE UPLOAD</FileBut>
                 </ProfileImg>
             </Div>
             <StyledBtn type="submit">확인</StyledBtn>
-        </form>
+        </Form>
     );
 }
 
 export default SignUp;
+
+const FileBut = styled.label`
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    margin: auto;
+    margin-top: 30px;
+    width: 200px;
+    height: 35px;
+
+    background-color: #edb432;
+    color: white;
+
+    cursor: pointer;
+`;
+
+const Form = styled.form`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+`;
 
 const Div = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    position: relative;
 `;
 
 const User = styled.div`
@@ -124,8 +163,6 @@ const User = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    margin-top: 100px;
 `;
 
 const ProfileImg = styled.div`
@@ -136,8 +173,6 @@ const ProfileImg = styled.div`
 `;
 
 const Img = styled.img`
-    /* position: absolute; */
-
     margin-bottom: 10px;
 
     right: 100px;
@@ -146,8 +181,13 @@ const Img = styled.img`
     width: 250px;
     height: 250px;
 
-    border: solid 7px #edb432;
-    border-radius: 10px;
+    border: solid 1px #edb432;
 
     background-color: #ffffff;
+`;
+
+const Font = styled.p`
+    margin: 1px;
+    margin-top: 2%;
+    margin-bottom: 13px;
 `;
