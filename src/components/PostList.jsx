@@ -15,8 +15,10 @@ const PostList = ({ id }) => {
                         if (a.created_at > b.created_at) return -1;
                         return 0;
                     })
-                    .map((post) => <PostCard key={post.id} post={post} />)
-                    .filter((post) => (id === undefined ? post : post.id === id))}
+                    .filter((post) => (id === undefined ? post : post.user_id === id))
+                    .map((post) => (
+                        <PostCard key={post.id} post={post} />
+                    ))}
             </StyledCardDiv>
         </>
     );
