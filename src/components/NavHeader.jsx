@@ -36,7 +36,7 @@ const NavHeader = () => {
                 </StyledNavLeft>
                 <StyledNavCenter>
                     <StyledNavLogo
-                        src="hi"
+                        src="src/assets/bincanlogo.svg"
                         alt="bincan"
                         onClick={() => {
                             navigate("/");
@@ -87,7 +87,7 @@ const StyledNavContainer = styled.nav`
     top: 0px;
     display: flex;
     justify-content: center;
-    background-color: #edb432;
+    background-color: #efefef;
 `;
 
 const StyledNavContent = styled.nav`
@@ -113,7 +113,7 @@ const StyledNavCenter = styled.div`
 `;
 
 const StyledNavLogo = styled.img`
-    /* width: 100%; */
+    width: 100px;
 `;
 
 const StyledNavRight = styled.div`
