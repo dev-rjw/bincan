@@ -7,7 +7,7 @@ export const StyledBtn = styled.button`
     align-items: center;
 
     margin: 10px;
-    margin-top: 20%;
+    margin-top: 50px;
     width: 125px;
     height: 35px;
 
