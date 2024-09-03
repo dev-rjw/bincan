@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useContext, useEffect, useState } from "react";
 import { PostsContext } from "../App";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import PostCard from "../components/PostCard";
+import PostList from "../components/PostList";
 import { supabase } from "../supabase";
 
 const Dashboard = styled.div`
@@ -19,7 +19,6 @@ function MyPage() {
     // const userProfileUrl = userData.user.user_metadata.profileUrl;
 
     const filterdPosts = posts.filter((post) => post.user_id === userId);
-
     const getUser = async () => {
         const { data } = await supabase.auth.getUser();
         setUser(data);
@@ -42,19 +41,9 @@ function MyPage() {
                 <p>{user?.user.user_metadata.intro ? user?.user.user_metadata.intro : "자기소개를 등록해주세요"}</p>
                 <button onClick={() => navigate("/MyInfo")}>개인정보수정</button>
             </Dashboard>
-            <ul>
-                {filterdPosts.map((post) => {
-                    return (
-                        <li key={post.id}>
-                            <PostCard post={post} />;
-                        </li>
-                    );
-                })}
-            </ul>
+            <PostList id={userId} />
         </>
     );
 }
 
 export default MyPage;
-
-//데이터 저장시 스토리지 사용 (네트워크 이미지사용)
