@@ -106,8 +106,10 @@ function Detail() {
             </StVoteBtnContainer>
 
             <StyledCommentContainer>
-                <CommentList comments={comments} setComments={setComments} />
-                <CommentInput comments={comments} setComments={setComments} />
+                <StyledCommentWrapper>
+                    <CommentList comments={comments} setComments={setComments} />
+                    <CommentInput comments={comments} setComments={setComments} />
+                </StyledCommentWrapper>
             </StyledCommentContainer>
         </>
     );
@@ -242,10 +244,13 @@ const StBadBtn = styled.button`
 `;
 
 const StyledCommentContainer = styled.div`
-    width: 1280px;
-    height: 100%;
+    width: 100%;
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
-    /* justify-content: center; */
-    /* align-items: center; */
+`;
+
+const StyledCommentWrapper = styled.div`
+    width: 1280px;
 `;
