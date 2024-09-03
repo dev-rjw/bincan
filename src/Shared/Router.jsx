@@ -9,10 +9,11 @@ import MyPage from "../pages/MyPage";
 import DetailEdit from "../pages/DetailEdit";
 import MyInfo from "../pages/MyInfo";
 
+// 로그아웃 상태
 const AuthRoute = () => {
     return <Outlet />;
 };
-
+//로그인이 된상태
 const PrivateRoute = () => {
     return <Outlet />;
 };

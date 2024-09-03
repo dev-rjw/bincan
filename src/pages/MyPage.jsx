@@ -30,7 +30,6 @@ function MyPage() {
         getUser();
     }, []);
 
-    // get user >  set user
     return (
         <>
             <Dashboard>
