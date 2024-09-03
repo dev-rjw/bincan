@@ -21,7 +21,7 @@ const NavHeader = () => {
     };
 
     return (
-        <StNavContainer>
+        <StyleNavContainer>
             <StyledNavContent>
                 <StNavLeft>
                     <StEmptyNav>
@@ -31,7 +31,7 @@ const NavHeader = () => {
                                 지갑은 안녕하시렵니까?
                             </>
                         ) : (
-                            "로그인이 필요합니다."
+                            "Bin-Can"
                         )}
                     </StEmptyNav>
                 </StNavLeft>
@@ -76,31 +76,28 @@ const NavHeader = () => {
                     )}
                 </StNavRight>
             </StyledNavContent>
-        </StNavContainer>
+        </StyleNavContainer>
     );
 };
 
 export default NavHeader;
 
-const StNavContainer = styled.nav`
+const StyleNavContainer = styled.nav`
     width: 100%;
+    height: 100px;
+
     display: flex;
     justify-content: center;
-    /* background-color: red; */
-    height: 80px;
+    background-color: #edb432;
 `;
 
 const StyledNavContent = styled.nav`
+    width: 1280px;
+    height: 100%;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    width: 1280px;
-    height: 80px;
-
-    border: 1px solid red;
-
-    background-color: red;
 `;
 
 const StNavLeft = styled.div``;
@@ -116,7 +113,9 @@ const StNavCenter = styled.div`
     width: 200px;
 `;
 
-const StNavLogo = styled.img``;
+const StNavLogo = styled.img`
+    /* width: 100%; */
+`;
 
 const StNavRight = styled.div`
     display: flex;
