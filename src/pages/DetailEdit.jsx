@@ -89,53 +89,132 @@ const DetailEdit = () => {
     };
 
     return (
-        <Window>
-            <Input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
-            <Input type="text" value={money} onChange={(e) => setMoney(e.target.value)} />
-            <TextArea value={context} onChange={(e) => setContext(e.target.value)} />
-            <img src={imgUrl} width="30%" />
-            <input type="file" accept="image/*" onChange={onchangeImageUpload}></input>
-            <Button onClick={editPost}>수정하기</Button>
-            <Button
-                onClick={() => {
-                    navigate(`/detail?id=${postsId}`);
-                }}
-            >
-                취소
-            </Button>
-        </Window>
+        <MainDiv>
+            <StyledWindow>
+                <LeftDiv>
+                    <StyledImg src={imgUrl} width="30%" />
+                    <StyledFile
+                        id="styleLabel"
+                        type="file"
+                        accept="image/*"
+                        onChange={onchangeImageUpload}
+                    ></StyledFile>
+                    <StyledLabel htmlFor="styleLabel">파일선택</StyledLabel>
+                </LeftDiv>
+                <RightDiv>
+                    <StyledInput
+                        type="text"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                        placeholder="제목"
+                    />
+                    <StyledInput
+                        type="number"
+                        value={money}
+                        onChange={(e) => setMoney(e.target.value)}
+                        placeholder="금액"
+                    />
+                    <StyledTextArea value={context} onChange={(e) => setContext(e.target.value)} placeholder="내용" />
+                    <ButtonDiv>
+                        <StyledButton onClick={editPost}>수정하기</StyledButton>
+                        <StyledButton
+                            onClick={() => {
+                                navigate(`/detail?id=${postsId}`);
+                            }}
+                        >
+                            취소
+                        </StyledButton>
+                    </ButtonDiv>
+                </RightDiv>
+            </StyledWindow>
+        </MainDiv>
     );
 };
 
 export default DetailEdit;
 
-const Window = styled.div`
-    width: 100%;
-    background-color: #676767;
+const MainDiv = styled.div`
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`;
+
+const StyledWindow = styled.div`
+    margin-top: 20px;
+    width: 800px;
+    background-color: #676767;
+    display: flex;
+    flex-direction: row;
     place-items: center;
     text-align: center;
     border-radius: 10px;
 `;
 
-const Input = styled.input`
+const LeftDiv = styled.div`
     width: 40%;
+    display: flex;
+    flex-direction: column;
+`;
+
+const RightDiv = styled.div`
+    width: 60%;
+`;
+
+const StyledInput = styled.input`
+    width: 400px;
     height: 30px;
     background-color: #f1d594;
+    margin-top: 10px;
 `;
 
-const TextArea = styled.textarea`
-    width: 40%;
+const StyledTextArea = styled.textarea`
+    width: 400px;
     height: 60px;
     background-color: #f1d594;
+    margin-top: 10px;
 `;
 
-const Button = styled.button`
-    width: 15%;
+const ButtonDiv = styled.div`
+    display: flex;
+    flex-direction: row-reverse;
+`;
+
+const StyledButton = styled.button`
+    width: 30%;
     height: 35px;
     background-color: #edb432;
     color: white;
     border-radius: 5px;
+    cursor: pointer;
+    margin: 40px;
+`;
+
+const StyledImg = styled.img`
+    background-color: white;
+    width: 250px;
+    height: 220px;
+    margin: 15% 0 5% 15%;
+`;
+
+const StyledFile = styled.input`
+    visibility: hidden;
+`;
+
+const StyledLabel = styled.label`
+    display: flex;
+    justify-content: space-around;
+
+    padding: 10px;
+    margin: auto;
+    margin-top: -20px;
+    margin-bottom: 20px;
+
+    width: 125px;
+    height: 35px;
+
+    background-color: #edb432;
+    color: white;
+
     cursor: pointer;
 `;
