@@ -5,18 +5,7 @@ import { PostsContext } from "../App";
 import { supabase } from "../supabase";
 
 const PostList = ({ id }) => {
-    const [posts, setPosts] = useState([]);
-
-    useEffect(() => {
-        getDocument();
-    }, []);
-
-    const getDocument = async () => {
-        let { data, error } = await supabase.from("posts").select("*");
-        if (error) console.log(error);
-
-        setPosts([...data]);
-    };
+    const { posts } = useContext(PostsContext);
 
     return (
         <>

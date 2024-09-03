@@ -1,12 +1,23 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { PostsContext } from "../App";
-import LogOut from "./LogOut";
+import Logout from "./Logout";
+import { supabase } from "../supabase";
 
 const NavHeader = () => {
     const navigate = useNavigate();
-    const { user } = useContext(PostsContext);
+    const { user, setUser } = useContext(PostsContext);
+
+    useEffect(() => {
+        getUser();
+    }, []);
+
+    // user
+    const getUser = async () => {
+        const { data } = await supabase.auth.getUser();
+        setUser(data);
+    };
 
     return (
         <>
@@ -43,7 +54,7 @@ const NavHeader = () => {
                                 >
                                     마이페이지
                                 </StNavMenu>
-                                <LogOut />
+                                <Logout />
                             </>
                         ) : (
                             <>

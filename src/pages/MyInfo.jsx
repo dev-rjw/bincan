@@ -12,12 +12,18 @@ const MyInfo = () => {
     const [nickName, setNickName] = useState("");
     const [intro, setIntro] = useState("");
 
-    const { user } = useContext(PostsContext);
+    const { user, setUser } = useContext(PostsContext);
+
+    const getUser = async () => {
+        const { data } = await supabase.auth.getUser();
+        setUser(data);
+    };
 
     const engValidation = /^[A-Za-z0-9.]+$/g;
     const fileInputRef = useRef(null);
 
     useEffect(() => {
+        getUser();
         checkProfile();
     }, []);
 
@@ -31,7 +37,7 @@ const MyInfo = () => {
         });
         if (data) {
             alert("수정되었습니다.");
-            navigate("/mypage");
+            navigate(`/mypage?id=${data.user.id}`);
         }
     };
 

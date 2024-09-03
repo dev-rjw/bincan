@@ -10,7 +10,9 @@ const DetailEdit = () => {
     const [context, setContext] = useState("");
     const [imgUrl, setImgUrl] = useState("");
 
-    const { posts, setPosts, user } = useContext(PostsContext);
+    const [post, setPost] = useState("");
+
+    const { posts, setPosts, user, setUser } = useContext(PostsContext);
 
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
@@ -25,7 +27,13 @@ const DetailEdit = () => {
         reader.onloadend = () => setImgUrl(reader.result);
     };
 
+    const getUser = async () => {
+        const { data } = await supabase.auth.getUser();
+        setUser(data);
+    };
+
     useEffect(() => {
+        getUser();
         const filteredPost = posts?.filter((data) => {
             return data.id === Number(postsId);
         });
@@ -67,9 +75,8 @@ const DetailEdit = () => {
         }
 
         const updatedPost = data;
-        console.log("포스트 업데이트 =>", updatedPost);
 
-        setPosts(updatedPost);
+        setPost(updatedPost);
 
         navigate(`/detail?id=${postsId}`);
     };

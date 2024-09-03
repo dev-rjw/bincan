@@ -46,7 +46,13 @@ function SignUp() {
                 }
             }
         });
-        navigate("/login");
+
+        if (error) {
+            console.log(error);
+        } else if (data) {
+            alert("회원가입을 환영합니다. 로그인페이지로 이동합니다.");
+            navigate("/login");
+        }
     };
 
     async function checkProfile() {

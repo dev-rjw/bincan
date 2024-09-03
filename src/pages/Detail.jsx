@@ -11,9 +11,10 @@ function Detail() {
     const [searchParams] = useSearchParams();
     const postsId = searchParams.get("id");
 
-    const [selectedPost, setSelectedPost] = useState({});
+    const [post, setPost] = useState({});
     const [comments, setComments] = useState([]);
-    const [user, setUser] = useState();
+
+    const { user, setUser } = useContext(PostsContext);
 
     useEffect(() => {
         getPost();
@@ -22,13 +23,10 @@ function Detail() {
     }, []);
 
     const getPost = async () => {
-        let { data, error } = await supabase.from("posts").select("*");
+        let { data, error } = await supabase.from("posts").select("*").eq("id", postsId);
         if (error) console.log(error);
 
-        const filteredPost = data.filter((data) => {
-            return data.id === Number(postsId);
-        });
-        setSelectedPost(filteredPost[0]);
+        setPost(data[0]);
     };
 
     const getUser = async () => {
@@ -55,14 +53,14 @@ function Detail() {
         setComments(data);
     };
 
-    const { created_at, title, nickname, img_url, money, context } = selectedPost;
+    const { created_at, title, nickname, img_url, money, context } = post;
 
     return (
         <>
             <StDetailContainer>
                 <StBtnContainer>
                     <StBtnWrapper>
-                        {user?.user?.id === selectedPost.user_id ? (
+                        {user?.user?.id === post.user_id ? (
                             <>
                                 <StEditBtn
                                     onClick={() => {
