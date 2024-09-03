@@ -31,7 +31,7 @@ const MyInfo = () => {
         const { data, error } = await supabase.auth.updateUser({
             data: {
                 profileUrl: imgUrl,
-                nickName: nickName,
+                nickName: nickName.replaceAll(" ", ""),
                 intro: intro
             }
         });
@@ -42,8 +42,7 @@ const MyInfo = () => {
     };
 
     async function checkProfile() {
-        const { data } = supabase.storage.from("UserProfile").getPublicUrl("Group_66.png");
-        setImgUrl(data.publicUrl);
+        setImgUrl(user?.user?.user_metadata.profileUrl);
     }
 
     async function handleFileInputChange(files) {
