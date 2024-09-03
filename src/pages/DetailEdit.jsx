@@ -34,6 +34,7 @@ const DetailEdit = () => {
 
     useEffect(() => {
         getUser();
+
         const filteredPost = posts?.filter((data) => {
             return data.id === Number(postsId);
         });
@@ -43,15 +44,15 @@ const DetailEdit = () => {
             setTitle(post.title || "");
             setMoney(post.money || "");
             setContext(post.context || "");
-            setImgUrl(post.imgUrl || "");
+            setImgUrl(post.img_url || "");
         }
     }, []);
 
     const editPost = async (e) => {
         e.preventDefault();
 
-        if (!title || !money || !context) {
-            alert("빈칸을 채워~");
+        if (!title || !money || !context || !imgUrl) {
+            alert("빈칸을 채워주세요~");
             return;
         }
 
@@ -59,10 +60,10 @@ const DetailEdit = () => {
         const userId = user.user.id;
         if (!userId) {
             console.error("유저 아이디가 없습니다");
-            return; // 로긴창
+            navigate("/signup");
+            return;
         }
 
-        // 게시물 업데이트
         const { data, error } = await supabase
             .from("posts")
             .update({ title, img_url: imgUrl, money, context })
@@ -75,12 +76,6 @@ const DetailEdit = () => {
             return;
         }
 
-        // 업데이트된 데이터가 있는지 확인
-        const updatedPost = data;
-
-        setPost(updatedPost);
-
-        // 페이지 리디렉션
         navigate(`/detail?id=${postsId}`);
     };
 
