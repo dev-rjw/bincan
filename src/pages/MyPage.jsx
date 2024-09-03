@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import MyInfo from "./MyInfo";
 import { useContext, useEffect, useState } from "react";
 import { PostsContext } from "../App";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -10,16 +9,20 @@ const Dashboard = styled.div`
     background-color: greenyellow;
 `;
 
+const styledprofile = styled.img``;
+
 function MyPage() {
     const navigate = useNavigate();
-
-    const { user, setUser } = useContext(PostsContext);
+    const { posts, user, setUser } = useContext(PostsContext);
     const [searchParams] = useSearchParams();
     const userId = searchParams.get("id");
+    // const userProfileUrl = userData.user.user_metadata.profileUrl;
 
+    const filterdPosts = posts.filter((post) => post.user_id === userId);
     const getUser = async () => {
         const { data } = await supabase.auth.getUser();
         setUser(data);
+        console.log(data);
     };
 
     useEffect(() => {

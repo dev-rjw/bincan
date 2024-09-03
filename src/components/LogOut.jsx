@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { supabase } from "../supabase";
+import { PostsContext } from "../App";
 
 const LogOut = () => {
+    const { user, setUser } = useContext(PostsContext);
     async function signOut() {
         await supabase.auth.signOut();
+        setUser(null);
     }
 
     return (

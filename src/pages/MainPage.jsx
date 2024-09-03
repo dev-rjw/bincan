@@ -20,7 +20,6 @@ function MainPage() {
 
     return (
         <>
-            <LogOut />
             {userData.user !== null ? <PostInput /> : ""}
             <PostList />
         </>
