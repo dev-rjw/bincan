@@ -15,6 +15,7 @@ function SignUp() {
     const [profileUrl, setProfileUrl] = useState("");
     const fileInputRef = useRef(null);
 
+    // 정규표현식 영어대소문자,_
     var engValidation = /^[A-Za-z.]+$/g;
 
     const getUserData = async () => {
