@@ -1,5 +1,5 @@
-import React from "react";
-import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import MainPage from "../pages/MainPage";
@@ -8,6 +8,7 @@ import NavHeader from "../components/NavHeader";
 import MyPage from "../pages/MyPage";
 import DetailEdit from "../pages/DetailEdit";
 import MyInfo from "../pages/MyInfo";
+import { supabase } from "../supabase";
 
 // 로그아웃 상태
 const AuthRoute = () => {
@@ -15,6 +16,27 @@ const AuthRoute = () => {
 };
 //로그인이 된상태
 const PrivateRoute = () => {
+    //isSign에 로그인 상태를 받아옴
+    const [signIn, setSignIn] = useState(true);
+
+    useEffect(() => {
+        checkSignIn();
+    }, []);
+
+    //로그인 유효성 검사
+    async function checkSignIn() {
+        const session = await supabase.auth.getSession();
+        const isSignIn = !!session.data.session;
+
+        setSignIn(isSignIn);
+    }
+
+    // 검사
+    if (!signIn) {
+        alert("비정상적인 접근입니다. 로그인을 해주세요.");
+        return <Navigate to={"/login"} />;
+    }
+
     return <Outlet />;
 };
 
