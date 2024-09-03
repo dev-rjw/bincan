@@ -15,8 +15,7 @@ function SignUp() {
     const [profileUrl, setProfileUrl] = useState("");
     const fileInputRef = useRef(null);
 
-    //정규표현식
-    var engValidation = /^[A-Za-z.]+$/g; // 영어랑.만 포함하는 정규표현식
+    var engValidation = /^[A-Za-z.]+$/g;
 
     const getUserData = async () => {
         const { data } = await supabase.auth.getUser();
@@ -25,7 +24,6 @@ function SignUp() {
     const SignUp = async (e) => {
         e.preventDefault();
 
-        // input 공백 유효성 검사
         if (!email) {
             alert("이메일을 입력해주세요");
             return;
@@ -38,7 +36,7 @@ function SignUp() {
         } else if (!nickName) {
             alert("닉네임을 입력해주세요");
             return;
-        } // 프로필 사진은 필수 입력값이 아니기때문에 프로필을 제외하기 위해 else를 쓰지 않음);
+        }
 
         const { data, error } = await supabase.auth.signUp({
             email: email,
@@ -59,34 +57,27 @@ function SignUp() {
         }
     };
 
-    // 프로필
     async function checkProfile() {
         const { data: userData } = await supabase.auth.getUser();
 
-        // 기본 이미지 "Group 66.png" 셋팅
         const { data } = supabase.storage.from("UserProfile").getPublicUrl("Group_66.png");
         setProfileUrl(data.publicUrl);
     }
 
-    // 프로필 사진 변경
     async function handleFileInputChange(files) {
         const [file] = files;
 
-        // 파일이 없으면 리턴
         if (!file) {
             return;
         }
 
-        // 파일명 유효성검사 => only eng & .
         if (!engValidation.test(file.name)) {
             alert("파일명이 잘못되었습니다. 영어 또는 숫자만 가능합니다.");
             return;
         }
 
-        // 로컬스토리지에 파일명으로 저장 // 프로필사진은 1개만 사용하므로 덮어쓰기(upsert:true)
         const { data } = await supabase.storage.from("UserProfile").upload(file.name, file, { upsert: true });
 
-        //유저 정보 업데이트
         const { data: profileUrl, error } = await supabase.auth.updateUser({
             data: { profileUrl: supabase.storage.from("UserProfile").getPublicUrl(file.name).data.publicUrl }
         });

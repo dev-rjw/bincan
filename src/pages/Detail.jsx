@@ -22,7 +22,6 @@ function Detail() {
         getComment();
     }, []);
 
-    // posts 내용 불러오기
     const getPost = async () => {
         let { data, error } = await supabase.from("posts").select("*").eq("id", postsId);
         if (error) console.log(error);
@@ -30,13 +29,11 @@ function Detail() {
         setPost(data[0]);
     };
 
-    // user
     const getUser = async () => {
         const { data } = await supabase.auth.getUser();
         setUser(data);
     };
 
-    // 삭제 로직
     const handleDelete = async (e) => {
         e.preventDefault();
 

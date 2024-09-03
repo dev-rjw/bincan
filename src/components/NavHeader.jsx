@@ -17,6 +17,7 @@ const NavHeader = () => {
     const getUser = async () => {
         const { data } = await supabase.auth.getUser();
         setUser(data);
+        console.log(data);
     };
 
     return (
