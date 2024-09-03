@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { supabase } from "../supabase";
 import { PostsContext } from "../App";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
 const Logout = () => {
     const navigator = useNavigate();
@@ -14,19 +15,11 @@ const Logout = () => {
         navigator("/");
     }
 
-    return (
-        <div>
-            <SignInBtn text="로그아웃" onClick={signOut} />
-        </div>
-    );
+    return <StNavMenu onClick={signOut}>로그아웃</StNavMenu>;
 };
 
-function SignInBtn({ text, onClick }) {
-    return (
-        <button type="button" onClick={onClick}>
-            {text}
-        </button>
-    );
-}
-
 export default Logout;
+
+const StNavMenu = styled.div`
+    margin-left: 15px;
+`;
