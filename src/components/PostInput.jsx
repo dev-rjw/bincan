@@ -10,25 +10,17 @@ const PostInput = () => {
 
     const [imgUrl, setImgUrl] = useState("");
 
-    const [posts, setPosts] = useState([]);
-    const [user, setUser] = useState();
+    const { posts, setPosts, user, setUser } = useContext(PostsContext);
 
     const engValidation = /^[A-Za-z0-9.]+$/g; // 영어랑 숫자만 포함하는 정규표현식
     const fileInputRef = useRef(null);
 
     useEffect(() => {
-        getDocument();
-        getUser();
         checkPost();
-    }, []);
+        getUser();
+    }, [imgUrl]);
 
-    const getDocument = async () => {
-        let { data, error } = await supabase.from("posts").select("*");
-        if (error) console.log(error);
-
-        setPosts([...data]);
-    };
-
+    // user
     const getUser = async () => {
         const { data } = await supabase.auth.getUser();
         setUser(data);
@@ -66,21 +58,41 @@ const PostInput = () => {
     const insertDocument = async (e) => {
         e.preventDefault();
 
+        // input validation
+        if (title.trim() === "") {
+            alert("제목을 입력해주세요.");
+            return;
+        }
+        if (imgUrl.trim() === "") {
+            alert("이미지를 추가해주세요.");
+            return;
+        }
+        if (money.trim() === "") {
+            alert("금액을 입력해주세요.");
+            return;
+        }
+        if (context.trim() === "") {
+            alert("내용을 입력해주세요.");
+            return;
+        }
+
+        // input insert
         const { data, error } = await supabase
             .from("posts")
             .insert([
                 {
-                    title: title,
+                    title: title.trim(),
                     nickname: user?.user.user_metadata.nickName,
-                    img_url: imgUrl,
-                    money: money,
-                    context: context
+                    img_url: imgUrl.trim(),
+                    money: money.trim(),
+                    context: context.trim()
                 }
             ])
             .select();
 
         if (error) console.log(error);
 
+        alert("등록이 완료되었습니다.");
         setPosts([...posts, ...data]);
 
         setTitle("");
@@ -91,9 +103,9 @@ const PostInput = () => {
 
     return (
         <StyledWindow>
-            <StyledInput type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
-            <StyledInput type="text" value={money} onChange={(e) => setMoney(e.target.value)} />
-            <StyledTextArea value={context} onChange={(e) => setContext(e.target.value)} />
+            <StyledInput type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="제목" />
+            <StyledInput type="text" value={money} onChange={(e) => setMoney(e.target.value)} placeholder="금액" />
+            <StyledTextArea value={context} onChange={(e) => setContext(e.target.value)} placeholder="내용" />
             <img src={imgUrl} width="30%" />
             <input
                 type="file"

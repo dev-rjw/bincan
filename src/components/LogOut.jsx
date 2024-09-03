@@ -2,11 +2,12 @@ import React, { useContext, useState } from "react";
 import { supabase } from "../supabase";
 import { PostsContext } from "../App";
 
-const LogOut = () => {
+const Logout = () => {
     const { user, setUser } = useContext(PostsContext);
+
     async function signOut() {
+        setUser({ user: null });
         await supabase.auth.signOut();
-        setUser(null);
     }
 
     return (
@@ -24,4 +25,4 @@ function SignInBtn({ text, onClick }) {
     );
 }
 
-export default LogOut;
+export default Logout;

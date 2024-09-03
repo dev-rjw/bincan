@@ -1,25 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import PostInput from "../components/PostInput";
 import PostList from "../components/PostList";
 import { supabase } from "../supabase";
-import LogOut from "../components/LogOut";
+import { PostsContext } from "../App";
 
 function MainPage() {
-    const [user, setUser] = useState({});
-
-    useEffect(() => {
-        getUser();
-    }, []);
+    const { posts, setPosts, user, setUser } = useContext(PostsContext);
 
     const getUser = async () => {
         const { data } = await supabase.auth.getUser();
         setUser(data);
-        return data;
     };
+
+    const getDocument = async () => {
+        let { data, error } = await supabase.from("posts").select("*");
+        if (error) console.log(error);
+
+        setPosts([...data]);
+    };
+
+    useEffect(() => {
+        getUser();
+        getDocument();
+    }, []);
 
     return (
         <>
-            {user.user !== null ? <PostInput /> : ""}
+            {user?.user !== null ? <PostInput /> : ""}
             <PostList />
         </>
     );
