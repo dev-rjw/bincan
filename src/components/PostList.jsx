@@ -29,4 +29,5 @@ export default PostList;
 const StyledCardDiv = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
+    justify-items: center;
 `;
