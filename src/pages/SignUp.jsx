@@ -95,8 +95,8 @@ function SignUp() {
     return (
         <Form onSubmit={SignUp}>
             <StyledLogo
-                alt="X"
-                src="https://ltmlsvowetkigjbwwqwy.supabase.co/storage/v1/object/public/UserProfile/bbin.svg
+                alt="bincan"
+                src="https://ltmlsvowetkigjbwwqwy.supabase.co/storage/v1/object/public/UserProfile/Group%2067bbin.png
                     "
             ></StyledLogo>
             <Div>
@@ -148,7 +148,6 @@ const Form = styled.form`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: relative;
 `;
 
 const Div = styled.div`
@@ -161,8 +160,8 @@ const Div = styled.div`
 const User = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: left;
+    align-items: left;
 `;
 
 const ProfileImg = styled.div`
@@ -187,7 +186,7 @@ const Img = styled.img`
 `;
 
 const Font = styled.p`
-    margin: 1px;
+    margin-left: 12px;
     margin-top: 2%;
     margin-bottom: 13px;
 `;

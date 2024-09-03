@@ -43,19 +43,21 @@ function Login() {
             <Form onSubmit={logIn}>
                 <StyledLogo
                     alt="X"
-                    src="https://ltmlsvowetkigjbwwqwy.supabase.co/storage/v1/object/public/UserProfile/bbin.svg
+                    src="https://ltmlsvowetkigjbwwqwy.supabase.co/storage/v1/object/public/UserProfile/Group%2067bbin.png
                     "
                 ></StyledLogo>
-                <Font>이메일</Font>
-                <Input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
-                <Font>비밀번호</Font>
-                <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                <Div>
+                <InputLogin>
+                    <Font>이메일</Font>
+                    <Input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
+                    <Font>비밀번호</Font>
+                    <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                </InputLogin>
+                <StyledButtonWrap>
                     <StyledBtn type="submit">로그인</StyledBtn>
                     <StyledBtn type="button" onClick={() => navigate("/signup")}>
                         회원가입
                     </StyledBtn>
-                </Div>
+                </StyledButtonWrap>
             </Form>
         </div>
     );
@@ -68,10 +70,16 @@ const Form = styled.form`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: relative;
 `;
 
-const Div = styled.div`
+const InputLogin = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: left;
+`;
+
+const StyledButtonWrap = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -79,7 +87,7 @@ const Div = styled.div`
 `;
 
 const Font = styled.p`
-    margin: 1px;
+    margin-left: 12px;
     margin-top: 2%;
     margin-bottom: 13px;
 `;

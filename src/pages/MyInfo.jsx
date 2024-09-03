@@ -70,6 +70,7 @@ const MyInfo = () => {
                 <div>
                     <h1>개인정보 수정</h1>
                     <h2>프로필 사진</h2>
+
                     <img src={imgUrl} alt="빈캔" width="373px" />
 
                     <StyledimgInput
