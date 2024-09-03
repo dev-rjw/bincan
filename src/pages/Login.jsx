@@ -24,6 +24,7 @@ function Login() {
         if (error) {
             alert("아이디 또는 비밀번호를 확인해주세요.");
         } else {
+            alert("로그인을 성공하였습니다. 메인페이지로 이동합니다.");
             navigate("/");
         }
     };
