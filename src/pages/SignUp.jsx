@@ -50,7 +50,13 @@ function SignUp() {
                 }
             }
         });
-        navigate("/login");
+
+        if (error) {
+            console.log(error);
+        } else if (data) {
+            alert("회원가입을 환영합니다. 로그인페이지로 이동합니다.");
+            navigate("/login");
+        }
     };
 
     // 프로필
@@ -86,8 +92,6 @@ function SignUp() {
         });
 
         setProfileUrl(supabase.storage.from("UserProfile").getPublicUrl(file.name).data.publicUrl);
-
-        // 고마워요 준호님
     }
 
     useEffect(() => {

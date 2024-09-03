@@ -1,11 +1,21 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import { PostsContext } from "../App";
 import { supabase } from "../supabase";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 const Comment = ({ comment, onDelete, onEdit }) => {
-    const { user } = useContext(PostsContext);
+    const { user, setUser } = useContext(PostsContext);
+
+    useEffect(() => {
+        getUser();
+    }, []);
+
+    // user
+    const getUser = async () => {
+        const { data } = await supabase.auth.getUser();
+        setUser(data);
+    };
 
     // 수정
     const handleEdit = async (e) => {

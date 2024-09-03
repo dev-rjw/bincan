@@ -13,16 +13,13 @@ const styledprofile = styled.img``;
 
 function MyPage() {
     const navigate = useNavigate();
-    const { posts, user, setUser } = useContext(PostsContext);
+    const { user, setUser } = useContext(PostsContext);
     const [searchParams] = useSearchParams();
     const userId = searchParams.get("id");
-    // const userProfileUrl = userData.user.user_metadata.profileUrl;
 
-    const filterdPosts = posts.filter((post) => post.user_id === userId);
     const getUser = async () => {
         const { data } = await supabase.auth.getUser();
         setUser(data);
-        console.log(data);
     };
 
     useEffect(() => {
