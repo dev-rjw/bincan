@@ -34,7 +34,7 @@ const NavHeader = () => {
                         />
                     </StNavCenter>
                     <StNavRight>
-                        {user?.user.email ? (
+                        {user?.user?.email ? (
                             <>
                                 <StNavMenu
                                     onClick={() => {
