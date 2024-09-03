@@ -26,19 +26,55 @@ const CommentInput = ({ comments, setComments }) => {
 
     return (
         <div>
-            <StInput
-                type="text"
-                value={comment}
-                onChange={(e) => {
-                    setComment(e.target.value);
-                }}
-            />
-            <StButton onClick={addComment}>등록</StButton>
+            <StyledCommentInputContainer>
+                <StyledCommentInputWrapper>
+                    <StyledCommentUser>{user?.user?.user_metadata.nickName}</StyledCommentUser>
+                    <StyledInput
+                        type="text"
+                        value={comment}
+                        onChange={(e) => {
+                            setComment(e.target.value);
+                        }}
+                    />
+                    <StyledButton onClick={addComment}>등록</StyledButton>
+                </StyledCommentInputWrapper>
+            </StyledCommentInputContainer>
         </div>
     );
 };
 
 export default CommentInput;
 
-const StInput = styled.input``;
-const StButton = styled.button``;
+const StyledCommentInputContainer = styled.div`
+    width: 1280px;
+    margin-top: 40px;
+    position: relative;
+`;
+
+const StyledCommentInputWrapper = styled.div`
+    width: 100%;
+    height: 100px;
+    margin-right: 20px;
+    border-radius: 8px;
+    border: 2px solid #edb432;
+`;
+
+const StyledInput = styled.input`
+    width: 90%;
+    height: 40px;
+    margin-left: 20px;
+    border: none;
+`;
+const StyledButton = styled.button`
+    width: 80px;
+    height: 40px;
+    margin-left: 20px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+`;
+
+const StyledCommentUser = styled.div`
+    margin: 15px 20px;
+    width: 200px;
+`;

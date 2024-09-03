@@ -114,10 +114,10 @@ const StyledCommentNickname = styled.div`
 
 const StyledCommentComment = styled.div`
     margin-left: 20px;
-    width: 750px;
+    width: 850px;
 `;
 const StyledCommentTime = styled.div`
-    width: 100px;
+    width: 120px;
 `;
 
 const StyledCommentBtnContainer = styled.div`
