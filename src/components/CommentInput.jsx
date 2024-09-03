@@ -31,6 +31,7 @@ const CommentInput = ({ comments, setComments }) => {
                     <StyledCommentUser>{user?.user?.user_metadata.nickName}</StyledCommentUser>
                     <StyledInput
                         type="text"
+                        placeholder="댓글을 입력하세요"
                         value={comment}
                         onChange={(e) => {
                             setComment(e.target.value);
@@ -61,7 +62,7 @@ const StyledCommentInputWrapper = styled.div`
 
 const StyledInput = styled.input`
     width: 90%;
-    height: 40px;
+    height: 30px;
     margin-left: 20px;
     border: none;
 `;
@@ -72,6 +73,10 @@ const StyledButton = styled.button`
     position: absolute;
     bottom: 10px;
     right: 10px;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    background-color: #edb432;
 `;
 
 const StyledCommentUser = styled.div`
