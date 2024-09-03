@@ -34,6 +34,7 @@ const DetailEdit = () => {
 
     useEffect(() => {
         getUser();
+
         const filteredPost = posts?.filter((data) => {
             return data.id === Number(postsId);
         });
@@ -43,15 +44,15 @@ const DetailEdit = () => {
             setTitle(post.title || "");
             setMoney(post.money || "");
             setContext(post.context || "");
-            setImgUrl(post.imgUrl || "");
+            setImgUrl(post.img_url || "");
         }
     }, []);
 
     const editPost = async (e) => {
         e.preventDefault();
 
-        if (!title || !money || !context) {
-            alert("빈칸을 채워~");
+        if (!title || !money || !context || !imgUrl) {
+            alert("빈칸을 채워주세요~");
             return;
         }
 
@@ -59,6 +60,8 @@ const DetailEdit = () => {
         const userId = user.user.id;
         if (!userId) {
             console.error("유저 아이디가 없습니다");
+            navigate("/signup");
+
             return;
         }
 
@@ -73,10 +76,6 @@ const DetailEdit = () => {
             console.log("게시물 업데이트 오류", error);
             return;
         }
-
-        const updatedPost = data;
-
-        setPost(updatedPost);
 
         navigate(`/detail?id=${postsId}`);
     };

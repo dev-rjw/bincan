@@ -55,6 +55,8 @@ function Detail() {
 
     const { created_at, title, nickname, img_url, money, context } = post;
 
+    const formatDate = created_at ? created_at.slice(0, 10) : "";
+
     return (
         <>
             <StDetailContainer>
@@ -85,7 +87,7 @@ function Detail() {
                     </StRightArea>
                     <StLeftArea>
                         <div>{nickname}</div>
-                        <div>{created_at}</div>
+                        <div>{formatDate}</div>
                         <div>{title}</div>
                         <div>{context}</div>
                         <div>{money}</div>

@@ -6,6 +6,7 @@ import { useSearchParams } from "react-router-dom";
 const CommentList = ({ comments, setComments }) => {
     const handleEdit = (updatedComment) => {
         // 수정된 댓글로 상태 업데이트
+
         const updatedComments = comments.map((comment) =>
             comment.id === updatedComment.id ? updatedComment : comment
         );
@@ -19,9 +20,13 @@ const CommentList = ({ comments, setComments }) => {
     };
     return (
         <>
-            {comments.map((comment) => {
-                return <Comment key={comment.id} comment={comment} onEdit={handleEdit} onDelete={handleDelete} />;
-            })}
+            {comments
+                .sort((a, b) => {
+                    return new Date(a.created_at) - new Date(b.created_at);
+                })
+                .map((comment) => (
+                    <Comment key={comment.id} comment={comment} onEdit={handleEdit} onDelete={handleDelete} />
+                ))}
         </>
     );
 };
