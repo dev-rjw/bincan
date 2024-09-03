@@ -8,10 +8,10 @@ export const StyledBtn = styled.button`
 
     margin: 10px;
     margin-top: 20%;
-    width: 67%;
-    height: 50px;
+    width: 125px;
+    height: 35px;
 
-    font-size: 23px;
+    font-size: 15px;
     color: #ffffff;
 
     border: none;
@@ -19,5 +19,10 @@ export const StyledBtn = styled.button`
 
     padding: 10px;
     background-color: #edb432;
-    cursor: pointe;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #dda249;
+        /* color: #3d3d3d; */
+    }
 `;

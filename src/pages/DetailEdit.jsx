@@ -61,6 +61,7 @@ const DetailEdit = () => {
         if (!userId) {
             console.error("유저 아이디가 없습니다");
             navigate("/signup");
+
             return;
         }
 
