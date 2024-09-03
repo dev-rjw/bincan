@@ -18,7 +18,7 @@ const PostInput = () => {
     useEffect(() => {
         checkPost();
         getUser();
-    }, [imgUrl]);
+    }, []);
 
     // user
     const getUser = async () => {
@@ -99,6 +99,7 @@ const PostInput = () => {
         setMoney("");
         setContext("");
         setImgUrl("");
+        checkPost();
     };
 
     return (
