@@ -48,6 +48,13 @@ const DetailEdit = () => {
         }
     }, []);
 
+    const getDocument = async () => {
+        let { data, error } = await supabase.from("posts").select("*");
+        if (error) console.log(error);
+
+        setPosts([...data]);
+    };
+
     const editPost = async (e) => {
         e.preventDefault();
 
@@ -75,9 +82,10 @@ const DetailEdit = () => {
         if (error) {
             console.log("게시물 업데이트 오류", error);
             return;
+        } else {
+            getDocument();
+            navigate(`/detail?id=${postsId}`);
         }
-
-        navigate(`/detail?id=${postsId}`);
     };
 
     return (

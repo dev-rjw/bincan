@@ -42,6 +42,7 @@ function Detail() {
             const { error } = await supabase.from("posts").delete().eq("id", postsId);
             navigate("/");
         } else {
+            getPost();
             return;
         }
     };
