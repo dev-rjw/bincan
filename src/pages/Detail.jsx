@@ -49,7 +49,7 @@ function Detail() {
         if (result) {
             const { error } = await supabase.from("posts").delete().eq("id", postsId);
             navigate("/");
-            window.location.reload();
+            // window.location.reload();
         } else {
             return;
         }

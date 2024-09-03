@@ -40,7 +40,7 @@ const DetailEdit = () => {
         console.log(filteredPost);
     }, []);
 
-    const editDocument = async (e) => {
+    const editPost = async (e) => {
         e.preventDefault();
 
         if (!title || !money || !context) {
@@ -85,7 +85,14 @@ const DetailEdit = () => {
             <TextArea value={context} onChange={(e) => setContext(e.target.value)} />
             <img src={imgUrl} width="30%" />
             <input type="file" accept="image/*" onChange={onchangeImageUpload}></input>
-            <Button onClick={editDocument}>수정하기</Button>
+            <Button onClick={editPost}>수정하기</Button>
+            <Button
+                onClick={() => {
+                    navigate(`/detail?id=${postsId}`);
+                }}
+            >
+                취소
+            </Button>
         </Window>
     );
 };
