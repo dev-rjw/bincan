@@ -2,7 +2,6 @@ import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import { PostsContext } from "../App";
 import { supabase } from "../supabase";
-import { useNavigate, useSearchParams } from "react-router-dom";
 
 const Comment = ({ comment, onDelete, onEdit }) => {
     const { user, setUser } = useContext(PostsContext);
@@ -22,6 +21,21 @@ const Comment = ({ comment, onDelete, onEdit }) => {
         e.preventDefault();
         const newComment = window.prompt("변경하실 내용을 적어주세요", comment.comment);
 
+        const updatedComment = {
+            id: comment.id,
+            comment: newComment,
+            user_id: comment.user_id,
+            created_at: comment.created_at,
+            nickname: comment.nickname
+        };
+
+        const { data, error } = await supabase
+            .from("comments")
+            .update({ comment: updatedComment.comment, nickname: user?.user.user_metadata.nickName })
+            .eq("id", updatedComment.id)
+            .eq("user_id", updatedComment.user_id)
+            .select();
+
         // 취소
         if (newComment === null) {
             alert("댓글 수정이 취소되었습니다.");
@@ -33,22 +47,6 @@ const Comment = ({ comment, onDelete, onEdit }) => {
             alert("댓글 내용을 입력해야 합니다.");
             return;
         }
-
-        // 시작은 기존 댓글의 데이터들
-        const updatedComment = {
-            id: comment.id,
-            comment: newComment,
-            user_id: comment.user_id,
-            created_at: comment.created_at
-        };
-
-        const { data, error } = await supabase
-            .from("comments")
-            .update({ comment: updatedComment.comment, nickname: user?.user.user_metadata.nickName })
-            .eq("id", updatedComment.id) // 댓글의 id로 업데이트
-            .eq("user_id", updatedComment.user_id) // 현재 사용자의 댓글만 업데이트
-            .select();
-
         if (error) {
             console.error("댓글 수정 오류:", error);
             alert("댓글 수정 중 오류가 발생했습니다.");
@@ -57,7 +55,6 @@ const Comment = ({ comment, onDelete, onEdit }) => {
         onEdit(updatedComment);
         // 수정 성공 후 사용자에게 알림
         alert("댓글이 수정되었습니다.");
-        console.log(data);
     };
 
     const handleDelete = async (e) => {

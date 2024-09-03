@@ -12,13 +12,13 @@ const PostInput = () => {
 
     const { posts, setPosts, user, setUser } = useContext(PostsContext);
 
-    const engValidation = /^[A-Za-z0-9.]+$/g; // 영어랑 숫자만 포함하는 정규표현식
+    const engValidation = /^[A-Za-z0-9._-]+$/g; // 영어랑 숫자만 포함하는 정규표현식
     const fileInputRef = useRef(null);
 
     useEffect(() => {
         checkPost();
         getUser();
-    }, [imgUrl]);
+    }, []);
 
     // user
     const getUser = async () => {
