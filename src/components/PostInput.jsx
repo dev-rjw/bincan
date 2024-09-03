@@ -104,17 +104,30 @@ const PostInput = () => {
 
     return (
         <StyledWindow>
-            <StyledInput type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="제목" />
-            <StyledInput type="number" value={money} onChange={(e) => setMoney(e.target.value)} placeholder="금액" />
-            <StyledTextArea value={context} onChange={(e) => setContext(e.target.value)} placeholder="내용" />
-            <img src={imgUrl} width="30%" />
-            <input
-                type="file"
-                accept="image/*"
-                onChange={(e) => handleFileInputChange(e.target.files)}
-                ref={fileInputRef}
-            ></input>
-            <StyledButton onClick={insertDocument}>등록</StyledButton>
+            <LeftDiv>
+                <StyledImg src={imgUrl} width="30%" />
+                <StyledFile
+                    id="styleLabel"
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => handleFileInputChange(e.target.files)}
+                    ref={fileInputRef}
+                ></StyledFile>
+                <StyledLabel htmlFor="styleLabel">파일선택</StyledLabel>
+            </LeftDiv>
+            <RightDiv>
+                <StyledInput type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="제목" />
+                <StyledInput
+                    type="number"
+                    value={money}
+                    onChange={(e) => setMoney(e.target.value)}
+                    placeholder="금액"
+                />
+                <StyledTextArea value={context} onChange={(e) => setContext(e.target.value)} placeholder="내용" />
+                <ButtonDiv>
+                    <StyledButton onClick={insertDocument}>등록</StyledButton>
+                </ButtonDiv>
+            </RightDiv>
         </StyledWindow>
     );
 };
@@ -122,32 +135,80 @@ const PostInput = () => {
 export default PostInput;
 
 const StyledWindow = styled.div`
-    width: 100%;
+    margin-top: 10px;
+    width: 800px;
     background-color: #676767;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     place-items: center;
     text-align: center;
     border-radius: 10px;
 `;
 
-const StyledInput = styled.input`
+const LeftDiv = styled.div`
     width: 40%;
+    display: flex;
+    flex-direction: column;
+`;
+
+const RightDiv = styled.div`
+    width: 60%;
+`;
+
+const StyledInput = styled.input`
+    width: 400px;
     height: 30px;
     background-color: #f1d594;
+    margin-top: 10px;
 `;
 
 const StyledTextArea = styled.textarea`
-    width: 40%;
+    width: 400px;
     height: 60px;
     background-color: #f1d594;
+    margin-top: 10px;
+`;
+
+const ButtonDiv = styled.div`
+    display: flex;
+    flex-direction: row-reverse;
 `;
 
 const StyledButton = styled.button`
-    width: 15%;
+    width: 30%;
     height: 35px;
     background-color: #edb432;
     color: white;
     border-radius: 5px;
+    cursor: pointer;
+    margin: 40px;
+`;
+
+const StyledImg = styled.img`
+    background-color: white;
+    width: 250px;
+    height: 220px;
+    margin: 15% 0 5% 15%;
+`;
+
+const StyledFile = styled.input`
+    visibility: hidden;
+`;
+
+const StyledLabel = styled.label`
+    display: flex;
+    justify-content: space-around;
+
+    padding: 10px;
+    margin: auto;
+    margin-top: -20px;
+    margin-bottom: 20px;
+
+    width: 125px;
+    height: 35px;
+
+    background-color: #edb432;
+    color: white;
+
     cursor: pointer;
 `;
