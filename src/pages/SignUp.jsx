@@ -117,7 +117,7 @@ function SignUp() {
                         type="file"
                         ref={fileInputRef}
                     />
-                    <FileBut htmlFor="styledLabel">🔗 FILE UPLOAD</FileBut>
+                    <FileBut htmlFor="styledLabel">파일선택</FileBut>
                 </ProfileImg>
             </Div>
             <StyledBtn type="submit">확인</StyledBtn>
