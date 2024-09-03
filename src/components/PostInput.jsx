@@ -18,7 +18,7 @@ const PostInput = () => {
     useEffect(() => {
         checkPost();
         getUser();
-    }, []);
+    }, [imgUrl]);
 
     // user
     const getUser = async () => {
