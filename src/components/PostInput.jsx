@@ -105,7 +105,7 @@ const PostInput = () => {
     return (
         <StyledWindow>
             <StyledInput type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="제목" />
-            <StyledInput type="text" value={money} onChange={(e) => setMoney(e.target.value)} placeholder="금액" />
+            <StyledInput type="number" value={money} onChange={(e) => setMoney(e.target.value)} placeholder="금액" />
             <StyledTextArea value={context} onChange={(e) => setContext(e.target.value)} placeholder="내용" />
             <img src={imgUrl} width="30%" />
             <input
