@@ -6,9 +6,9 @@ import MyPage from "./MyPage";
 
 const MyInfo = () => {
     const navigate = useNavigate();
-    const [imgUrl, setImgUrl] = useState();
-    const [nickName, setNickName] = useState();
-    const [intro, setIntro] = useState();
+    const [imgUrl, setImgUrl] = useState("");
+    const [nickName, setNickName] = useState("");
+    const [intro, setIntro] = useState("");
 
     const { user } = useContext(PostsContext);
 

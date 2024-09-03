@@ -10,7 +10,7 @@ function MainPage() {
 
     useEffect(() => {
         getUserData();
-    });
+    }, []);
 
     const getUserData = async () => {
         const { data } = await supabase.auth.getUser();
