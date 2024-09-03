@@ -17,118 +17,111 @@ const NavHeader = () => {
     const getUser = async () => {
         const { data } = await supabase.auth.getUser();
         setUser(data);
-        console.log(data);
     };
 
     return (
-        <StNavContainer>
+        <StyledNavContainer>
             <StyledNavContent>
-                <StNavLeft>
-                    <StEmptyNav>
+                <StyledNavLeft>
+                    <StyledEmptyNav>
                         {user?.user?.email ? (
                             <>
-                                {user?.user.email}님, <br />
+                                {user?.user?.user_metadata.nickName}님, <br />
                                 지갑은 안녕하시렵니까?
                             </>
                         ) : (
-                            "로그인이 필요합니다."
+                            "Bin-Can"
                         )}
-                    </StEmptyNav>
-                </StNavLeft>
-                <StNavCenter>
-                    <StNavLogo
+                    </StyledEmptyNav>
+                </StyledNavLeft>
+                <StyledNavCenter>
+                    <StyledNavLogo
                         src="hi"
                         alt="bincan"
                         onClick={() => {
                             navigate("/");
                         }}
                     />
-                </StNavCenter>
-                <StNavRight>
+                </StyledNavCenter>
+                <StyledNavRight>
                     {user?.user?.email ? (
                         <>
-                            <StNavMenu
+                            <StyledNavMenu
                                 onClick={() => {
                                     navigate(`/mypage?id=${user?.user.id}`);
                                 }}
                             >
                                 마이페이지
-                            </StNavMenu>
+                            </StyledNavMenu>
                             <Logout />
                         </>
                     ) : (
                         <>
-                            <StNavMenu
+                            <StyledNavMenu
                                 onClick={() => {
                                     navigate(`/signup`);
                                 }}
                             >
                                 회원가입
-                            </StNavMenu>
-                            <StNavMenu
+                            </StyledNavMenu>
+                            <StyledNavMenu
                                 onClick={() => {
                                     navigate("/login");
                                 }}
                             >
                                 로그인
-                            </StNavMenu>
+                            </StyledNavMenu>
                         </>
                     )}
-                </StNavRight>
+                </StyledNavRight>
             </StyledNavContent>
-        </StNavContainer>
+        </StyledNavContainer>
     );
 };
 
 export default NavHeader;
 
-const StNavContainer = styled.nav`
-    display: flex;
-    justify-content: center;
-    // 헤더 상단 고정
+const StyledNavContainer = styled.nav`
+    width: 100%;
     position: sticky;
     top: 0px;
-
-    width: 100%;
-    height: 80px;
-
-    background-color: #d9d9d9;
+    display: flex;
+    justify-content: center;
+    background-color: #edb432;
 `;
 
 const StyledNavContent = styled.nav`
+    width: 1280px;
+    height: 100px;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    width: 1280px;
-    height: 80px;
-
-    border: 1px solid red;
-
-    background-color: #d9d9d9;
 `;
 
-const StNavLeft = styled.div``;
+const StyledNavLeft = styled.div``;
 
-const StEmptyNav = styled.div`
+const StyledEmptyNav = styled.div`
     width: 200px;
 `;
 
-const StNavCenter = styled.div`
+const StyledNavCenter = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
     width: 200px;
 `;
 
-const StNavLogo = styled.img``;
+const StyledNavLogo = styled.img`
+    /* width: 100%; */
+`;
 
-const StNavRight = styled.div`
+const StyledNavRight = styled.div`
     display: flex;
     width: 200px;
     justify-content: flex-end;
     align-items: center;
 `;
-const StNavMenu = styled.div`
-    margin-left: 15px;
+const StyledNavMenu = styled.div`
+    margin-right: 20px;
 `;

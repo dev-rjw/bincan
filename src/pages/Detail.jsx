@@ -83,27 +83,32 @@ function Detail() {
 
             <StContentContainer>
                 <StContentArea>
-                    <StRightArea>
-                        <img src={img_url} alt={title} />
-                    </StRightArea>
                     <StLeftArea>
-                        <div>{nickname}</div>
-                        <div>{formatDate}</div>
-                        <div>{title}</div>
-                        <div>{context}</div>
-                        <div>{money}</div>
+                        <StyledImg src={img_url} alt={title} />
                     </StLeftArea>
+                    <StRightArea>
+                        <StyledRightTop>
+                            <StyledNickname>{nickname}</StyledNickname>
+                            <StyledDate>{formatDate}</StyledDate>
+                        </StyledRightTop>
+                        <StyledTitle>{title}</StyledTitle>
+                        <StyledContext>{context}</StyledContext>
+                        <hr style={{ border: "0.5px solid #666" }} />
+                        <StyledMoney>{money}원</StyledMoney>
+                    </StRightArea>
                 </StContentArea>
             </StContentContainer>
             <StVoteBtnContainer>
                 <StVoteBtnWrapper>
-                    <StGoodBtn>인정</StGoodBtn>
-                    <StBadBtn>장난?</StBadBtn>
+                    <StGoodBtn>😋</StGoodBtn>
+                    <StBadBtn>🤬</StBadBtn>
                 </StVoteBtnWrapper>
             </StVoteBtnContainer>
 
-            <CommentList comments={comments} setComments={setComments} />
-            <CommentInput comments={comments} setComments={setComments} />
+            <StyledCommentContainer>
+                <CommentList comments={comments} setComments={setComments} />
+                <CommentInput comments={comments} setComments={setComments} />
+            </StyledCommentContainer>
         </>
     );
 }
@@ -117,12 +122,12 @@ const StDetailContainer = styled.div`
 const StBtnContainer = styled.div`
     width: 1280px;
     height: 20px;
-    /* background-color: purple; */
     margin-top: 80px;
 `;
 const StBtnWrapper = styled.div`
     display: flex;
     justify-content: flex-end;
+    margin-bottom: 20px;
 `;
 const StEditBtn = styled.div``;
 const StDeleteBtn = styled.div`
@@ -136,17 +141,60 @@ const StContentContainer = styled.div`
 const StContentArea = styled.div`
     width: 1280px;
     height: 400px;
-    /* background-color: blue; */
     display: flex;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 1px 3px 8px rgba(0, 0, 0, 0.2);
+`;
+
+const StLeftArea = styled.div`
+    /* background-color: green; */
+    width: 620px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+`;
+
+const StyledImg = styled.img`
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 `;
 
 const StRightArea = styled.div`
-    flex: 1;
-    background-color: blue;
+    width: 50%;
+    margin: 40px;
+    position: relative;
 `;
-const StLeftArea = styled.div`
-    background-color: green;
-    flex: 1;
+
+const StyledRightTop = styled.div`
+    display: flex;
+    top: 0px;
+    margin-bottom: 50px;
+`;
+
+const StyledNickname = styled.div`
+    margin-right: 20px;
+    font-weight: 600;
+`;
+const StyledDate = styled.div``;
+const StyledTitle = styled.div`
+    font-size: 40px;
+    margin-bottom: 20px;
+    font-weight: 600;
+`;
+const StyledContext = styled.div`
+    font-size: 20px;
+    margin-bottom: 20px;
+    height: 100px;
+`;
+const StyledMoney = styled.div`
+    font-size: 40px;
+    font-weight: 600;
+    position: absolute;
+    bottom: 0;
+    left: 0;
 `;
 
 const StVoteBtnContainer = styled.div`
@@ -156,15 +204,48 @@ const StVoteBtnContainer = styled.div`
 const StVoteBtnWrapper = styled.div`
     display: flex;
     gap: 50px;
-    margin: 30px 0 60px 0;
+    margin: 50px 0 60px 0;
 `;
+
 const StGoodBtn = styled.button`
     width: 300px;
     height: 80px;
-    background-color: red;
+    border: none;
+    border-radius: 12px;
+    background-color: #edb432;
+    font-size: 40px;
+    cursor: pointer;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+
+    &:hover {
+        background-color: #dca732;
+        transform: scale(1.02);
+    }
 `;
+
 const StBadBtn = styled.button`
     width: 300px;
     height: 80px;
-    background-color: red;
+    border: none;
+    border-radius: 12px;
+    background-color: #edb432;
+    font-size: 40px;
+    cursor: pointer;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+
+    &:hover {
+        background-color: #dca732;
+        transform: scale(1.02);
+    }
+`;
+
+const StyledCommentContainer = styled.div`
+    width: 1280px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* align-items: center; */
 `;

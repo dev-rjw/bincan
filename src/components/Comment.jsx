@@ -72,10 +72,10 @@ const Comment = ({ comment, onDelete, onEdit }) => {
 
     return (
         <>
-            <StCommentWrapper>
-                <StCommentContext>{comment.nickname} </StCommentContext>
-                <StCommentContext>{comment.comment} </StCommentContext>
-                <StCommentTime>{comment.created_at.slice(0, 10)}</StCommentTime>
+            <StyledCommentWrapper>
+                <StyledCommentNickname>{comment.nickname} </StyledCommentNickname>
+                <StyledCommentComment>{comment.comment} </StyledCommentComment>
+                <StyledCommentTime>{comment.created_at.slice(0, 10)}</StyledCommentTime>
                 {user?.user?.id === comment.user_id ? (
                     <>
                         <StyledCommentBtnContainer>
@@ -88,32 +88,52 @@ const Comment = ({ comment, onDelete, onEdit }) => {
                 ) : (
                     <></>
                 )}
-            </StCommentWrapper>
+            </StyledCommentWrapper>
         </>
     );
 };
 
 export default Comment;
 
-const commentContainer = styled.div``;
+const StyledcommentContainer = styled.div``;
 
-const StCommentWrapper = styled.div`
+const StyledCommentWrapper = styled.div`
     width: 100%x;
-    height: 30px;
+    height: 40px;
+    border-radius: 8px;
     margin-top: 10px;
-    background-color: red;
+    background-color: #f6e6c2;
     display: flex;
+    align-items: center;
 `;
 
-const StCommentContext = styled.div``;
-const StCommentTime = styled.div``;
+const StyledCommentNickname = styled.div`
+    margin-left: 50px;
+    width: 120px;
+`;
+
+const StyledCommentComment = styled.div`
+    margin-left: 20px;
+    width: 750px;
+`;
+const StyledCommentTime = styled.div`
+    width: 100px;
+`;
 
 const StyledCommentBtnContainer = styled.div`
     justify-content: flex-end;
 `;
 const StyledCommentBtnWrapper = styled.div`
     display: flex;
-    gap: 10px; /* 버튼들 사이에 간격 추가 */
+    gap: 5px;
 `;
-const StyledCommentEditBtn = styled.button``;
-const StyledCommnetDeleteBtn = styled.button``;
+const StyledCommentEditBtn = styled.button`
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+`;
+const StyledCommnetDeleteBtn = styled.button`
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+`;
