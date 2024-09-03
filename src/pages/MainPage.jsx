@@ -19,12 +19,7 @@ function MainPage() {
 
     return (
         <>
-<<<<<<< HEAD
-            <LogOut />
             {user.user !== null ? <PostInput /> : ""}
-=======
-            {userData.user !== null ? <PostInput /> : ""}
->>>>>>> cce299eb15cd90c8bfbbfc7e747f7977c385aff5
             <PostList />
         </>
     );
