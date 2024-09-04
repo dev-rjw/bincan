@@ -135,7 +135,7 @@ const StyledContent = styled.div`
     margin-bottom: 20px;
 `;
 
-const StyledContentIntroduction = styled.textarea`
+const StyledContentIntroduction = styled.div`
     width: 90%;
     height: 120px;
     background-color: #f1d594;
