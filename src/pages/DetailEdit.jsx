@@ -115,8 +115,7 @@ const DetailEdit = () => {
                         placeholder="금액"
                     />
                     <StyledTextArea value={context} onChange={(e) => setContext(e.target.value)} placeholder="내용" />
-                    <ButtonDiv>
-                        <StyledButton onClick={editPost}>수정하기</StyledButton>
+                    <StyledButtonDiv>
                         <StyledButton
                             onClick={() => {
                                 navigate(`/detail?id=${postsId}`);
@@ -124,7 +123,8 @@ const DetailEdit = () => {
                         >
                             취소
                         </StyledButton>
-                    </ButtonDiv>
+                        <StyledButton onClick={editPost}>수정완료</StyledButton>
+                    </StyledButtonDiv>
                 </RightDiv>
             </StyledWindow>
         </MainDiv>
@@ -134,6 +134,7 @@ const DetailEdit = () => {
 export default DetailEdit;
 
 const MainDiv = styled.div`
+    margin-top: 70px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -141,60 +142,84 @@ const MainDiv = styled.div`
 `;
 
 const StyledWindow = styled.div`
-    margin-top: 20px;
     width: 800px;
-    background-color: #676767;
+    height: 350px;
+    background-color: #edb432;
     display: flex;
-    flex-direction: row;
-    place-items: center;
     text-align: center;
-    border-radius: 10px;
+    border-radius: 8px;
 `;
 
 const LeftDiv = styled.div`
-    width: 40%;
+    flex: 4;
     display: flex;
     flex-direction: column;
 `;
 
 const RightDiv = styled.div`
-    width: 60%;
+    flex: 6;
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    gap: 10px;
 `;
 
 const StyledInput = styled.input`
-    width: 400px;
-    height: 30px;
+    width: 90%;
+    height: 45px;
     background-color: #f1d594;
-    margin-top: 10px;
+    border-radius: 8px;
+    border: none;
+    padding: 15px;
+
+    &:focus {
+        background-color: #ffffff;
+        outline: none;
+    }
 `;
 
 const StyledTextArea = styled.textarea`
-    width: 400px;
-    height: 60px;
+    width: 90%;
+    height: 120px;
     background-color: #f1d594;
-    margin-top: 10px;
+    border-radius: 8px;
+    border: none;
+    resize: none;
+    padding: 15px;
+    &:focus {
+        background-color: #ffffff;
+        outline: none;
+    }
 `;
 
-const ButtonDiv = styled.div`
+const StyledButtonDiv = styled.div`
     display: flex;
-    flex-direction: row-reverse;
+    justify-content: space-between;
 `;
 
 const StyledButton = styled.button`
-    width: 30%;
+    width: 150px;
     height: 35px;
     background-color: #edb432;
     color: white;
-    border-radius: 5px;
+    border: 1px solid white;
+    margin-right: 48px;
+    margin-top: 10px;
+    border-radius: 8px;
     cursor: pointer;
-    margin: 40px;
+
+    &:hover {
+        background-color: white;
+        color: #edb432;
+    }
 `;
 
 const StyledImg = styled.img`
     background-color: white;
-    width: 250px;
-    height: 220px;
-    margin: 15% 0 5% 15%;
+    width: 300px;
+    height: 230px;
+    margin: 30px 30px 20px 30px;
+    border-radius: 8px;
 `;
 
 const StyledFile = styled.input`
@@ -212,9 +237,10 @@ const StyledLabel = styled.label`
 
     width: 125px;
     height: 35px;
-
+    border-radius: 8px;
+    /* border: 1px solid white; */
     background-color: #edb432;
     color: white;
-
+    text-decoration: underline;
     cursor: pointer;
 `;

@@ -88,11 +88,12 @@ const StyledNavContainer = styled.nav`
     display: flex;
     justify-content: center;
     background-color: #efefef;
+    z-index: 100;
 `;
 
 const StyledNavContent = styled.nav`
     width: 1280px;
-    height: 100px;
+    height: 120px;
 
     display: flex;
     justify-content: space-between;

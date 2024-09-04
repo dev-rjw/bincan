@@ -133,8 +133,10 @@ function Detail() {
                         </StyledRightTop>
                         <StyledTitle>{title}</StyledTitle>
                         <StyledContext>{context}</StyledContext>
-                        <hr style={{ border: "0.5px solid #666" }} />
-                        <StyledMoney>{Number(money)?.toLocaleString()}원</StyledMoney>
+                        <StyledMoney>
+                            <StyledHr style={{ border: "0.5px solid #666" }} />
+                            {Number(money)?.toLocaleString()}원
+                        </StyledMoney>
                     </StRightArea>
                 </StContentArea>
             </StContentContainer>
@@ -186,6 +188,7 @@ const StContentArea = styled.div`
     display: flex;
     border-radius: 8px;
     overflow: hidden;
+    background-color: white;
     box-shadow: 1px 3px 8px rgba(0, 0, 0, 0.2);
 `;
 
@@ -230,6 +233,7 @@ const StyledContext = styled.div`
     font-size: 20px;
     margin-bottom: 20px;
     height: 100px;
+    overflow: hidden;
 `;
 const StyledMoney = styled.div`
     font-size: 40px;
@@ -293,4 +297,8 @@ const StyledCommentContainer = styled.div`
 
 const StyledCommentWrapper = styled.div`
     width: 1280px;
+`;
+
+const StyledHr = styled.hr`
+    width: 608px;
 `;

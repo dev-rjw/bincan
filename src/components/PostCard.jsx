@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { PostsContext } from "../App";
 
 const PostCard = ({ post }) => {
+    const { user } = useContext(PostsContext);
     const navigate = useNavigate();
+    const formatDate = post.created_at ? post.created_at.slice(0, 10) : "";
     return (
         <>
             <StyledCard
@@ -11,9 +14,21 @@ const PostCard = ({ post }) => {
                     navigate(`/detail?id=${post.id}`);
                 }}
             >
-                <StyledImg src={post.img_url} width="100%"></StyledImg>
-                <StyledP>{post.title}</StyledP>
-                <StyledP>{post.context.length > 20 ? post.context.substr(0, 20) + " ..." : post.context}</StyledP>
+                <StyledImgContainer>
+                    <StyledImg src={post.img_url} width="100%" />
+                </StyledImgContainer>
+
+                <StyledCardTop>
+                    <StyledNickname>{user?.user?.user_metadata.nickName}</StyledNickname>
+                    <StyledDate>{formatDate}</StyledDate>
+                </StyledCardTop>
+
+                <StyledTitle>{post.title.substr(0, 28) + " ..."}</StyledTitle>
+
+                <StyledMoney>
+                    {/* {post.context.length > 20 ? post.context.substr(0, 20) + " ..." : post.context} */}${" "}
+                    <strong>{Number(post.money)?.toLocaleString()}</strong>
+                </StyledMoney>
             </StyledCard>
         </>
     );
@@ -22,9 +37,11 @@ const PostCard = ({ post }) => {
 export default PostCard;
 
 const StyledCard = styled.div`
+    position: relative;
+
     background-color: #f6e6c2;
-    width: 200px;
-    height: 300px;
+    width: 250px;
+    height: 400px;
     margin-top: 30px;
     cursor: pointer;
     border-radius: 10px;
@@ -36,12 +53,41 @@ const StyledCard = styled.div`
     }
 `;
 
+const StyledImgContainer = styled.div`
+    width: 100%;
+    height: 240px;
+    overflow: hidden;
+`;
+
 const StyledImg = styled.img`
-    height: 60%;
+    width: 100%;
     border-radius: 10px 10px 0 0;
     background-color: white;
 `;
 
-const StyledP = styled.p`
+const StyledCardTop = styled.div`
+    display: flex;
+    color: #777;
+`;
+const StyledNickname = styled.p`
+    margin-left: 15px;
+`;
+const StyledDate = styled.p`
+    margin-left: auto;
+    margin-right: 15px;
+`;
+
+const StyledTitle = styled.p`
+    font-size: 20px;
     margin: 10px;
+`;
+
+const StyledContent = styled.p`
+    font-size: 16px;
+    margin: 10px;
+`;
+
+const StyledMoney = styled.p`
+    margin-left: 15px;
+    font-size: 20px;
 `;

@@ -70,6 +70,7 @@ const Form = styled.form`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 50px;
 `;
 
 const InputLogin = styled.div`
