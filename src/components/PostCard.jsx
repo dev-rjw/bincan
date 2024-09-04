@@ -19,7 +19,7 @@ const PostCard = ({ post }) => {
                 </StyledImgContainer>
 
                 <StyledCardTop>
-                    <StyledNickname>{user?.user?.user_metadata.nickName}</StyledNickname>
+                    <StyledNickname>{post.nickname}</StyledNickname>
                     <StyledDate>{formatDate}</StyledDate>
                 </StyledCardTop>
 

@@ -46,7 +46,7 @@ const StyledFooter = styled.div`
     box-sizing: border-box;
     font-size: 14px;
     font-weight: 400;
-    position: fixed;
+    /* position: fixed; */
     bottom: 0;
     margin-top: 80px;
 `;
