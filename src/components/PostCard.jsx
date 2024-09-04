@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { PostsContext } from "../App";
 
 const PostCard = ({ post }) => {
-    const { user } = useContext(PostsContext);
     const navigate = useNavigate();
     const formatDate = post.created_at ? post.created_at.slice(0, 10) : "";
     return (
@@ -26,8 +25,7 @@ const PostCard = ({ post }) => {
                 <StyledTitle>{post.title.substr(0, 28) + " ..."}</StyledTitle>
 
                 <StyledMoney>
-                    {/* {post.context.length > 20 ? post.context.substr(0, 20) + " ..." : post.context} */}${" "}
-                    <strong>{Number(post.money)?.toLocaleString()}</strong>
+                    <strong>\{Number(post.money)?.toLocaleString()}</strong>
                 </StyledMoney>
             </StyledCard>
         </>
@@ -40,7 +38,7 @@ const StyledCard = styled.div`
     position: relative;
 
     background-color: #f6e6c2;
-    width: 250px;
+    width: 230px;
     height: 400px;
     margin-top: 30px;
     cursor: pointer;
@@ -69,20 +67,17 @@ const StyledCardTop = styled.div`
     display: flex;
     color: #777;
 `;
+
 const StyledNickname = styled.p`
     margin-left: 15px;
 `;
+
 const StyledDate = styled.p`
     margin-left: auto;
     margin-right: 15px;
 `;
 
 const StyledTitle = styled.p`
-    font-size: 20px;
-    margin: 10px;
-`;
-
-const StyledContent = styled.p`
     font-size: 16px;
     margin: 10px;
 `;
