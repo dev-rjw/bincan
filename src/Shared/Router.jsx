@@ -50,11 +50,11 @@ const Router = () => {
                 <Route element={<AuthRoute />}>
                     <Route path="/login" element={<Login />}></Route>
                     <Route path="/signup" element={<SignUp />}></Route>
+                    <Route path="/detail" element={<Detail />}></Route>
                 </Route>
                 <Route element={<PrivateRoute />}>
                     <Route path="/mypage" element={<MyPage />}></Route>
                     <Route path="/myinfo" element={<MyInfo />}></Route>
-                    <Route path="/detail" element={<Detail />}></Route>
                     <Route path="/detail-edit" element={<DetailEdit />}></Route>
                 </Route>
             </Routes>

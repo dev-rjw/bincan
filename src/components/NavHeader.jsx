@@ -36,7 +36,7 @@ const NavHeader = () => {
                 </StyledNavLeft>
                 <StyledNavCenter>
                     <StyledNavLogo
-                        src="src/assets/bincanlogo.svg"
+                        src="https://ltmlsvowetkigjbwwqwy.supabase.co/storage/v1/object/public/UserProfile/Group%2068.png"
                         alt="bincan"
                         onClick={() => {
                             navigate("/");
