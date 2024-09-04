@@ -65,80 +65,171 @@ const MyInfo = () => {
     }
 
     return (
-        <StyledMyInfoWrap>
-            <StyledInfo>
-                <div>
-                    <h1>개인정보 수정</h1>
-                    <h2>프로필 사진</h2>
+        <StyledMypageContainer>
+            <StyledMyPage>
+                <StyledContentTitle>{user?.user?.user_metadata.nickName}님의 개인정보 수정 페이지</StyledContentTitle>
+            </StyledMyPage>
 
-                    <img src={imgUrl} alt="빈캔" width="373px" />
+            <StyledDiv>
+                <StyledLeftArea>
+                    <StyledLeftContainer>
+                        <StyledTitle>프로필 사진</StyledTitle>
+                        <StyledImg src={imgUrl} alt="빈캔" width="373px" />
 
-                    <StyledimgInput
-                        id="styleLabel"
-                        type="file"
-                        accept="image/*"
-                        onChange={(e) => handleFileInputChange(e.target.files)}
-                        ref={fileInputRef}
-                    />
-                    <Styledlabel htmlFor="styleLabel">파일선택</Styledlabel>
-                </div>
-                <StyledInputWrap>
-                    <h2>이메일</h2>
-                    {user && <Input type="text" value={user?.user?.email} disabled />}
+                        <StyledImgInput
+                            id="styleLabel"
+                            type="file"
+                            accept="image/*"
+                            onChange={(e) => handleFileInputChange(e.target.files)}
+                            ref={fileInputRef}
+                        />
+                        <StyledLabel htmlFor="styleLabel">파일선택</StyledLabel>
+                    </StyledLeftContainer>
+                </StyledLeftArea>
 
-                    <h2>닉네임</h2>
-                    <Input
-                        type="text"
-                        value={nickName}
-                        onChange={(e) => {
-                            setNickName(e.target.value);
-                        }}
-                    />
-                    <h2>자기소개</h2>
-                    <Input
-                        type="text"
-                        value={intro}
-                        onChange={(e) => {
-                            setIntro(e.target.value);
-                        }}
-                    />
+                <StyledRightArea>
                     <div>
-                        <StyledBtn onClick={updateUserData}>수정하기</StyledBtn>
-                        <StyledBtn
-                            onClick={() => {
-                                navigate(`/mypage?id=${user.user.id}`);
-                            }}
-                        >
-                            취소
-                        </StyledBtn>
+                        <StyledInputWrap>
+                            <StyledTitle>이메일</StyledTitle>
+                            {user && <StyledContentInput type="text" value={user?.user?.email} disabled />}
+
+                            <StyledTitle>닉네임</StyledTitle>
+                            <StyledContentInput
+                                type="text"
+                                value={nickName}
+                                onChange={(e) => {
+                                    setNickName(e.target.value);
+                                }}
+                            />
+
+                            <StyledTitle>자기소개</StyledTitle>
+                            <StyledContentIntroduction
+                                type="text"
+                                value={intro}
+                                onChange={(e) => {
+                                    setIntro(e.target.value);
+                                }}
+                            />
+                            <StyledBtnContainer>
+                                <StyledBtn onClick={updateUserData}>수정하기</StyledBtn>
+                                <StyledBtn
+                                    onClick={() => {
+                                        navigate(`/mypage?id=${user.user.id}`);
+                                    }}
+                                >
+                                    취소
+                                </StyledBtn>
+                            </StyledBtnContainer>
+                        </StyledInputWrap>
                     </div>
-                </StyledInputWrap>
-            </StyledInfo>
-        </StyledMyInfoWrap>
+                </StyledRightArea>
+            </StyledDiv>
+        </StyledMypageContainer>
     );
 };
 
 export default MyInfo;
 
-const StyledInputWrap = styled.div`
-    margin-top: 55px;
+const StyledMypageContainer = styled.div`
+    width: 100%;
 `;
-const StyledMyInfoWrap = styled.div`
-    background-color: #d9d9d9;
-    margin-top: 50px;
-    padding-bottom: 50px;
+const StyledMyPage = styled.div`
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`;
+const StyledDiv = styled.div`
+    width: 1280px;
+    height: 500px;
+    display: flex;
+    /* flex-direction: row; */
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    margin-top: 30px;
+    padding: 10px;
+    background-color: #edb432;
+    border-radius: 12px;
 `;
 
-const StyledInfo = styled.div`
+const StyledLeftArea = styled.div`
+    flex: 5;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+`;
+
+const StyledLeftContainer = styled.div`
+    margin-left: 100px;
     justify-content: center;
 `;
 
-const StyledimgInput = styled.input`
-    position: absolute;
-    visibility: hidden;
+const StyledImg = styled.img`
+    width: 350px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: solid 2px #f1d594;
+    justify-content: center;
+    align-items: center;
+`;
 
+const StyledLabel = styled.label`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 35px;
+    border-radius: 8px;
+    /* border: 1px solid white; */
+    background-color: #edb432;
+    color: white;
+    text-decoration: underline;
+    cursor: pointer;
+    margin-left: 100px;
+`;
+
+const StyledRightArea = styled.div`
+    flex: 7;
+    position: relative;
+    z-index: 0;
+`;
+const StyledTitle = styled.div`
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 6px;
+`;
+const StyledContentIntroduction = styled.textarea`
+    width: 90%;
+    height: 120px;
+    background-color: #f1d594;
+    border-radius: 8px;
+    border: none;
+    resize: none;
+    padding: 15px;
+`;
+
+const StyledContentTitle = styled.div`
+    font-size: 20px;
+    font-weight: 600;
+    margin: 70px 0 10px 0;
+`;
+
+const StyledContentInput = styled.input`
+    width: 90%;
+    height: 45px;
+    background-color: #f1d594;
+    border-radius: 8px;
+    border: none;
+    padding: 15px;
+    margin-bottom: 20px;
+`;
+
+const StyledInputWrap = styled.div``;
+
+const StyledImgInput = styled.input`
+    visibility: hidden;
     cursor: pointer;
 
     &:focus {
@@ -146,46 +237,28 @@ const StyledimgInput = styled.input`
     }
 `;
 
-const Styledlabel = styled.label`
-    display: flex;
-    justify-content: space-around;
-    padding: 10px;
-
-    margin: auto;
-    margin-top: 30px;
-    width: 125px;
-    height: 35px;
-
-    background-color: #edb432;
-    color: white;
-
-    cursor: pointer;
-    border-radius: 3px;
-
-    &:hover {
-        background-color: #f6e6c2;
-        color: #edb432;
-    }
+const StyledBtnContainer = styled.div`
+    position: absolute;
+    gap: 10px;
+    right: 0;
+    margin-right: 74px;
 `;
 
-export const StyledBtn = styled.button`
-    margin: 10px;
-    margin-top: 30px;
-    width: 125px;
+const StyledBtn = styled.button`
+    width: 150px;
     height: 35px;
-
-    font-size: 15px;
-    color: #ffffff;
-
-    border: none;
-    border-radius: 3px;
-
-    padding: 10px;
     background-color: #edb432;
-    cursor: pointe;
+    color: white;
+    border: 1px solid white;
+    margin-top: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    /* position: absolute; */
+    margin-left: 20px;
+    right: 0;
 
     &:hover {
-        background-color: #f6e6c2;
+        background-color: white;
         color: #edb432;
     }
 `;
