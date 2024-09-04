@@ -36,6 +36,7 @@ function Detail() {
         getThumbUp();
         getThumbDown();
         checkSignIn();
+        window.scrollTo(0, 0);
     }, []);
 
     const getPost = async () => {
