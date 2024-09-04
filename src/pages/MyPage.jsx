@@ -43,11 +43,11 @@ function MyPage() {
 
                     <StyledRightArea>
                         <div>
-                            <StyledTitle>닉네임</StyledTitle>
-                            <StyledContent>{user?.user?.user_metadata.nickName}</StyledContent>
-
                             <StyledTitle>이메일</StyledTitle>
                             <StyledContent>{user?.user?.email}</StyledContent>
+
+                            <StyledTitle>닉네임</StyledTitle>
+                            <StyledContent>{user?.user?.user_metadata.nickName}</StyledContent>
 
                             <StyledTitle>자기소개</StyledTitle>
                             <StyledContentIntroduction>

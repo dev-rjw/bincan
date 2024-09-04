@@ -18,12 +18,24 @@ function Detail() {
 
     const { user, setUser } = useContext(PostsContext);
 
+    //isSign에 로그인 상태를 받아옴
+    const [signIn, setSignIn] = useState(true);
+
+    //로그인 유효성 검사
+    async function checkSignIn() {
+        const session = await supabase.auth.getSession();
+        const isSignIn = !!session.data.session;
+
+        setSignIn(isSignIn);
+    }
+
     useEffect(() => {
         getPost();
         getUser();
         getComment();
         getThumbUp();
         getThumbDown();
+        checkSignIn();
     }, []);
 
     const getPost = async () => {
@@ -68,6 +80,10 @@ function Detail() {
     };
 
     const updateThumbUp = async () => {
+        if (!signIn) {
+            alert("로그인 후 사용해주세요.");
+            return;
+        }
         setThumbUp(thumbUp + 1);
         const { data, error } = await supabase
             .from("posts")
@@ -82,6 +98,10 @@ function Detail() {
     };
 
     const updateThumbDown = async () => {
+        if (!signIn) {
+            alert("로그인 후 사용해주세요.");
+            return;
+        }
         setThumbDown(thumbDown + 1);
         const { data, error } = await supabase
             .from("posts")
