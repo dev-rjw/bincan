@@ -22,7 +22,7 @@ const PostCard = ({ post }) => {
                     <StyledDate>{formatDate}</StyledDate>
                 </StyledCardTop>
 
-                <StyledTitle>{post.title.substr(0, 28) + " ..."}</StyledTitle>
+                <StyledTitle>{post.title.length > 28 ? post.title.substr(0, 28) + " ..." : post.title}</StyledTitle>
 
                 <StyledMoney>
                     <strong>₩{Number(post.money)?.toLocaleString()}</strong>
