@@ -38,12 +38,12 @@ function Detail() {
     };
 
     const getThumbUp = async () => {
-        const { data, error } = await supabase.from("posts").select("thumb_up");
+        const { data, error } = await supabase.from("posts").select("thumb_up").eq("id", postsId);
         setThumbUp(data[0].thumb_up);
     };
 
     const getThumbDown = async () => {
-        const { data, error } = await supabase.from("posts").select("thumb_down");
+        const { data, error } = await supabase.from("posts").select("thumb_down").eq("id", postsId);
         setThumbDown(data[0].thumb_down);
     };
 

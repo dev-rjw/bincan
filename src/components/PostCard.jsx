@@ -25,7 +25,7 @@ const PostCard = ({ post }) => {
                 <StyledTitle>{post.title.substr(0, 28) + " ..."}</StyledTitle>
 
                 <StyledMoney>
-                    <strong>\{Number(post.money)?.toLocaleString()}</strong>
+                    <strong>₩{Number(post.money)?.toLocaleString()}</strong>
                 </StyledMoney>
             </StyledCard>
         </>
@@ -59,6 +59,8 @@ const StyledImgContainer = styled.div`
 
 const StyledImg = styled.img`
     width: 100%;
+    height: 100%;
+    object-fit: cover;
     border-radius: 10px 10px 0 0;
     background-color: white;
 `;
@@ -85,4 +87,6 @@ const StyledTitle = styled.p`
 const StyledMoney = styled.p`
     margin-left: 15px;
     font-size: 20px;
+    position: absolute;
+    bottom: 0;
 `;
