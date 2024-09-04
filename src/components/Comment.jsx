@@ -99,7 +99,7 @@ const StyledcommentContainer = styled.div``;
 
 const StyledCommentWrapper = styled.div`
     width: 100%x;
-    height: 40px;
+    height: 50px;
     border-radius: 8px;
     margin-top: 10px;
     background-color: #f6e6c2;

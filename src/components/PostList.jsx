@@ -30,5 +30,7 @@ const StyledCardDiv = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     width: 1280px;
+    height: 100%;
     justify-items: center;
+    margin-top: 50px;
 `;

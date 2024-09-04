@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const Div = styled.div`
+    width: 1280px;
+
     display: flex;
     flex-direction: row;
     justify-content: center;

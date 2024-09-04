@@ -32,96 +32,146 @@ function MyPage() {
 
     return (
         <>
-            <Div2>
-                <Div>
-                    <div>
-                        <Img src={user?.user?.user_metadata.profileUrl} alt="" />
-                    </div>
-                    <div>
+            <StyledMypageContainer>
+                <StyledMyPage>
+                    <StyledContentTitle>{user?.user?.user_metadata.nickName}님의 마이페이지</StyledContentTitle>
+                </StyledMyPage>
+                <StyledDiv>
+                    <StyledLeftArea>
+                        <StyledImg src={user?.user?.user_metadata.profileUrl} alt="" />
+                    </StyledLeftArea>
+
+                    <StyledRightArea>
                         <div>
-                            <H2>닉네임</H2>
-                            <p>{user?.user?.user_metadata.nickName}</p>
+                            <StyledTitle>닉네임</StyledTitle>
+                            <StyledContent>{user?.user?.user_metadata.nickName}</StyledContent>
 
-                            <H2>이메일</H2>
-                            <p>{user?.user?.email}</p>
+                            <StyledTitle>이메일</StyledTitle>
+                            <StyledContent>{user?.user?.email}</StyledContent>
 
-                            <H2>자기소개</H2>
-                            <p>
+                            <StyledTitle>자기소개</StyledTitle>
+                            <StyledContentIntroduction>
                                 {user?.user?.user_metadata.intro
                                     ? user?.user?.user_metadata.intro
                                     : "자기소개를 등록해주세요"}
-                            </p>
+                            </StyledContentIntroduction>
                         </div>
                         <StyledBtn onClick={() => navigate("/MyInfo")}>개인정보수정</StyledBtn>
-                    </div>
-                </Div>
-                <div>
-                    <P>{user?.user?.user_metadata.nickName}님의 게시물</P>
-                    <MainDiv>
+                    </StyledRightArea>
+                </StyledDiv>
+
+                <StyledMyContentContainer>
+                    <StyledContentTitle>{user?.user?.user_metadata.nickName}님의 게시물</StyledContentTitle>
+                    <StyledMyContentContainer>
                         <PostList id={userId} />
-                    </MainDiv>
-                </div>
-            </Div2>
+                    </StyledMyContentContainer>
+                </StyledMyContentContainer>
+            </StyledMypageContainer>
         </>
     );
 }
 
 export default MyPage;
 
-const MainDiv = styled.div`
+const StyledMypageContainer = styled.div`
+    width: 100%;
+`;
+
+const StyledMyPage = styled.div`
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 `;
 
-const P = styled.p`
-    margin-top: 80px;
-    margin-left: 30px;
+const StyledDiv = styled.div`
+    width: 1280px;
+    height: 500px;
+    display: flex;
+    /* flex-direction: row; */
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    margin-top: 30px;
+    padding: 10px;
+    background-color: #edb432;
+    border-radius: 12px;
 `;
 
-const H2 = styled.h2`
+const StyledLeftArea = styled.div`
+    flex: 5;
+    display: flex;
+`;
+
+const StyledImg = styled.img`
+    width: 400px;
+    height: 300px;
+    object-fit: cover;
+    margin: 0 100px;
+    border-radius: 8px;
+    border: solid 2px #f1d594;
+`;
+
+const StyledRightArea = styled.div`
+    flex: 7;
+    position: relative;
+    z-index: 0;
+`;
+
+const StyledTitle = styled.div`
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 6px;
+`;
+
+const StyledContent = styled.div`
+    width: 90%;
+    height: 45px;
+    background-color: #f1d594;
+    border-radius: 8px;
+    border: none;
+    padding: 15px;
+    margin-bottom: 20px;
+`;
+
+const StyledContentIntroduction = styled.textarea`
+    width: 90%;
+    height: 120px;
+    background-color: #f1d594;
+    border-radius: 8px;
+    border: none;
+    resize: none;
+    padding: 15px;
+`;
+
+const StyledBtn = styled.button`
+    width: 150px;
+    height: 35px;
+    background-color: #edb432;
+    color: white;
+    border: 1px solid white;
+    margin-top: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    position: absolute;
+    margin-right: 65px;
+    right: 0;
+
+    &:hover {
+        background-color: white;
+        color: #edb432;
+    }
+`;
+
+const StyledContentTitle = styled.div`
+    margin-top: 70px;
     font-size: 20px;
 `;
 
-const Div2 = styled.div`
-    /* display: flex;
-    flex-direction: column;
-    justify-content: center; */
-`;
-
-export const Img = styled.img`
-    width: 300px;
-    height: 300px;
-    object-fit: cover;
-    margin-right: 180px;
-    border: solid 3px #edb432;
-`;
-
-export const StyledBtn = styled.button`
+const StyledMyContentContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: relative;
-    left: 400px;
-
-    margin-top: 50px;
-    width: 125px;
-    height: 35px;
-
-    font-size: 15px;
-    color: #ffffff;
-
-    border: none;
-    border-radius: 3px;
-
-    padding: 10px;
-    background-color: #edb432;
-    cursor: pointe;
-
-    &:hover {
-        background-color: #f6e6c2;
-        color: #edb432;
-    }
 `;

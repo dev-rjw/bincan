@@ -9,6 +9,7 @@ import MyPage from "../pages/MyPage";
 import DetailEdit from "../pages/DetailEdit";
 import MyInfo from "../pages/MyInfo";
 import { supabase } from "../supabase";
+import Footer from "../components/footer";
 
 // 로그아웃 상태
 const AuthRoute = () => {
@@ -57,6 +58,7 @@ const Router = () => {
                     <Route path="/detail-edit" element={<DetailEdit />}></Route>
                 </Route>
             </Routes>
+            <Footer />
         </BrowserRouter>
     );
 };
