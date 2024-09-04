@@ -1,11 +1,29 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { PostsContext } from "../App";
+import { supabase } from "../supabase";
 
 const PostCard = ({ post }) => {
     const navigate = useNavigate();
     const formatDate = post.created_at ? post.created_at.slice(0, 10) : "";
+    const [commentCount, setCommentCount] = useState(0);
+
+    useEffect(() => {
+        fetchCommentCount();
+    }, []);
+
+    const fetchCommentCount = async () => {
+        const { data, error } = await supabase.from("comments").select("*", { count: "exact" }).eq("post_id", post.id);
+
+        if (error) {
+            console.error("댓글 개수 가져오기 오류:", error);
+            return;
+        }
+
+        setCommentCount(data.length);
+    };
+
     return (
         <>
             <StyledCard
@@ -22,7 +40,11 @@ const PostCard = ({ post }) => {
                     <StyledDate>{formatDate}</StyledDate>
                 </StyledCardTop>
 
-                <StyledTitle>{post.title.length > 28 ? post.title.substr(0, 28) + " ..." : post.title}</StyledTitle>
+                <StyledTitle>
+                    {post.title.length > 25
+                        ? `${post.title.substr(0, 25)} ... (${commentCount})`
+                        : `${post.title} (${commentCount})`}
+                </StyledTitle>
 
                 <StyledMoney>
                     <strong>₩{Number(post.money)?.toLocaleString()}</strong>
@@ -81,7 +103,7 @@ const StyledDate = styled.p`
 
 const StyledTitle = styled.p`
     font-size: 16px;
-    margin: 10px;
+    margin-left: 15px;
 `;
 
 const StyledMoney = styled.p`
