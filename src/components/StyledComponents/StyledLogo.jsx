@@ -5,8 +5,8 @@ export const StyledLogo = styled.img`
     justify-content: center;
     align-items: center;
 
-    width: 400px;
-    min-height: 400px;
+    width: 300px;
+    min-height: 300px;
 
     border: none;
     border-radius: 5px;
